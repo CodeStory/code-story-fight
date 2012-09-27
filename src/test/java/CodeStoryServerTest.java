@@ -1,13 +1,22 @@
 import net.gageot.test.utils.Shell;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 public class CodeStoryServerTest {
+  private CodeStoryServer server;
+
   @Before
   public void setUp() throws Exception {
-    CodeStoryServer.main(null);
+    server = new CodeStoryServer();
+    server.start(8080);
+  }
+
+  @After
+  public void tearDown() {
+    server.stop();
   }
 
   @Test
