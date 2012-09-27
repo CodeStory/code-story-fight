@@ -31,5 +31,17 @@
       <artifactId>jersey-server</artifactId>
       <version>1.12</version>
     </dependency>
+    <dependency>
+      <groupId>net.gageot</groupId>
+      <artifactId>testexpert</artifactId>
+      <version>1.0.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easytesting</groupId>
+      <artifactId>fest-assert</artifactId>
+      <version>1.4</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
