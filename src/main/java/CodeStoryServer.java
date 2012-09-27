@@ -8,6 +8,8 @@ import javax.ws.rs.Path;
 import java.io.File;
 import java.io.IOException;
 
+import static java.lang.Integer.parseInt;
+
 @Path("/")
 public class CodeStoryServer {
   private HttpServer server;
@@ -18,7 +20,8 @@ public class CodeStoryServer {
   }
 
   public static void main(String[] args) throws Exception {
-    new CodeStoryServer().start(8080);
+    int port = parseInt(System.getenv("PORT"));
+    new CodeStoryServer().start(port);
   }
 
   public void start(int port) throws IOException {
