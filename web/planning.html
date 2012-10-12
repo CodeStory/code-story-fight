@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CodeStory - Fight for Devoxx</title>
+  <link type='image/png' rel='shortcut icon' href='fusee-16x16.png'/>
+  <link type='text/css' rel='stylesheet' href='style.less'>
+  <link type='text/css' rel='stylesheet' href='http://fonts.googleapis.com/css?family=Oxygen'>
+</head>
+
+<body>
+</body>
+
+<script src="codestory.js"></script>
+
+<script type="text/x-template" id="talks-template">
+  {{#days}}
+  <div class="day">{{name}}</div>
+  {{#slots}}
+  <div class="slot">{{start}} - {{end}}</div>
+  {{#talks}}
+  <div class="talk">
+    <div class="title">{{title}}</div>
+    <div class="speaker">{{speaker}}</div>
+    <div class="description">{{description}}</div>
+    <div class="tags">
+      {{#tags}}
+      <span class="tag {{color}}">{{label}}</span>
+      {{/tags}}
+    </div>
+  </div>
+  {{/talks}}
+  {{/slots}}
+  {{/days}}
+</script>
+</html>

@@ -1,0 +1,88 @@
+@white: #FFFFFF;
+@black: #000000;
+@gray: #808080;
+@red: #FF0000;
+@blue: #0000FF;
+@green: #00FF00;
+@light_gray: #d3d3d3;
+
+body {
+  background-color: @light_gray;
+  font-family: 'Oxygen', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.day {
+  #styles > .title;
+  background-color: @black;
+}
+
+.slot {
+  #styles > .title;
+  background-color: @gray;
+}
+
+.talk {
+  background-color: @white;
+  border-top: 0 solid @black;
+  border-left: 1px solid @black;
+  border-right: 1px solid @black;
+  border-bottom: 1px solid @black;
+  padding: 10px;
+
+  .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .speaker {
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  .tags {
+    text-align: right;
+
+    .tag {
+      color: @white;
+      font-weight: bold;
+      font-size: 80%;
+      padding: 0 10px;
+      #styles > .rounded-corners(5px);
+    }
+
+    .red {
+      #styles > .colored(@red);
+    }
+
+    .blue {
+      #styles > .colored(@blue);
+    }
+
+    .green {
+      #styles > .colored(@green);
+    }
+  }
+}
+
+#styles {
+  .title {
+    text-align: center;
+    color: @white;
+    font-size: 150%;
+    border: 1px solid @black;
+  }
+
+  .colored(@color: @red){
+    background-color: @color;
+    border: 1px solid darken(@color, 10%);
+  }
+
+  .rounded-corners(@radius: 5px){
+    border-radius: @radius;
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+  }
+}
+

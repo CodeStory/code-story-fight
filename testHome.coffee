@@ -5,4 +5,4 @@ port = process.argv[2]
 
 browser = new Browser()
 browser.visit "http://localhost:#{port}/", ->
-  assert.equal browser.text('title'), 'CodeStory'
+  assert.equal browser.text('title'), 'CodeStory - Fight for Devoxx'
