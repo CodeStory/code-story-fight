@@ -11,7 +11,7 @@ should 'Should show title', '/', (browser) ->
   expect(browser.text 'title').to.be 'CodeStory - Devoxx Fight'
 
 should 'Should show teaser', '/', (browser) ->
-  expect(browser.text '#teaser').to.contain 'Hello world'
+  expect(browser.text '#vote').to.contain 'Create your personal schedule for Devoxx.'
 
 should 'Should got to planning to vite', '/', (browser) ->
   browser.clickLink '#vote a', ->
