@@ -12,9 +12,9 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.System.getProperty;
 
-public class URLConnection extends java.net.HttpURLConnection {
+public class ClassPathURLConnection extends java.net.HttpURLConnection {
 
-  protected URLConnection(URL url) {
+  protected ClassPathURLConnection(URL url) {
     super(url);
   }
 

@@ -7,8 +7,8 @@ import java.net.URLStreamHandler;
 public class Handler extends URLStreamHandler {
 
   @Override
-  protected URLConnection openConnection(URL url) throws IOException {
-    return new URLConnection(url);
+  protected ClassPathURLConnection openConnection(URL url) throws IOException {
+    return new ClassPathURLConnection(url);
   }
 
 }

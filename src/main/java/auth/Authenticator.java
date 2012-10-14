@@ -1,6 +1,5 @@
 package auth;
 
-import com.google.common.base.Throwables;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
