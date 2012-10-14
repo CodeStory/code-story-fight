@@ -32,7 +32,7 @@ public class CodeStoryResource {
 
   @GET
   public Response index() {
-    return Response.seeOther(URI.create("planning.html")).build();
+    return Response.seeOther(URI.create("index.html")).build();
   }
 
   @POST
