@@ -8,9 +8,20 @@
 </head>
 
 <body>
+  <header></header>
+  <div id="content"></div>
 </body>
 
 <script src="codestory.js"></script>
+
+<script type="text/x-template" id="header-template">
+  {{#authenticated}}
+  <a href="#">disconnect</a>
+  {{/authenticated}}
+  {{^authenticated}}
+  <a href="#">login</a>
+  {{/authenticated}}
+</script>
 
 <script type="text/x-template" id="talks-template">
   <div style="color: red;">Real planning coming up in less than a week!</div>

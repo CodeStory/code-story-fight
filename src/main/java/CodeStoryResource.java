@@ -1,22 +1,23 @@
+import auth.AuthenticationException;
+import auth.Authenticator;
+import auth.User;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import org.lesscss.LessCompiler;
 import org.lesscss.LessException;
+import twitter4j.TwitterException;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import static com.google.common.base.Charsets.UTF_8;
 
@@ -33,6 +34,26 @@ public class CodeStoryResource {
   @GET
   public Response index() {
     return Response.seeOther(URI.create("index.html")).build();
+  }
+
+  @GET
+  @Path("/authenticate")
+  public Response authenticate() throws MalformedURLException, TwitterException, URISyntaxException {
+    return Response.seeOther(new Authenticator().getAuthenticateURL().toURI()).build();
+  }
+
+  @GET
+  @Path("/authenticated")
+  public Response authenticated(@QueryParam("oauth_token") String oauthToken, @QueryParam("oauth_verifier") String oauthVerifier) {
+    try {
+      User user = new Authenticator().authenticate(oauthVerifier);
+      Users.add(user);
+      return index();
+    } catch (IllegalStateException e) {
+      return index();
+    } catch (AuthenticationException e) {
+      return index();
+    }
   }
 
   @POST

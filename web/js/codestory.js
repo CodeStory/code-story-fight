@@ -12,7 +12,7 @@ function refreshRegistrationLinks() {
 
 function refreshPlanning() {
   $.getJSON('planning.json', function (json) {
-    $("body").html(Hogan.compile($('#talks-template').html()).render(json));
+    $("#content").html(Hogan.compile($('#talks-template').html()).render(json));
     refreshRegistrationLinks();
   });
 }
@@ -37,7 +37,12 @@ function listenRegistrationClicks() {
   });
 }
 
+function initAuthenticationState() {
+  $('header').html(Hogan.compile($('#header-template').html()).render({authenticated:false}));
+}
+
 $(document).ready(function () {
+  initAuthenticationState();
   refreshPlanning();
   listenRegistrationClicks();
 });
