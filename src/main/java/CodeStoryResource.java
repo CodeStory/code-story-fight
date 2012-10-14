@@ -11,6 +11,7 @@ import twitter4j.TwitterException;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.ws.rs.*;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import java.io.File;
@@ -25,10 +26,12 @@ import static com.google.common.base.Charsets.UTF_8;
 @Singleton
 public class CodeStoryResource {
   private Planning planning;
+  private Users users;
 
   @Inject
-  public CodeStoryResource(Planning planning) throws IOException {
+  public CodeStoryResource(Planning planning, Users users) throws IOException {
     this.planning = planning;
+    this.users = users;
   }
 
   @GET
@@ -47,7 +50,7 @@ public class CodeStoryResource {
   public Response authenticated(@QueryParam("oauth_token") String oauthToken, @QueryParam("oauth_verifier") String oauthVerifier) {
     try {
       User user = new Authenticator().authenticate(oauthVerifier);
-      Users.add(user);
+      users.add(user);
       return index();
     } catch (IllegalStateException e) {
       return index();

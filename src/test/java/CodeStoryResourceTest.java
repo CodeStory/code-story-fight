@@ -1,5 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -9,15 +13,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CodeStoryResourceTest {
-  CodeStoryResource resource;
 
-  Planning planning = mock(Planning.class);
+  @Mock
+  private Planning planning;
 
-  @Before
-  public void setUp() throws IOException {
-    resource = new CodeStoryResource(planning);
-  }
+  @Mock
+  private Users users;
+
+  @InjectMocks
+  private CodeStoryResource resource;
 
   @Test
   public void should_register_user_for_talk() {
