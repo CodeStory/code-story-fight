@@ -76,7 +76,7 @@ public class CodeStoryResource {
   }
 
   @GET
-  @Path("{path : .*\\.less}")
+  @Path("{path : .*\\.less}.css")
   public File style(@PathParam("path") String path) throws IOException, LessException {
     File output = new File("target", path + ".css");
     new LessCompiler().compile(file(path), output, false);
