@@ -66,10 +66,10 @@ public class CodeStoryResource {
   @Path("codestory.js")
   @Produces("application/javascript;charset=UTF-8")
   public String javascript() throws IOException {
-    return readFile("hogan.js")
-      + readFile("jquery.js")
-      + readFile("underscore.js")
-      + readFile("codestory.js");
+    return readFile("js/hogan.js")
+      + readFile("js/jquery.js")
+      + readFile("js/underscore.js")
+      + readFile("js/codestory.js");
   }
 
   @GET
