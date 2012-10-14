@@ -1,7 +1,6 @@
 import auth.AuthenticationException;
 import auth.Authenticator;
 import auth.User;
-import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
@@ -12,6 +11,13 @@ import twitter4j.TwitterException;
 import javax.activation.MimetypesFileTypeMap;
 import javax.ws.rs.*;
 import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import java.io.File;
@@ -19,8 +25,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import static com.google.common.base.Charsets.UTF_8;
 
 @Path("/")
 @Singleton
@@ -87,25 +91,11 @@ public class CodeStoryResource {
   }
 
   @GET
-  @Path("codestory.js")
-  @Produces("application/javascript;charset=UTF-8")
-  public String javascript() throws IOException {
-    return readFile("js/hogan.js")
-      + readFile("js/jquery.js")
-      + readFile("js/underscore.js")
-      + readFile("js/codestory.js");
-  }
-
-  @GET
   @Path("{path : .*}")
   public Response staticResource(@PathParam("path") String path) throws IOException {
     File file = file(path);
     String mimeType = new MimetypesFileTypeMap().getContentType(file);
     return Response.ok(file, mimeType).build();
-  }
-
-  static String readFile(String path) throws IOException {
-    return Files.toString(file(path), UTF_8);
   }
 
   static File file(String path) throws IOException {
