@@ -15,8 +15,13 @@ public class CodeStoryServer {
   private HttpServer server;
 
   public static void main(String[] args) throws Exception {
-    int port = parseInt(System.getenv("PORT"));
-    System.out.println(port);
+    int port;
+    try {
+      port = parseInt(System.getenv("PORT"));
+    } catch (NumberFormatException e) {
+      port = 8080;
+    }
+    System.out.println("PORT: " + port);
     new CodeStoryServer().start(port);
   }
 
