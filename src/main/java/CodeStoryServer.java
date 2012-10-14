@@ -1,7 +1,11 @@
+import com.google.inject.Guice;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.jersey.api.core.DefaultResourceConfig;
 import com.sun.jersey.api.core.ResourceConfig;
+import com.sun.jersey.core.spi.component.ioc.IoCComponentProviderFactory;
+import com.sun.jersey.guice.spi.container.GuiceComponentProviderFactory;
 import com.sun.net.httpserver.HttpServer;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import java.io.IOException;
 
@@ -12,13 +16,15 @@ public class CodeStoryServer {
 
   public static void main(String[] args) throws Exception {
     int port = parseInt(System.getenv("PORT"));
-    System.out.println("PORT: " + port);
+    System.out.println(port);
     new CodeStoryServer().start(port);
   }
 
   public void start(int port) throws IOException {
-    ResourceConfig config = new DefaultResourceConfig(CodeStoryResource.class);
-    server = HttpServerFactory.create(String.format("http://localhost:%d/", port), config);
+    ResourceConfig config = new DefaultResourceConfig(JacksonJsonProvider.class, CodeStoryResource.class);
+    IoCComponentProviderFactory ioc = new GuiceComponentProviderFactory(config, Guice.createInjector());
+
+    server = HttpServerFactory.create(String.format("http://localhost:%d/", port), config, ioc);
     server.start();
   }
 

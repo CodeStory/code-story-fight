@@ -1,10 +1,14 @@
 import com.google.common.io.Files;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import org.lesscss.LessCompiler;
 import org.lesscss.LessException;
 
 import javax.activation.MimetypesFileTypeMap;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,10 +21,37 @@ import java.net.URI;
 import static com.google.common.base.Charsets.UTF_8;
 
 @Path("/")
+@Singleton
 public class CodeStoryResource {
+  private Planning planning;
+
+  @Inject
+  public CodeStoryResource(Planning planning) throws IOException {
+    this.planning = planning;
+  }
+
   @GET
   public Response index() {
     return Response.seeOther(URI.create("planning.html")).build();
+  }
+
+  @POST
+  @Path("register")
+  public void register(@FormParam("login") String login, @FormParam("talkId") String talkId) {
+    planning.register(login, talkId);
+  }
+
+  @POST
+  @Path("unregister")
+  public void unregister(@FormParam("login") String login, @FormParam("talkId") String talkId) {
+    planning.unregister(login, talkId);
+  }
+
+  @GET
+  @Path("registrations/{login}")
+  @Produces("application/json;charset=UTF-8")
+  public Iterable<String> myRegistrations(@PathParam("login") String login) {
+    return planning.registrations(login);
   }
 
   @GET
@@ -35,9 +66,10 @@ public class CodeStoryResource {
   @Path("codestory.js")
   @Produces("application/javascript;charset=UTF-8")
   public String javascript() throws IOException {
-    return Files.toString(file("hogan.js"), UTF_8) + //
-      Files.toString(file("jquery.js"), UTF_8) + //
-      Files.toString(file("codestory.js"), UTF_8);
+    return readFile("hogan.js")
+      + readFile("jquery.js")
+      + readFile("underscore.js")
+      + readFile("codestory.js");
   }
 
   @GET
@@ -46,6 +78,10 @@ public class CodeStoryResource {
     File file = file(path);
     String mimeType = new MimetypesFileTypeMap().getContentType(file);
     return Response.ok(file, mimeType).build();
+  }
+
+  static String readFile(String path) throws IOException {
+    return Files.toString(file(path), UTF_8);
   }
 
   static File file(String path) throws IOException {
