@@ -5,12 +5,53 @@
 @blue: #0000FF;
 @green: #00FF00;
 @light_gray: #d3d3d3;
+@codestory_background: #375b63;
 
 body {
   background-color: @light_gray;
   font-family: 'Oxygen', sans-serif;
   margin: 0;
   padding: 0;
+}
+
+header {
+  background-color: @codestory_background;
+  #styles > .title;
+  text-align: left;
+
+  nav {
+    height: 1.5em;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      li:hover {
+        background-color: lighten(@codestory_background, 30%);
+      }
+
+      li#auth {
+        float: right;
+      }
+
+      #planning-name {
+        font-size: 1em;
+      }
+
+      li {
+        font-size: 0.8em;
+        height: 1.5em;
+        float: left;
+        padding: 0 1em;
+
+        a:link, a:visited {
+          text-decoration: none;
+          color: white;
+        }
+      }
+    }
+  }
 }
 
 h1 {
@@ -55,7 +96,7 @@ h1 {
     .tag {
       color: @white;
       font-weight: bold;
-      font-size: 80%;
+      font-size: 0.8em;
       padding: 0 10px;
       #styles > .rounded-corners(5px);
       #styles > .colored(@blue);
@@ -67,7 +108,7 @@ h1 {
   .title {
     text-align: center;
     color: @white;
-    font-size: 150%;
+    font-size: 1.5em;
     border: 1px solid @black;
   }
 

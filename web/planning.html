@@ -15,17 +15,28 @@
 <script src="codestory.js"></script>
 
 <script type="text/x-template" id="header-template">
-  {{#authenticated}}
-  <a href="#">disconnect</a>
-  {{/authenticated}}
-  {{^authenticated}}
-  <a href="#">login</a>
-  {{/authenticated}}
+  <nav>
+    <ul>
+      <li id="planning-name">
+        <a href="/planning.html">Devoxx planning</a>
+      </li>
+      <li>
+        <a href="index.html">Back</a>
+      </li>
+      <li id="auth">
+        {{#authenticated}}
+        <a href="#">Log Out</a>
+        {{/authenticated}}
+        {{^authenticated}}
+        <a href="#">Log In</a>
+        {{/authenticated}}
+      </li>
+    </ul>
+  </nav>
 </script>
 
 <script type="text/x-template" id="talks-template">
   <div style="color: red;">Real planning coming up in less than a week!</div>
-  <a href="index.html">Back</a>
   {{#days}}
   <div class="day">{{name}}</div>
   {{#slots}}
