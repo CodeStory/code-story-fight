@@ -113,11 +113,16 @@ public class CodeStoryResource {
   }
 
   static File file(String path) throws IOException {
+    if (path.endsWith("/")) {
+      throw new NotFoundException();
+    }
+
     File root = new File("web");
     File file = new File(root, path);
     if (!file.exists() || !file.getCanonicalPath().startsWith(root.getCanonicalPath())) {
       throw new NotFoundException();
     }
+
     return file;
   }
 }
