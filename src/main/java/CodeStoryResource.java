@@ -106,7 +106,6 @@ public class CodeStoryResource {
 
     if (!"dev".equals(System.getProperty("env"))) {
       cacheControl.setMaxAge(3600); // 1 hour
-      cacheControl.setNoTransform(false); // bug is jax-rs
     }
 
     return cacheControl;
