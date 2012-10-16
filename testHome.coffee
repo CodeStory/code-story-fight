@@ -13,9 +13,9 @@ should 'Should show title', '/', (browser) ->
 should 'Should show teaser', '/', (browser) ->
   expect(browser.text '#vote').to.contain 'Create your personal schedule for Devoxx.'
 
-should 'Should show the planning', '/', (browser) ->
-  browser.clickLink '#vote a', ->
-    expect(browser.text '.day').to.contain 'Monday'
+#should 'Should show the planning', '/', (browser) ->
+#  browser.clickLink '#vote a', ->
+#    expect(browser.text '.day').to.contain 'Monday'
 
 should 'Should show sessions', '/planning.html', (browser) ->
   expect(browser.text '#session01 .title').to.be 'Scala m\'a tuer !'
