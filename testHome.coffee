@@ -13,7 +13,7 @@ should 'Should show title', '/', (browser) ->
 should 'Should show teaser', '/', (browser) ->
   expect(browser.text '#vote').to.contain 'Create your personal schedule for Devoxx.'
 
-should 'Should got to planning to vite', '/', (browser) ->
+should 'Should show the planning', '/', (browser) ->
   browser.clickLink '#vote a', ->
     expect(browser.text '.day').to.contain 'Monday'
 
