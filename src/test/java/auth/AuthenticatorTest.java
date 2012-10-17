@@ -11,11 +11,11 @@ import java.net.URL;
 
 import static java.lang.Boolean.TRUE;
 import static org.fest.assertions.Assertions.assertThat;
-import static org.fest.assertions.Fail.fail;
 
 public class AuthenticatorTest {
-
   public static final String UNAUTHORIZED = "code-story.test.unauthorized";
+
+  Authenticator authenticator = new Authenticator();
 
   @BeforeClass
   public static void setupHTTPMock() {
@@ -23,9 +23,7 @@ public class AuthenticatorTest {
   }
 
   @Test
-  public void should_generate_an_authentication_URL() throws Exception {
-    Authenticator authenticator = new Authenticator();
-
+  public void should_generate_an_authentication_URL() throws MalformedURLException, TwitterException {
     URL authenticateURL = authenticator.getAuthenticateURL();
 
     assertThat(authenticateURL).isEqualTo(new URL("http", "api.twitter.com", "/oauth/authenticate?oauth_token=NPcudxy0yU5T3tBzho7iCotZ3cnetKwcTIRlX0iwRl0"));
@@ -33,7 +31,6 @@ public class AuthenticatorTest {
 
   @Test
   public void should_authenticate() throws MalformedURLException, TwitterException {
-    Authenticator authenticator = new Authenticator();
     authenticator.getAuthenticateURL();
 
     User user = authenticator.authenticate("oauthVerifierProvidedByCallBackAfterAuthenticateURL");
@@ -46,7 +43,6 @@ public class AuthenticatorTest {
 
   @Test(expected = AuthenticationException.class)
   public void should_raise_exception_when_authentication_fails() throws MalformedURLException, TwitterException {
-    Authenticator authenticator = new Authenticator();
     authenticator.getAuthenticateURL();
     nextRequestWillBeUnauthorized();
 

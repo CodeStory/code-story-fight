@@ -35,7 +35,7 @@ public class PlanningResource {
   private final Users users;
 
   @Inject
-  public PlanningResource(Planning planning, PlanningLoader planningLoader, Users users) throws IOException {
+  public PlanningResource(Planning planning, Users users, PlanningLoader planningLoader) throws IOException {
     this.planning = planning;
     this.users = users;
     planningLoader.createTalks(planning, Files.toString(file("planning.json"), Charsets.UTF_8));
@@ -105,12 +105,12 @@ public class PlanningResource {
   }
 
   static CacheControl buildCacheControl() {
-    CacheControl cacheControl = new CacheControl();
-
-    if (!"dev".equals(System.getProperty("env"))) {
-      cacheControl.setMaxAge(3600); // 1 hour
+    if ("dev".equals(System.getProperty("env"))) {
+      return new CacheControl(); // Disable caching
     }
 
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setMaxAge(3600); // 1 hour
     return cacheControl;
   }
 

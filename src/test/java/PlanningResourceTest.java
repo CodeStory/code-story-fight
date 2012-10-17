@@ -14,10 +14,6 @@ import static org.mockito.Mockito.when;
 public class PlanningResourceTest {
   @Mock
   Planning planning;
-
-  @Mock
-  Users users;
-
   @Mock
   PlanningLoader planningLoader;
 

@@ -9,28 +9,35 @@ import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import java.io.IOException;
 
+import static com.google.common.base.Objects.firstNonNull;
 import static java.lang.Integer.parseInt;
+import static java.lang.String.format;
 
 public class PlanningServer {
+  public static final String DEFAULT_PORT = "8080";
+
   private HttpServer server;
 
-  public static void main(String[] args) throws Exception {
-    int port;
-    try {
-      port = parseInt(System.getenv("PORT"));
-    } catch (NumberFormatException e) {
-      port = 8080;
-    }
-    System.out.println("PORT: " + port);
+  public static void main(String[] args) throws IOException {
+    int port = parseInt(firstNonNull(System.getenv("PORT"), DEFAULT_PORT));
+
     new PlanningServer().start(port);
   }
 
   public void start(int port) throws IOException {
-    ResourceConfig config = new DefaultResourceConfig(JacksonJsonProvider.class, PlanningResource.class);
+    ResourceConfig config = configuration();
     IoCComponentProviderFactory ioc = new GuiceComponentProviderFactory(config, Guice.createInjector());
 
-    server = HttpServerFactory.create(String.format("http://localhost:%d/", port), config, ioc);
+    System.out.println("Starting server on port: " + port);
+
+    server = HttpServerFactory.create(format("http://localhost:%d/", port), config, ioc);
     server.start();
+  }
+
+  private ResourceConfig configuration() {
+    return new DefaultResourceConfig(
+      JacksonJsonProvider.class,
+      PlanningResource.class);
   }
 
   public void stop() {

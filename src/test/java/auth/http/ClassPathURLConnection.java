@@ -3,23 +3,22 @@ package auth.http;
 import auth.AuthenticatorTest;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.System.getProperty;
 
-public class ClassPathURLConnection extends java.net.HttpURLConnection {
-
+public class ClassPathURLConnection extends HttpURLConnection {
   protected ClassPathURLConnection(URL url) {
     super(url);
   }
 
   @Override
-  public void connect() throws IOException {
+  public void connect() {
     connected = true;
   }
 
@@ -34,12 +33,12 @@ public class ClassPathURLConnection extends java.net.HttpURLConnection {
   }
 
   @Override
-  public OutputStream getOutputStream() throws IOException {
+  public OutputStream getOutputStream() {
     return new ByteArrayOutputStream();
   }
 
   @Override
-  public InputStream getInputStream() throws IOException {
+  public InputStream getInputStream() {
     if (!connected) {
       connect();
     }
@@ -47,11 +46,9 @@ public class ClassPathURLConnection extends java.net.HttpURLConnection {
   }
 
   @Override
-  public int getResponseCode() throws IOException {
-    Boolean fail = parseBoolean(getProperty(AuthenticatorTest.UNAUTHORIZED, FALSE.toString()));
-    if (fail) {
-      return HTTP_UNAUTHORIZED;
-    }
-    return HTTP_OK;
+  public int getResponseCode() {
+    boolean fail = parseBoolean(getProperty(AuthenticatorTest.UNAUTHORIZED, FALSE.toString()));
+
+    return fail ? HTTP_UNAUTHORIZED : HTTP_OK;
   }
 }

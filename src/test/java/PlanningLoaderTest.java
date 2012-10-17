@@ -4,6 +4,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PlanningLoaderTest {
@@ -19,5 +20,14 @@ public class PlanningLoaderTest {
     loader.createTalks(planning, json);
 
     verify(planning).createTalk("TALK", "DAY-SLOT");
+  }
+
+  @Test
+  public void should_ignore_empty_json() {
+    String emptyJson = "";
+
+    loader.createTalks(planning, emptyJson);
+
+    verifyZeroInteractions(planning);
   }
 }
