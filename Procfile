@@ -1,1 +1,1 @@
-web: java -Xmx512M -cp target/classes:target/dependency/* CodeStoryServer
+web: java -Xmx512M -cp target/classes:target/dependency/* PlanningServer

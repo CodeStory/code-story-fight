@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static java.lang.Integer.parseInt;
 
-public class CodeStoryServer {
+public class PlanningServer {
   private HttpServer server;
 
   public static void main(String[] args) throws Exception {
@@ -22,11 +22,11 @@ public class CodeStoryServer {
       port = 8080;
     }
     System.out.println("PORT: " + port);
-    new CodeStoryServer().start(port);
+    new PlanningServer().start(port);
   }
 
   public void start(int port) throws IOException {
-    ResourceConfig config = new DefaultResourceConfig(JacksonJsonProvider.class, CodeStoryResource.class);
+    ResourceConfig config = new DefaultResourceConfig(JacksonJsonProvider.class, PlanningResource.class);
     IoCComponentProviderFactory ioc = new GuiceComponentProviderFactory(config, Guice.createInjector());
 
     server = HttpServerFactory.create(String.format("http://localhost:%d/", port), config, ioc);

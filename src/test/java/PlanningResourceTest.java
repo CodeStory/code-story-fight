@@ -11,7 +11,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CodeStoryResourceTest {
+public class PlanningResourceTest {
   @Mock
   Planning planning;
 
@@ -22,7 +22,7 @@ public class CodeStoryResourceTest {
   PlanningLoader planningLoader;
 
   @InjectMocks
-  CodeStoryResource resource;
+  PlanningResource resource;
 
   @Test
   public void should_register_user_for_talk() {

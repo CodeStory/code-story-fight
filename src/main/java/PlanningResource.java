@@ -30,12 +30,12 @@ import java.util.Date;
 
 @Path("/")
 @Singleton
-public class CodeStoryResource {
+public class PlanningResource {
   private final Planning planning;
   private final Users users;
 
   @Inject
-  public CodeStoryResource(Planning planning, PlanningLoader planningLoader, Users users) throws IOException {
+  public PlanningResource(Planning planning, PlanningLoader planningLoader, Users users) throws IOException {
     this.planning = planning;
     this.users = users;
     planningLoader.createTalks(planning, Files.toString(file("planning.json"), Charsets.UTF_8));
