@@ -39,8 +39,6 @@ should 'Should register', '/planning.html', (browser) ->
     expect(browser.text '#session02 a.register').to.be 'Register'
     expect(browser.text '#session03 a.register').to.be 'Register'
 
-should 'Should unregister', '/planning.html', (browser) ->
-  browser.clickLink '#session01 a.register', ->
     browser.clickLink '#session01 a.register', ->
       expect(browser.text '#session01 a.register').to.be 'Register'
       expect(browser.text '#session02 a.register').to.be 'Register'
