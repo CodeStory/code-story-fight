@@ -11,7 +11,7 @@ public class PlanningServerTest {
 
   @Test
   public void should_show_homepage() {
-    int result = new Shell().execute("coffee testHome.coffee %d", web.getPort());
+    int result = new Shell().execute("./testHome.coffee %d", web.getPort());
 
     assertThat(result).isZero();
   }

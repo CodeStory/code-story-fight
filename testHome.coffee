@@ -1,3 +1,5 @@
+#!/usr/bin/env coffee 
+
 Browser = require 'zombie'
 expect = require 'expect.js'
 

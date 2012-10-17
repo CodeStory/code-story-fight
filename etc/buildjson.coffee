@@ -1,3 +1,5 @@
+#!/usr/bin/env coffee 
+
 # prerequisites
 # npm install -g underscore
 
