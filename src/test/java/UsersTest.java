@@ -1,14 +1,13 @@
 import auth.User;
-import org.fest.assertions.Assertions;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 public class UsersTest {
+  Users users = new Users();
 
   @Test
-  public void should_find_user_by_id() throws Exception {
-    Users users = new Users();
+  public void should_find_user_by_id() {
     User user = new User(42L, "foo", "bar", "baz");
     users.add(user);
 

@@ -1,29 +1,28 @@
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CodeStoryResourceTest {
+  @Mock
+  Planning planning;
 
   @Mock
-  private Planning planning;
+  Users users;
 
   @Mock
-  private Users users;
+  PlanningLoader planningLoader;
 
   @InjectMocks
-  private CodeStoryResource resource;
+  CodeStoryResource resource;
 
   @Test
   public void should_register_user_for_talk() {

@@ -1,6 +1,8 @@
 import auth.AuthenticationException;
 import auth.Authenticator;
 import auth.User;
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
@@ -33,9 +35,10 @@ public class CodeStoryResource {
   private final Users users;
 
   @Inject
-  public CodeStoryResource(Planning planning, Users users) throws IOException {
+  public CodeStoryResource(Planning planning, PlanningLoader planningLoader, Users users) throws IOException {
     this.planning = planning;
     this.users = users;
+    planningLoader.createTalks(planning, Files.toString(file("planning.json"), Charsets.UTF_8));
   }
 
   @GET
