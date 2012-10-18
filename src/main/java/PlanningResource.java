@@ -105,10 +105,6 @@ public class PlanningResource {
   }
 
   static CacheControl buildCacheControl() {
-    if ("dev".equals(System.getProperty("env"))) {
-      return new CacheControl(); // Disable caching
-    }
-
     CacheControl cacheControl = new CacheControl();
     cacheControl.setMaxAge(3600); // 1 hour
     return cacheControl;
