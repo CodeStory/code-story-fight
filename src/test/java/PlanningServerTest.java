@@ -1,4 +1,3 @@
-import net.gageot.test.rules.ServiceRule;
 import net.gageot.test.utils.Shell;
 import org.junit.Rule;
 import org.junit.Test;
