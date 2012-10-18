@@ -1,4 +1,4 @@
-#!/usr/bin/env coffee 
+#!/usr/bin/env coffee
 
 Browser = require 'zombie'
 expect = require 'expect.js'
@@ -15,33 +15,26 @@ should 'Should show title', '/', (browser) ->
 should 'Should show teaser', '/', (browser) ->
   expect(browser.text '#vote').to.contain 'Create your personal schedule for Devoxx.'
 
-#should 'Should show the planning', '/', (browser) ->
-#  browser.clickLink '#vote a', ->
-#    expect(browser.text '.day').to.contain 'Monday'
-
 should 'Should show sessions', '/planning.html', (browser) ->
-  expect(browser.text '#session01 .title').to.be 'Scala m\'a tuer !'
-  expect(browser.text '#session01 .speaker').to.be 'John Doe'
-  expect(browser.text '#session01 .description').to.contain 'Lorem ipsum'
-  expect(browser.text '#session01 .tags .tag').to.contain 'Scala'
-  expect(browser.text '#session01 .tags .tag').to.contain 'Troll'
+  expect(browser.text '#session-759 .title').to.be 'Android Development Code Lab (Hands-on Labs)'
+  expect(browser.text '#session-759 .speaker').to.be 'Nick Butcher -'
+  expect(browser.text '#session-759 .description').to.contain ''
 
-  expect(browser.text '#session03 .title').to.be 'Java m\'a tuer !'
-  expect(browser.text '#session03 .speaker').to.be 'Jane Doe'
-  expect(browser.text '#session03 .description').to.contain 'Lorem ipsum'
-  expect(browser.text '#session03 .tags .tag').to.contain 'Java'
+  expect(browser.text '#session-761 .title').to.be 'Modular Architecture Today (University)'
+  expect(browser.text '#session-761 .speaker').to.be 'Kirk Knoernschild -'
+  expect(browser.text '#session-761 .description').to.contain ''
 
 should 'Should register', '/planning.html', (browser) ->
-  expect(browser.text '#session01 a.register').to.be 'Register'
-  expect(browser.text '#session02 a.register').to.be 'Register'
-  expect(browser.text '#session03 a.register').to.be 'Register'
+  expect(browser.text '#session-759 a.register').to.be 'Register'
+  expect(browser.text '#session-760 a.register').to.be 'Register'
+  expect(browser.text '#session-761 a.register').to.be 'Register'
 
-  browser.clickLink '#session01 a.register', ->
-    expect(browser.text '#session01 a.register').to.be 'Unregister'
-    expect(browser.text '#session02 a.register').to.be 'Register'
-    expect(browser.text '#session03 a.register').to.be 'Register'
+  browser.clickLink '#session-759 a.register', ->
+    expect(browser.text '#session-759 a.register').to.be 'Unregister'
+    expect(browser.text '#session-760 a.register').to.be 'Register'
+    expect(browser.text '#session-761 a.register').to.be 'Register'
 
-    browser.clickLink '#session01 a.register', ->
-      expect(browser.text '#session01 a.register').to.be 'Register'
-      expect(browser.text '#session02 a.register').to.be 'Register'
-      expect(browser.text '#session03 a.register').to.be 'Register'
+    browser.clickLink '#session-759 a.register', ->
+      expect(browser.text '#session-759 a.register').to.be 'Register'
+      expect(browser.text '#session-760 a.register').to.be 'Register'
+      expect(browser.text '#session-761 a.register').to.be 'Register'

@@ -5,7 +5,7 @@ function refreshRegistrationLinks() {
     $('.register').html('Register');
 
     _.each(json, function (talkId) {
-      $('#' + talkId + ' a.register').html('Unregister');
+      $('#session-' + talkId + ' a.register').html('Unregister');
     });
   });
 }

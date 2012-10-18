@@ -19,7 +19,7 @@ public class PlanningLoaderTest {
 
     loader.createTalks(planning, json);
 
-    verify(planning).createTalk("TALK", "DAY-SLOT");
+    verify(planning).createTalk("TALK", "DAY SLOT");
   }
 
   @Test
