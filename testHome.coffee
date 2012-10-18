@@ -7,7 +7,7 @@ port = process.argv[2]
 
 should = (name, url, callback) ->
   browser = new Browser()
-  browser.visit "http://localhost:#{port}" + url, -> callback(browser)
+  browser.visit "http://localhost:#{port}#{url}", -> callback(browser)
 
 should 'Should show title', '/', (browser) ->
   expect(browser.text 'title').to.be 'CodeStory - Devoxx Fight'
