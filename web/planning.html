@@ -14,7 +14,7 @@
 
 <script src="js/jquery.js"></script>
 <script src="js/underscore.js"></script>
-<script src="js/hogan.js"></script>
+<script src="js/mustache.js"></script>
 <script src="js/codestory.js"></script>
 
 <script type="text/x-template" id="header-template">
@@ -41,15 +41,15 @@
 <script type="text/x-template" id="talks-template">
   <div style="color: red;">Real planning coming up in less than a week!</div>
   {{#days}}
-  <div class="day">{{name}}</div>
+  <div class="day">{{day}}</div>
   {{#slots}}
-  <div class="slot">{{start}} - {{end}}</div>
+  <div class="slot">{{slot}}</div>
   {{#talks}}
   <div id="{{id}}" class="talk">
     <a href="#" class="register" data-talk="{{id}}">Register</a>
 
-    <div class="title">{{title}}</div>
-    <div class="speaker">{{speaker}}</div>
+    <div class="title">{{title}} ({{type}})</div>
+    <div class="speaker">{{#speakers}}{{speaker}} - {{/speakers}}</div>
     <div class="description">{{description}}</div>
     <div class="tags">
       {{#tags}}

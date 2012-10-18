@@ -15,7 +15,7 @@ public class PlanningLoaderTest {
 
   @Test
   public void should_create_talks() {
-    String json = "{\"days\":[{\"name\":\"DAY\",\"slots\":[{\"id\":\"0\",\"start\":\"SLOT\",\"talks\":[{\"id\":\"TALK\"}]}]}]}";
+    String json = "{days:[{day:DAY,slots:[{slot:SLOT,talks:[{id:TALK}]}]}]}";
 
     loader.createTalks(planning, json);
 

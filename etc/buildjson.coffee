@@ -1,45 +1,30 @@
 #!/usr/bin/env coffee 
 
-# prerequisites
-# npm install -g underscore
-
 _ = require('underscore')
 http = require('http')
 fs = require('fs')
-
-#class Talk
-#  constructor: (@speakers, @title, @fromTime, @toTime, @kind, @room) ->
-
 
 class ScheduleRetriever
   constructor: (@eventId, @outputfile) ->
     @scheduleUri = "http://cfp.devoxx.com/rest/v1/events/#{@eventId}/schedule"
 
-  writeToDisk: ->
-    if outputFile?
-      fs.writeFileSync(@outputfile, JSON.stringify(@talkData), 'utf8')
-      console.log "written #{@outputfile}"
-    else
-      console.log JSON.stringify @talkData
-
   transform: ->
-    @talkData = _.chain(@talkData)
-    .filter((event) -> event.speaker?)
-    .map((event) -> _.omit event, ['partnerSlot', 'code', 'speakerUri'])
-    .sortBy((event) -> event.fromTime)
-    .groupBy((event) -> event.fromTime[0..9])
-    .map((events, day) -> {
-      day : day,  #this sucks
-      events : _.groupBy events, (event) -> event.fromTime[11..15]
-    })
-    .flatten()
-    .value()
+    @talkData =
+      _.chain(@talkData)
+      .filter((talk) -> talk.speaker?)
+      .map((talk) -> _.omit(talk, ['partnerSlot', 'code', 'speakerUri']))
+      .sortBy((talk) -> talk.fromTime)
+      .groupBy((talk) -> talk.fromTime[0..9])
+      .map((talks, day) ->
+        day: day,
+        slots: _.chain(talks).groupBy((talk) -> talk.fromTime[11..15]).map((talks, slot) ->
+          slot: slot,
+          talks: talks
+        ).value()
+      )
+      .value()
 
-
-    # add days !
-    # 2 get extra data
-    # end of story
-    @writeToDisk()
+    console.log JSON.stringify { days: @talkData }
 
   getMainSchedule: ->
     http.get @scheduleUri, (response) =>
@@ -54,4 +39,3 @@ class ScheduleRetriever
     @getMainSchedule()
 
 scheduleRetriever = new ScheduleRetriever(7).retrieveSchedule()
-

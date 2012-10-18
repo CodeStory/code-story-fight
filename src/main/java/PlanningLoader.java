@@ -16,7 +16,7 @@ public class PlanningLoader {
     for (Day day : sessions.days) {
       for (Slot slot : day.slots) {
         for (Talk talk : slot.talks) {
-          planning.createTalk(talk.id, day.name + "-" + slot.start);
+          planning.createTalk(talk.id, day.day + "-" + slot.slot);
         }
       }
     }
@@ -27,12 +27,12 @@ public class PlanningLoader {
   }
 
   static class Day {
-    String name;
+    String day;
     List<Slot> slots;
   }
 
   static class Slot {
-    String start;
+    String slot;
     List<Talk> talks;
   }
 
