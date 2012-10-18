@@ -11,14 +11,9 @@ import org.lesscss.LessException;
 import twitter4j.TwitterException;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import java.io.File;
@@ -33,11 +28,13 @@ import java.util.Date;
 public class PlanningResource {
   private final Planning planning;
   private final Users users;
+  private final Authenticator authenticator;
 
   @Inject
-  public PlanningResource(Planning planning, Users users, PlanningLoader planningLoader) throws IOException {
+  public PlanningResource(Planning planning, Users users, PlanningLoader planningLoader, Authenticator authenticator) throws IOException {
     this.planning = planning;
     this.users = users;
+    this.authenticator = authenticator;
     planningLoader.createTalks(planning, Files.toString(file("planning.json"), Charsets.UTF_8));
   }
 
@@ -49,16 +46,16 @@ public class PlanningResource {
   @GET
   @Path("/authenticate")
   public Response authenticate() throws MalformedURLException, TwitterException, URISyntaxException {
-    return Response.seeOther(new Authenticator().getAuthenticateURL().toURI()).build();
+    return Response.seeOther(authenticator.getAuthenticateURL().toURI()).build();
   }
 
   @GET
   @Path("/authenticated")
   public Response authenticated(@QueryParam("oauth_token") String oauthToken, @QueryParam("oauth_verifier") String oauthVerifier) {
     try {
-      User user = new Authenticator().authenticate(oauthVerifier);
+      User user = authenticator.authenticate(oauthVerifier);
       users.add(user);
-      return index();
+      return Response.seeOther(URI.create("planning.html")).cookie(new NewCookie("userId", user.getId().toString())).build();
     } catch (IllegalStateException e) {
       return index();
     } catch (AuthenticationException e) {
