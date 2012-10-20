@@ -6,52 +6,83 @@
 @green: #00FF00;
 @light_gray: #d3d3d3;
 @codestory_background: #375b63;
+@blue_devoxx: #009FE6;
 
 body {
   background-color: @light_gray;
-  font-family: 'Oxygen', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   margin: 0;
   padding: 0;
-}
 
-header {
-  background-color: @codestory_background;
-  #styles > .title;
-  text-align: left;
+  header {
+    background-color: @black;
+    #styles > .title;
+    color: @blue_devoxx;
+    font-weight: lighter;
 
-  nav {
-    height: 1.5em;
+    ul#logo-section {
+      font-family: monospace;
+      text-transform: uppercase;
 
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-
-      li:hover {
-        background-color: lighten(@codestory_background, 30%);
+      #logo {
+        height: 80px;
+        overflow: hidden;
       }
 
-      li#auth {
-        float: right;
+      #mojo {
+        letter-spacing: 1em;
       }
 
-      #planning-name {
-        font-size: 1em;
-      }
-
-      li {
+      #attribution {
+        text-align: right;
         font-size: 0.8em;
-        height: 1.5em;
-        float: left;
-        padding: 0 1em;
+      }
 
-        a:link, a:visited {
-          text-decoration: none;
-          color: white;
+    }
+
+    nav {
+      height: 1.5em;
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li:hover {
+          background-color: lighten(@codestory_background, 30%);
+        }
+
+        li#auth {
+          float: right;
+        }
+
+        #planning-name {
+          font-size: 1em;
+        }
+
+        li {
+          font-size: 0.8em;
+          height: 1.5em;
+          float: left;
+          padding: 0 1em;
+
+          a:link, a:visited {
+            text-decoration: none;
+            color: white;
+          }
         }
       }
     }
   }
+}
+
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
 }
 
 h1 {
