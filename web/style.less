@@ -1,6 +1,6 @@
 @white: #FFFFFF;
 @black: #000000;
-@gray: #808080;
+@gray: #EEEEEE;
 @red: #FF0000;
 @blue: #0000FF;
 @green: #00FF00;
@@ -19,10 +19,10 @@ body {
     #styles > .title;
     color: @blue_devoxx;
     font-weight: lighter;
+    text-transform: uppercase;
 
     ul#logo-section {
       font-family: monospace;
-      text-transform: uppercase;
 
       #logo {
         height: 80px;
@@ -37,38 +37,40 @@ body {
         text-align: right;
         font-size: 0.8em;
       }
-
     }
 
     nav {
-      height: 1.5em;
+      background-color: @gray;
+      height: 49px;
+      font-size: 0.8em;
 
       ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-
-        li:hover {
-          background-color: lighten(@codestory_background, 30%);
-        }
 
         li#auth {
           float: right;
         }
 
-        #planning-name {
-          font-size: 1em;
-        }
-
         li {
-          font-size: 0.8em;
-          height: 1.5em;
           float: left;
-          padding: 0 1em;
+          padding: 13px 1em 0 1em;
+
+          a {
+            padding-bottom: 4px;
+            font-weight: bold;
+          }
 
           a:link, a:visited {
             text-decoration: none;
-            color: white;
+            color: @black;
+            padding-left: 29px;
+          }
+
+          a#back {
+            background: no-repeat url('back.png');
+          }
+
+          a#login, a#logout {
+            background: no-repeat url('login.png');
           }
         }
       }
@@ -93,44 +95,56 @@ h1 {
   margin-top: 30px;
 }
 
-.day {
-  #styles > .title;
-  background-color: @black;
-}
-
-.slot {
-  #styles > .title;
-  background-color: @gray;
-}
-
-.talk {
-  background-color: @white;
-  border-top: 0 solid @black;
-  border-left: 1px solid @black;
-  border-right: 1px solid @black;
-  border-bottom: 1px solid @black;
-  padding: 10px;
-
-  .title {
-    font-weight: bold;
-    margin-bottom: 5px;
+#content {
+  #disclaimer {
+    position: absolute;
+    top: 0;
+    background-color: gold;
+    width: 100%;
+    text-align: center;
+    padding: 0 3px;
+    color: slategray;
   }
 
-  .speaker {
-    font-style: italic;
-    margin-bottom: 20px;
+  .day {
+    #styles > .title;
+    background-color: @black;
   }
 
-  .tags {
-    text-align: right;
+  .slot {
+    #styles > .title;
+    background-color: @gray;
+  }
 
-    .tag {
-      color: @white;
+  .talk {
+    background-color: @white;
+    border-top: 0 solid @black;
+    border-left: 1px solid @black;
+    border-right: 1px solid @black;
+    border-bottom: 1px solid @black;
+    padding: 10px;
+
+    .title {
       font-weight: bold;
-      font-size: 0.8em;
-      padding: 0 10px;
-      #styles > .rounded-corners(5px);
-      #styles > .colored(@blue);
+      margin-bottom: 5px;
+    }
+
+    .speaker {
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .tags {
+      text-align: right;
+
+      .tag {
+        color: @white;
+        font-weight: bold;
+        font-size: 0.8em;
+        padding: 0 10px;
+        #styles > .rounded-corners(5px);
+        #styles > .colored(@blue);
+      }
     }
   }
 }
