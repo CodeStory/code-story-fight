@@ -17,6 +17,7 @@ body {
   header {
     background-color: @black;
     #styles > .title;
+    text-align: center;
     color: @blue_devoxx;
     font-weight: lighter;
     text-transform: uppercase;
@@ -40,11 +41,12 @@ body {
     }
 
     nav {
+      #styles > .horizontal-section;
       background-color: @gray;
-      height: 49px;
       font-size: 0.8em;
 
       ul {
+        margin: 0;
 
         li#auth {
           float: right;
@@ -52,7 +54,6 @@ body {
 
         li {
           float: left;
-          padding: 13px 1em 0 1em;
 
           a {
             padding-bottom: 4px;
@@ -96,23 +97,27 @@ h1 {
 }
 
 #content {
+
   #disclaimer {
     position: absolute;
     top: 0;
     background-color: gold;
     width: 100%;
     text-align: center;
-    padding: 0 3px;
+    padding: 3px 0;
     color: slategray;
   }
 
   .day {
     #styles > .title;
+    #styles > .horizontal-section;
     background-color: @black;
+
   }
 
   .slot {
     #styles > .title;
+    #styles > .horizontal-section;
     background-color: @gray;
   }
 
@@ -151,7 +156,6 @@ h1 {
 
 #styles {
   .title {
-    text-align: center;
     color: @white;
     font-size: 1.5em;
     border: 1px solid @black;
@@ -164,6 +168,11 @@ h1 {
 
   .rounded-corners(@radius: 5px){
     border-radius: @radius;
+  }
+
+  .horizontal-section {
+    height: 37px;
+    padding: 13px 1em 0 1em;
   }
 }
 

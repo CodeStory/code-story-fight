@@ -12,6 +12,19 @@ function refreshRegistrationLinks() {
 
 function refreshPlanning() {
   $.getJSON('planning.json', function (json) {
+    $.each(json.days, function(i, day) {
+      if (day.day == '2012-11-12') {
+        day.dayLabel = 'Monday, Nov. 12 2012';
+      } else if (day.day == '2012-11-13') {
+        day.dayLabel = 'Tuesday, Nov. 13 2012';
+      } else if (day.day == '2012-11-14') {
+        day.dayLabel = 'Wednesday, Nov. 14 2012';
+      } else if (day.day == '2012-11-15') {
+        day.dayLabel = 'Thursday, Nov. 15 2012';
+      } else if (day.day == '2012-11-16') {
+        day.dayLabel = 'Friday, Nov. 16 2012';
+      }
+    });
     $("#content").html(Hogan.compile($('#talks-template').html()).render(json));
     refreshRegistrationLinks();
   });
