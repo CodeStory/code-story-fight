@@ -1,5 +1,6 @@
 import auth.Authenticator;
 import auth.User;
+import com.google.common.collect.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -7,34 +8,31 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.core.Cookie;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.MapAssert.entry;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PlanningResourceTest {
   @Mock
-  Planning planning;
+  private Planning planning;
   @Mock
-  PlanningLoader planningLoader;
+  private Authenticator authenticator;
   @Mock
-  Authenticator authenticator;
+  private Users users;
   @Mock
-  Users users;
+  private PlanningLoader planningLoader;
 
   @InjectMocks
-  PlanningResource resource;
+  private PlanningResource resource;
 
   @Test
   public void should_register_user_for_talk() {
@@ -52,7 +50,7 @@ public class PlanningResourceTest {
 
   @Test
   public void should_get_my_registrations() {
-    when(planning.registrations("user")).thenReturn(Arrays.asList("talkId1", "talkId2"));
+    when(planning.registrations("user")).thenReturn(newArrayList("talkId1", "talkId2"));
 
     Iterable<String> talkIds = resource.myRegistrations("user");
 
