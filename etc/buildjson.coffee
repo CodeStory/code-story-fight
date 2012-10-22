@@ -2,26 +2,40 @@
 
 _ = require('underscore')
 http = require('http')
+Promise = require("promised-io/promise").Promise
+all = require("promised-io/promise").all
 
-transformPresentation = (data) ->
-  summary: data.summary
+promises = []
+
+retrieve = (url) ->
+  promise = new Promise()
+  http.get url, (response) ->
+    scheduleData = ""
+    response.on 'data', (data) -> scheduleData += data
+    response.on 'end', () -> promise.resolve JSON.parse(scheduleData)
+  promise.wait()
 
 transformTalks = (data) ->
   _.chain(data)
   .filter((talk) -> talk.speaker?)
   .sortBy((talk) -> talk.fromTime)
   .map((talk) ->
-    id: talk.id,
-    title: talk.title,
+    id: talk.id
+    title: talk.title
+    presentationUri: talk.presentationUri
+    summary: ''
     room: talk.room
-    speaker: talk.speaker,
-    day: talk.fromTime[0..9],
-    from: talk.fromTime[11..15],
-    to: talk.toTime[11..15],
-    type: talk.type,
-    speakers: _.pluck(talk.speakers, 'speaker').join ',',
-  )
-  .groupBy((talk) -> talk.day)
+    speaker: talk.speaker
+    day: talk.fromTime[0..9]
+    from: talk.fromTime[11..15]
+    to: talk.toTime[11..15]
+    type: talk.type
+    speakers: _.pluck(talk.speakers, 'speaker').join ','
+  ).map((talk) ->
+    promises.push retrieve(talk.presentationUri).then (presentation) ->
+      talk.summary = presentation.summary
+    talk
+  ).groupBy((talk) -> talk.day)
   .map((talks, day) ->
     day: day,
     slots: _.chain(talks).groupBy((talk) -> talk.from).map((talks, slot) ->
@@ -30,14 +44,8 @@ transformTalks = (data) ->
     ).value()
   ).value()
 
-retrieve = (url, action) ->
-  http.get url, (response) ->
-    scheduleData = ""
-    response.on 'data', (data) -> scheduleData += data
-    response.on 'end', -> action(scheduleData)
-
-retrieve 'http://cfp.devoxx.com/rest/v1/events/7/schedule', (body) ->
-  schedule = {days: transformTalks(JSON.parse body)}
-  console.log JSON.stringify(schedule, null, " ")
-
+retrieve('http://cfp.devoxx.com/rest/v1/events/7/schedule').then (data) ->
+  schedule = {days: transformTalks(data)}
+  all(promises).then () ->
+    console.log JSON.stringify(schedule, null, " ")
 
