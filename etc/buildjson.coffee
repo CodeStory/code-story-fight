@@ -19,7 +19,7 @@ transformTalks = (data) ->
     from: talk.fromTime[11..15],
     to: talk.toTime[11..15],
     type: talk.type,
-    speakers: _.pluck(talk.speakers, 'speaker').join ','
+    speakers: _.pluck(talk.speakers, 'speaker').join ',',
   )
   .groupBy((talk) -> talk.day)
   .map((talks, day) ->
@@ -30,14 +30,14 @@ transformTalks = (data) ->
     ).value()
   ).value()
 
-retrieve = (url, transformation) ->
-  http.get url, (response) =>
+retrieve = (url, action) ->
+  http.get url, (response) ->
     scheduleData = ""
     response.on 'data', (data) -> scheduleData += data
-    response.on 'end', =>
-      json = {days: transformation(JSON.parse scheduleData)}
-      console.log JSON.stringify(json, null, " ")
+    response.on 'end', -> action(scheduleData)
 
-retrieve 'http://cfp.devoxx.com/rest/v1/events/7/schedule', transformTalks
+retrieve 'http://cfp.devoxx.com/rest/v1/events/7/schedule', (body) ->
+  schedule = {days: transformTalks(JSON.parse body)}
+  console.log JSON.stringify(schedule, null, " ")
 
 
