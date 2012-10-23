@@ -103,7 +103,7 @@ public class PlanningResource {
 
   static CacheControl buildCacheControl() {
     CacheControl cacheControl = new CacheControl();
-    cacheControl.setMaxAge(3600); // 1 hour
+    //cacheControl.setMaxAge(3600); // 1 hour
     return cacheControl;
   }
 
