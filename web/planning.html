@@ -61,9 +61,11 @@
   <div id="disclaimer">Real planning coming up in less than a week!</div>
   {{#days}}
   <div class="day">{{dayLabel}}</div>
+  <div class="toc"><ul>{{#slots}}<li><a href="#{{slot}}">{{slot}}</a></li>{{/slots}}</ul></div>
+  </div>
   {{#slots}}
   <div class="slot">
-    <div class="hour">{{slot}}</div>
+    <div class="hour"><a name="{{slot}}">{{slot}}</a></div>
     {{#talks}}
     <div id="session-{{id}}" class="talk">
       <div class="title">{{title}} ({{type}})</div>
