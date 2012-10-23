@@ -34,6 +34,7 @@ transformTalks = (data) ->
   ).map((talk) ->
     promises.push retrieve(talk.presentationUri).then (presentation) ->
       talk.summary = presentation.summary
+      talk.tags = _.pluck(presentation.tags, 'name')
     talk
   ).groupBy((talk) -> talk.day)
   .map((talks, day) ->
@@ -44,8 +45,8 @@ transformTalks = (data) ->
     ).value()
   ).value()
 
-retrieve('http://cfp.devoxx.com/rest/v1/events/7/schedule').then (data) ->
-  schedule = {days: transformTalks(data)}
+retrieve('http://cfp.devoxx.com/rest/v1/events/7/schedule').then (talks) ->
+  schedule = {days: transformTalks(talks)}
   all(promises).then () ->
     console.log JSON.stringify(schedule, null, " ")
 
