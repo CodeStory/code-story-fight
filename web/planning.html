@@ -66,16 +66,15 @@
     <div class="hour">{{slot}}</div>
     {{#talks}}
     <div id="session-{{id}}" class="talk">
-      <a href="#" class="register" data-talk="{{id}}">Register</a>
-
       <div class="title">{{title}} ({{type}})</div>
-      <div class="summary">{{summary}})</div>
+      <a href="#" class="register" data-talk="{{id}}">Register</a>
       <div class="speaker">{{speakers_string}} @{{room}} from {{from}} to {{to}}</div>
       <div class="tags">
         {{#tags}}
         <span class="tag">{{.}}</span>
         {{/tags}}
       </div>
+      <div class="summary">{{summary}})</div>
     </div>
     {{/talks}}
   </div>
