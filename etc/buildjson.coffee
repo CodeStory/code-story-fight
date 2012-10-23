@@ -13,7 +13,7 @@ retrieve = (url) ->
     scheduleData = ""
     response.on 'data', (data) -> scheduleData += data
     response.on 'end', () -> promise.resolve JSON.parse(scheduleData)
-  promise.wait()
+  promise
 
 transformTalks = (data) ->
   _.chain(data)
