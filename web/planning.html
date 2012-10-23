@@ -22,7 +22,7 @@
     <li id="logo">
       <a href="planning.html">
         <figure>
-          <img src="devoxx-logo.png" />
+          <img src="devoxx-logo.png"/>
         </figure>
       </a>
     </li>
@@ -58,11 +58,11 @@
       <a href="#" class="register" data-talk="{{id}}">Register</a>
 
       <div class="title">{{title}} ({{type}})</div>
-      <div class="speaker">{{#speakers}}{{speaker}} - {{/speakers}}</div>
-      <div class="description">{{description}}</div>
+      <div class="summary">{{summary}})</div>
+      <div class="speaker">{{speakers_string}} @{{room}} from {{from}} to {{to}}</div>
       <div class="tags">
         {{#tags}}
-        <span class="tag">{{label}}</span>
+        <span class="tag">{{.}}</span>
         {{/tags}}
       </div>
     </div>

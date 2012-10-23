@@ -30,7 +30,7 @@ transformTalks = (data) ->
     from: talk.fromTime[11..15]
     to: talk.toTime[11..15]
     type: talk.type
-    speakers: _.pluck(talk.speakers, 'speaker').join ','
+    speakers: _.pluck(talk.speakers, 'speaker')
   ).map((talk) ->
     promises.push retrieve(talk.presentationUri).then (presentation) ->
       talk.summary = presentation.summary

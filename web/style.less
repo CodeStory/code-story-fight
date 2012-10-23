@@ -1,6 +1,7 @@
 @white: #FFFFFF;
 @black: #000000;
 @gray: #EEEEEE;
+@darkgray: #A9A9A9;
 @red: #FF0000;
 @blue: #0000FF;
 @green: #00FF00;
@@ -79,7 +80,6 @@ body {
   }
 }
 
-
 ul {
   padding-left: 0;
 }
@@ -97,7 +97,6 @@ h1 {
 }
 
 #content {
-
   #disclaimer {
     position: absolute;
     top: 0;
@@ -128,6 +127,10 @@ h1 {
       margin: 0 28px 34px;
       padding: 24px 18px;
 
+      .register {
+        float: right;
+      }
+
       .title {
         font-weight: bold;
         font-size: 125%;
@@ -139,6 +142,7 @@ h1 {
         color: slategray;
         font-size: 85%;
         padding-bottom: 12px;
+        margin-top: 10px;
         margin-bottom: 20px;
         border-bottom: 1px @gray solid;
       }
@@ -164,6 +168,7 @@ h1 {
     color: @white;
     font-size: 1.5em;
     border: 1px solid @black;
+    text-align: center;
   }
 
   .colored(@color: @red){

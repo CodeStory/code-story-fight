@@ -17,11 +17,11 @@ should 'Should show teaser', '/', (browser) ->
 
 should 'Should show sessions', '/planning.html', (browser) ->
   expect(browser.text '#session-759 .title').to.be 'Android Development Code Lab (Hands-on Labs)'
-  expect(browser.text '#session-759 .speaker').to.be 'Nick Butcher -'
+  expect(browser.text '#session-759 .speaker').to.be 'Nick Butcher, Richard Hyndman @BOF 1 from 09:30 to 12:30'
   expect(browser.text '#session-759 .description').to.contain ''
 
   expect(browser.text '#session-761 .title').to.be 'Modular Architecture Today (University)'
-  expect(browser.text '#session-761 .speaker').to.be 'Kirk Knoernschild -'
+  expect(browser.text '#session-761 .speaker').to.be 'Kirk Knoernschild @Room 8 from 09:30 to 12:30'
   expect(browser.text '#session-761 .description').to.contain ''
 
 should 'Should register', '/planning.html', (browser) ->
