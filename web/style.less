@@ -112,43 +112,48 @@ h1 {
     #styles > .title;
     #styles > .horizontal-section;
     background-color: @black;
-
   }
 
   .slot {
-    #styles > .title;
-    #styles > .horizontal-section;
-    background-color: @gray;
-  }
+    background: -moz-linear-gradient(lighten(@blue_devoxx, 35%), @gray, @gray, @gray);
+    padding-bottom: 1px;
 
-  .talk {
-    background-color: @white;
-    border-top: 0 solid @black;
-    border-left: 1px solid @black;
-    border-right: 1px solid @black;
-    border-bottom: 1px solid @black;
-    padding: 10px;
-
-    .title {
-      font-weight: bold;
-      margin-bottom: 5px;
+    .hour {
+      font-size: 1.5em;
+      #styles > .horizontal-section;
     }
 
-    .speaker {
-      font-style: italic;
-      margin-bottom: 20px;
-    }
+    .talk {
+      background-color: @white;
+      margin: 0 28px 34px;
+      padding: 24px 18px;
 
-    .tags {
-      text-align: right;
-
-      .tag {
-        color: @white;
+      .title {
         font-weight: bold;
-        font-size: 0.8em;
-        padding: 0 10px;
-        #styles > .rounded-corners(5px);
-        #styles > .colored(@blue);
+        font-size: 125%;
+        line-height: 125%;
+        margin-bottom: 7px;
+      }
+
+      .speaker {
+        color: slategray;
+        font-size: 85%;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+        border-bottom: 1px @gray solid;
+      }
+
+      .tags {
+        text-align: right;
+
+        .tag {
+          color: @white;
+          font-weight: bold;
+          font-size: 0.8em;
+          padding: 0 10px;
+          #styles > .rounded-corners(5px);
+          #styles > .colored(@blue);
+        }
       }
     }
   }

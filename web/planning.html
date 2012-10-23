@@ -51,21 +51,23 @@
   {{#days}}
   <div class="day">{{dayLabel}}</div>
   {{#slots}}
-  <div class="slot">{{slot}}</div>
-  {{#talks}}
-  <div id="session-{{id}}" class="talk">
-    <a href="#" class="register" data-talk="{{id}}">Register</a>
+  <div class="slot">
+    <div class="hour">{{slot}}</div>
+    {{#talks}}
+    <div id="session-{{id}}" class="talk">
+      <a href="#" class="register" data-talk="{{id}}">Register</a>
 
-    <div class="title">{{title}} ({{type}})</div>
-    <div class="speaker">{{#speakers}}{{speaker}} - {{/speakers}}</div>
-    <div class="description">{{description}}</div>
-    <div class="tags">
-      {{#tags}}
-      <span class="tag">{{label}}</span>
-      {{/tags}}
+      <div class="title">{{title}} ({{type}})</div>
+      <div class="speaker">{{#speakers}}{{speaker}} - {{/speakers}}</div>
+      <div class="description">{{description}}</div>
+      <div class="tags">
+        {{#tags}}
+        <span class="tag">{{label}}</span>
+        {{/tags}}
+      </div>
     </div>
+    {{/talks}}
   </div>
-  {{/talks}}
   {{/slots}}
   {{/days}}
 </script>
