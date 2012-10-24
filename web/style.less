@@ -19,12 +19,12 @@ body {
     background-color: @black;
     #styles > .title;
     text-align: center;
-    color: @blue_devoxx;
+    color: darken(@blue_devoxx, 10%);
     font-weight: lighter;
     text-transform: uppercase;
 
-    ul#logo-section {
-      font-family: monospace;
+    #logo-section {
+      font-family: 'Sirin Stencil', cursive; //font-family: monospace;
 
       #logo {
         height: 80px;
@@ -33,11 +33,13 @@ body {
 
       #mojo {
         letter-spacing: 1em;
+        padding-left: 1em;
       }
 
       #attribution {
         text-align: right;
         font-size: 0.8em;
+        padding-right: 5px;
       }
     }
 
