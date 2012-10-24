@@ -26,9 +26,9 @@ function refreshPlanning() {
       _.each(day.slots, function (slot) {
         _.each(slot.talks, function (talk) {
           talk.speakers_string = talk.speakers.join(', ');
-        })
-      })
-    })
+        });
+      });
+    });
 
     $("#content").html(Hogan.compile($('#talks-template').html()).render(json));
     refreshRegistrationLinks();
@@ -58,37 +58,35 @@ function listenRegistrationClicks() {
 }
 
 function initAuthenticationState() {
-  $('header').html(Hogan.compile($('#header-template').html()).render({authenticated:false}));
+  $('header').append(Hogan.compile($('#header-template').html()).render({authenticated:false}));
 }
 
 function listenSearch() {
   $('#search input').keyup(function () {
+    $('.day_wrapper, .toc-link, .slot, .talk').show();
+
     var text = $(this).val();
     if (text.length < 3) {
-      $('.talk, .slot').show();
-    } else {
-      var words = _.filter(text.toLowerCase().split(' '), function (word) {
-        return word.length > 0;
-      });
-
-      $('.slot, .day_wrapper').show();
-      $('.talk').each(function () {
-        var fulltext = $(this).text().toLowerCase();
-        var visible = _.all(words, function (word) {
-          return fulltext.indexOf(word) > 0;
-        });
-
-        if (visible) {
-          $(this).show();
-        } else {
-          $(this).hide();
-        }
-      });
-
-      var parents = $('.talk:visible').parents('.day_wrapper, .slot');
-      $('.slot, .day_wrapper').hide();
-      parents.show();
+      return;
     }
+
+    var words = _.filter(text.toLowerCase().split(' '), function (word) {
+      return word.length > 0;
+    });
+
+    $('.talk').filter(function () {
+      var fulltext = $(this).text().toLowerCase();
+      return !_.all(words, function (word) {
+        return fulltext.indexOf(word) > 0;
+      });
+    }).hide();
+
+    $('.day_wrapper:not(:has(.talk:visible))').hide();
+    $('.slot:not(:has(.talk:visible))').hide();
+
+    $('.hour a:hidden').each(function () {
+      $('.toc-link[data-toc="' + this.id + '"]').hide();
+    });
   });
 }
 

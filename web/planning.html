@@ -24,16 +24,7 @@
 </head>
 
 <body>
-<header></header>
-<div id="content"></div>
-</body>
-
-<script src="js/jquery.js"></script>
-<script src="js/underscore.js"></script>
-<script src="js/hogan.js"></script>
-<script src="js/codestory.js"></script>
-
-<script type="text/x-template" id="header-template">
+<header>
   <ul id="logo-section">
     <li id="logo">
       <a href="planning.html">
@@ -45,6 +36,16 @@
     <li id="mojo">Planning</li>
     <li id="attribution">by Code-Story</li>
   </ul>
+</header>
+<div id="content"></div>
+</body>
+
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/hogan.js"></script>
+<script src="js/codestory.js"></script>
+
+<script type="text/x-template" id="header-template">
   <nav>
     <a id="back" href="index.html">Back</a>
 
@@ -70,12 +71,12 @@
     <div class="day">{{dayLabel}}</div>
     <ul class="toc">
       {{#slots}}
-      <li><a href="#{{slot}}">{{slot}}</a></li>
+      <li class="toc-link" data-toc="{{day}}-{{slot}}"><a href="#{{day}}-{{slot}}">{{slot}}</a></li>
       {{/slots}}
     </ul>
     {{#slots}}
     <div class="slot">
-      <div class="hour"><a name="{{slot}}">{{slot}}</a></div>
+      <div class="hour"><a id="{{day}}-{{slot}}">{{slot}}</a></div>
       {{#talks}}
       <div id="session-{{id}}" class="talk">
         <div class="header">
