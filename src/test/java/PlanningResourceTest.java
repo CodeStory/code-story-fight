@@ -1,6 +1,5 @@
 import auth.Authenticator;
 import auth.User;
-import com.google.common.collect.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -78,7 +77,7 @@ public class PlanningResourceTest {
     User user = new User(42L, "screenName", "token", "secret");
     when(authenticator.authenticate("oauthVerifier")).thenReturn(user);
 
-    Response response = resource.authenticated("oauthToken", "oauthVerifier");
+    Response response = resource.authenticated("oauthVerifier");
 
     verify(users).add(user);
     Map<String, List<Object>> metadata = assertRedirected(response, "planning.html");

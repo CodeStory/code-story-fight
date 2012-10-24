@@ -1,4 +1,3 @@
-var current_login = 'dgageot';
 var dayLabels = {
   '2012-11-12':'Monday, Nov. 12 2012',
   '2012-11-13':'Tuesday, Nov. 13 2012',
@@ -12,19 +11,23 @@ function set_content(selector, template, data) {
 }
 
 function initAuthenticationState() {
-  set_content('#nav', '#header-template', {authenticated:false});
+  var authenticated = ($.cookie('userId') != null);
+  set_content('#auth', '#header-template', { 'authenticated': authenticated });
 }
 
 function refreshRegistrationLinks() {
-  $.getJSON('registrations/' + current_login, function (json) {
-    $('.register').html('Register');
-    $('.talk').removeClass('registered');
+  $('.register').html('Register');
+  $('.talk').removeClass('registered');
 
-    _.each(json, function (talkId) {
-      $('#session-' + talkId + ' .register').html('Unregister');
-      $('#session-' + talkId).addClass('registered');
+  var authenticated = ($.cookie('userId') != null);
+  if (authenticated) {
+    $.getJSON('registrations', function (json) {
+      _.each(json, function (talkId) {
+        $('#session-' + talkId + ' .register').html('Unregister');
+        $('#session-' + talkId).addClass('registered');
+      });
     });
-  });
+  }
 }
 
 function enrichPlanning(planning) {
@@ -52,9 +55,9 @@ function listenRegistrationClicks() {
     var talkId = $(this).attr('data-talk');
 
     if ($(this).html() == "Register") {
-      $.post('register', {login:current_login, talkId:talkId}, refreshRegistrationLinks);
+      $.post('register', { talkId:talkId }, refreshRegistrationLinks);
     } else {
-      $.post('unregister', {login:current_login, talkId:talkId}, refreshRegistrationLinks);
+      $.post('unregister', { talkId:talkId }, refreshRegistrationLinks);
     }
 
     return false;

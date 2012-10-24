@@ -13,4 +13,8 @@ public class Users {
   public User withId(Long userId) {
     return users.get(userId);
   }
+
+  public User remove(Long userId) {
+    return users.remove(userId);
+  }
 }

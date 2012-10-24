@@ -7,8 +7,9 @@ import twitter4j.TwitterException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class FakeAuthenticator implements Authenticator, CredentialValidator {
+import static java.lang.String.format;
 
+public class FakeAuthenticator implements Authenticator {
   private final int port;
 
   @Inject
@@ -18,16 +19,11 @@ public class FakeAuthenticator implements Authenticator, CredentialValidator {
 
   @Override
   public URL getAuthenticateURL() throws TwitterException, MalformedURLException {
-    return new URL("http://localhost:" + port + "/fakeauthenticate");
+    return new URL(format("http://localhost:%d/fakeauthenticate", port));
   }
 
   @Override
   public User authenticate(String oauthVerifier) throws AuthenticationException {
     return new User(42L, "arnold", "ring", "girl");
-  }
-
-  @Override
-  public boolean isAuthenticated(User user) {
-    return true;
   }
 }

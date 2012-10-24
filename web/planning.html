@@ -39,14 +39,13 @@
     <li id="attribution">by Code-Story</li>
   </ul>
   <nav>
+    <span id="auth"></span>
+
     <a id="back" href="index.html">Back</a>
 
     <form id="search">
       <input id="search_box" autofocus="autofocus" placeholder="Search for talks/speakers/room..."/>
     </form>
-
-    <span id="auth">
-    </span>
   </nav>
 </header>
 
@@ -54,13 +53,14 @@
 </body>
 
 <script src="js/jquery.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script src="js/underscore.js"></script>
 <script src="js/hogan.js"></script>
 <script src="js/codestory.js"></script>
 
 <script type="text/x-template" id="header-template">
   {{#authenticated}}
-  <a href="#" id="logout">Log Out</a>
+  <a href="/logout" id="logout">Log Out</a>
   {{/authenticated}}
   {{^authenticated}}
   <a href="/authenticate" id="login">Log In</a>

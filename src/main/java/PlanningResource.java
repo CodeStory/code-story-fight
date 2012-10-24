@@ -23,6 +23,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 
+import static java.lang.Long.parseLong;
+import static javax.ws.rs.core.Response.Status.FORBIDDEN;
+
 @Path("/")
 @Singleton
 public class PlanningResource {
@@ -51,11 +54,11 @@ public class PlanningResource {
 
   @GET
   @Path("/authenticated")
-  public Response authenticated(@QueryParam("oauth_token") String oauthToken, @QueryParam("oauth_verifier") String oauthVerifier) {
+  public Response authenticated(@QueryParam("oauth_verifier") String oauthVerifier) {
     try {
       User user = authenticator.authenticate(oauthVerifier);
       users.add(user);
-      return Response.seeOther(URI.create("planning.html")).cookie(new NewCookie("userId", user.getId().toString())).build();
+      return planning().cookie(new NewCookie("userId", user.getId().toString(), "/", null, null, 60 * 60 * 24 * 7, false)).build();
     } catch (IllegalStateException e) {
       return index();
     } catch (AuthenticationException e) {
@@ -63,23 +66,40 @@ public class PlanningResource {
     }
   }
 
+  @GET
+  @Path("/logout")
+  public Response logout(@CookieParam("userId") String userId) {
+    rejectUnauthenticated(userId);
+    users.remove(parseLong(userId));
+    return planning().cookie(new NewCookie("userId", null, "/", null, null, 0, false)).build();
+  }
+
+  private void rejectUnauthenticated(String userId) {
+    if (userId == null) {
+      throw new WebApplicationException(FORBIDDEN);
+    }
+  }
+
   @POST
   @Path("register")
-  public void register(@FormParam("login") String login, @FormParam("talkId") String talkId) {
-    planning.register(login, talkId);
+  public void register(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
+    rejectUnauthenticated(userId);
+    planning.register(userId, talkId);
   }
 
   @POST
   @Path("unregister")
-  public void unregister(@FormParam("login") String login, @FormParam("talkId") String talkId) {
-    planning.unregister(login, talkId);
+  public void unregister(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
+    rejectUnauthenticated(userId);
+    planning.unregister(userId, talkId);
   }
 
   @GET
-  @Path("registrations/{login}")
+  @Path("registrations")
   @Produces("application/json;charset=UTF-8")
-  public Iterable<String> myRegistrations(@PathParam("login") String login) {
-    return planning.registrations(login);
+  public Iterable<String> myRegistrations(@CookieParam("userId") String userId) {
+    rejectUnauthenticated(userId);
+    return planning.registrations(userId);
   }
 
   @GET
@@ -94,6 +114,10 @@ public class PlanningResource {
   @Path("{path : .*}")
   public Response staticResource(@PathParam("path") String path) throws IOException {
     return staticResource(file(path));
+  }
+
+  private Response.ResponseBuilder planning() {
+    return Response.seeOther(URI.create("planning.html"));
   }
 
   static Response staticResource(File file) throws IOException {

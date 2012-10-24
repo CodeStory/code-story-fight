@@ -6,7 +6,7 @@ expect = require 'expect.js'
 port = process.argv[2]
 
 should = (name, url, callback) ->
-  browser = new Browser()
+  browser = new Browser( { "maxWait": 10000, "waitFor": 10000 } )
   browser.visit "http://localhost:#{port}#{url}", -> callback(browser)
 
 should 'Should show title', '/', (browser) ->
@@ -24,17 +24,30 @@ should 'Should show sessions', '/planning.html', (browser) ->
   expect(browser.text '#session-761 .speaker').to.be 'Kirk Knoernschild @Room 8 from 09:30 to 12:30'
   expect(browser.text '#session-761 .description').to.contain ''
 
-should 'Should register', '/planning.html', (browser) ->
+should 'Should register while logged in', '/planning.html', (browser) ->
+  expect(browser.text '#auth a').to.be 'Log In'
+  expect(browser.cookies().get 'userId').to.be undefined
   expect(browser.text '#session-759 a.register').to.be 'Register'
   expect(browser.text '#session-760 a.register').to.be 'Register'
   expect(browser.text '#session-761 a.register').to.be 'Register'
 
-  browser.clickLink '#session-759 a.register', ->
-    expect(browser.text '#session-759 a.register').to.be 'Unregister'
+  browser.clickLink '#login', ->
+    expect(browser.text '#auth a').to.be 'Log Out'
+    expect(browser.cookies().get 'userId').to.be '42'
+    expect(browser.text '#session-759 a.register').to.be 'Register'
     expect(browser.text '#session-760 a.register').to.be 'Register'
     expect(browser.text '#session-761 a.register').to.be 'Register'
 
     browser.clickLink '#session-759 a.register', ->
-      expect(browser.text '#session-759 a.register').to.be 'Register'
+      expect(browser.text '#session-759 a.register').to.be 'Unregister'
       expect(browser.text '#session-760 a.register').to.be 'Register'
       expect(browser.text '#session-761 a.register').to.be 'Register'
+
+      browser.clickLink '#session-759 a.register', ->
+        expect(browser.text '#session-759 a.register').to.be 'Register'
+        expect(browser.text '#session-760 a.register').to.be 'Register'
+        expect(browser.text '#session-761 a.register').to.be 'Register'
+
+        browser.clickLink '#logout', ->
+          expect(browser.cookies().get 'userId').to.be undefined
+          expect(browser.text '#auth a').to.be 'Log In'
