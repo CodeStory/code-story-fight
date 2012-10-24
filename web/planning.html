@@ -24,6 +24,8 @@
 </head>
 
 <body>
+<div id="disclaimer">Real planning coming up in less than a week!</div>
+
 <header>
   <ul id="logo-section">
     <li id="logo">
@@ -36,7 +38,18 @@
     <li id="mojo">Planning</li>
     <li id="attribution">by Code-Story</li>
   </ul>
+  <nav>
+    <a id="back" href="index.html">Back</a>
+
+    <form id="search">
+      <input id="search_box" autofocus="autofocus" placeholder="Search for talks/speakers/room..."/>
+    </form>
+
+    <span id="auth">
+    </span>
+  </nav>
 </header>
+
 <div id="content"></div>
 </body>
 
@@ -46,26 +59,15 @@
 <script src="js/codestory.js"></script>
 
 <script type="text/x-template" id="header-template">
-  <nav>
-    <a id="back" href="index.html">Back</a>
-
-    <form id="search">
-      <input id="search_box" autofocus="autofocus" placeholder="Search for talks/speakers/room..."/>
-    </form>
-
-    <span id="auth">
-      {{#authenticated}}
-      <a href="#" id="logout">Log Out</a>
-      {{/authenticated}}
-      {{^authenticated}}
-      <a href="/authenticate" id="login">Log In</a>
-      {{/authenticated}}
-    </span>
-  </nav>
+  {{#authenticated}}
+  <a href="#" id="logout">Log Out</a>
+  {{/authenticated}}
+  {{^authenticated}}
+  <a href="/authenticate" id="login">Log In</a>
+  {{/authenticated}}
 </script>
 
 <script type="text/x-template" id="talks-template">
-  <div id="disclaimer">Real planning coming up in less than a week!</div>
   {{#days}}
   <div class="day_wrapper">
     <div class="day">{{dayLabel}}</div>
