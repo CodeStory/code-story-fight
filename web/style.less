@@ -46,35 +46,42 @@ body {
       background-color: @gray;
       font-size: 0.8em;
 
-      ul {
-        margin: 0;
+      #back {
+        float: left;
+        background: no-repeat url('back.png');
+      }
 
-        li#auth {
-          float: right;
+      #search {
+        display: inline;
+
+        input {
+          height: 20px;
+          line-height: 20px;
+          font-size: 0.8em;
         }
+      }
 
-        li {
-          float: left;
+      #auth {
+        float: right;
+      }
 
-          a {
-            padding-bottom: 4px;
-            font-weight: bold;
-          }
+      a {
+        padding-bottom: 4px;
+        font-weight: bold;
+      }
 
-          a:link, a:visited {
-            text-decoration: none;
-            color: @black;
-            padding-left: 29px;
-          }
+      a:link, a:visited {
+        text-decoration: none;
+        color: @black;
+        padding-left: 29px;
+      }
 
-          a#back {
-            background: no-repeat url('back.png');
-          }
+      #login, #logout {
+        background: no-repeat url('login.png');
+      }
 
-          a#login, a#logout {
-            background: no-repeat url('login.png');
-          }
-        }
+      #search_box {
+        width: 300px;
       }
     }
   }
@@ -114,20 +121,20 @@ h1 {
   }
 
   .toc {
-      #styles > .horizontal-section;
-      background-color: @black;
-      text-align: center;
-      padding-bottom:20px;
-      ul {
-          list-style-type: none;
-          li {
-              display:inline;
-              a {
-                  color: white;
-              }
-              margin-left:30px;
-          }
+    #styles > .horizontal-section;
+    background-color: @black;
+    text-align: center;
+    padding-bottom: 20px;
+    ul {
+      list-style-type: none;
+      li {
+        display: inline;
+        a {
+          color: white;
+        }
+        margin-left: 30px;
       }
+    }
   }
 
   .slot {

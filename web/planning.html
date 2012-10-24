@@ -5,17 +5,20 @@
   <link type='image/png' rel='shortcut icon' href='fusee-16x16.png'/>
   <link type='text/css' rel='stylesheet' href='style.less.css'>
   <link type='text/css' rel='stylesheet' href='http://fonts.googleapis.com/css?family=Ubuntu:400,700'>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27949651-2']);
-  _gaq.push(['_trackPageview']);
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27949651-2']);
+    _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
+    (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 </head>
 
 <body>
@@ -41,46 +44,54 @@
     <li id="attribution">By Code-Story</li>
   </ul>
   <nav>
-    <ul>
-      <li>
-        <a href="index.html" id="back">Back</a>
-      </li>
-      <li id="auth">
-        {{#authenticated}}
-        <a href="#" id="logout">Log Out</a>
-        {{/authenticated}}
-        {{^authenticated}}
-        <a href="/authenticate" id="login">Log In</a>
-        {{/authenticated}}
-      </li>
-    </ul>
+    <a id="back" href="index.html">Back</a>
+
+    <form id="search">
+      <input id="search_box" autofocus="autofocus" placeholder="Search for talks/speakers/room..."/>
+    </form>
+
+    <span id="auth">
+      {{#authenticated}}
+      <a href="#" id="logout">Log Out</a>
+      {{/authenticated}}
+      {{^authenticated}}
+      <a href="/authenticate" id="login">Log In</a>
+      {{/authenticated}}
+    </span>
   </nav>
 </script>
 
 <script type="text/x-template" id="talks-template">
   <div id="disclaimer">Real planning coming up in less than a week!</div>
   {{#days}}
-  <div class="day">{{dayLabel}}</div>
-  <div class="toc"><ul>{{#slots}}<li><a href="#{{slot}}">{{slot}}</a></li>{{/slots}}</ul></div>
-  </div>
-  {{#slots}}
-  <div class="slot">
-    <div class="hour"><a name="{{slot}}">{{slot}}</a></div>
-    {{#talks}}
-    <div id="session-{{id}}" class="talk">
-      <div class="title">{{title}} ({{type}})</div>
-      <a href="#" class="register" data-talk="{{id}}">Register</a>
-      <div class="speaker">{{speakers_string}} @{{room}} from {{from}} to {{to}}</div>
-      <div class="tags">
-        {{#tags}}
-        <span class="tag">{{.}}</span>
-        {{/tags}}
-      </div>
-      <div class="summary">{{summary}})</div>
+  <div class="day_wrapper">
+    <div class="day">{{dayLabel}}</div>
+    <div class="toc">
+      <ul>{{#slots}}
+        <li><a href="#{{slot}}">{{slot}}</a></li>
+        {{/slots}}
+      </ul>
     </div>
-    {{/talks}}
+    {{#slots}}
+    <div class="slot">
+      <div class="hour"><a name="{{slot}}">{{slot}}</a></div>
+      {{#talks}}
+      <div id="session-{{id}}" class="talk">
+        <div class="title">{{title}} ({{type}})</div>
+        <a href="#" class="register" data-talk="{{id}}">Register</a>
+
+        <div class="speaker">{{speakers_string}} @{{room}} from {{from}} to {{to}}</div>
+        <div class="tags">
+          {{#tags}}
+          <span class="tag">{{.}}</span>
+          {{/tags}}
+        </div>
+        <div class="summary">{{summary}})</div>
+      </div>
+      {{/talks}}
+    </div>
+    {{/slots}}
   </div>
-  {{/slots}}
   {{/days}}
 </script>
 </html>

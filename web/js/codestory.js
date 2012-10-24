@@ -52,6 +52,8 @@ function listenRegistrationClicks() {
     } else {
       unregister(current_login, talkId, refreshRegistrationLinks);
     }
+
+    return false;
   });
 }
 
@@ -59,8 +61,40 @@ function initAuthenticationState() {
   $('header').html(Hogan.compile($('#header-template').html()).render({authenticated:false}));
 }
 
+function listenSearch() {
+  $('#search input').keyup(function () {
+    var text = $(this).val();
+    if (text.length < 3) {
+      $('.talk, .slot').show();
+    } else {
+      var words = _.filter(text.toLowerCase().split(' '), function (word) {
+        return word.length > 0;
+      });
+
+      $('.slot, .day_wrapper').show();
+      $('.talk').each(function () {
+        var fulltext = $(this).text().toLowerCase();
+        var visible = _.all(words, function (word) {
+          return fulltext.indexOf(word) > 0;
+        });
+
+        if (visible) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+
+      var parents = $('.talk:visible').parents('.day_wrapper, .slot');
+      $('.slot, .day_wrapper').hide();
+      parents.show();
+    }
+  });
+}
+
 $(document).ready(function () {
   initAuthenticationState();
   refreshPlanning();
   listenRegistrationClicks();
+  listenSearch();
 });
