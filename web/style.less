@@ -26,7 +26,7 @@ h1 {
 }
 
 body {
-  background-color: @light_gray;
+  background-color: @gray;
   font-family: 'Ubuntu', sans-serif;
   margin: 0;
   padding: 0;
@@ -140,6 +140,8 @@ body {
   }
 
   .slot {
+    #styles > .gradient(lighten(@blue_devoxx, 35%), @gray);
+
     .hour {
       font-size: 1.5em;
       #styles > .horizontal-section;
@@ -277,5 +279,16 @@ body#index {
   .horizontal-section {
     height: 37px;
     padding: 13px 1em 0 1em;
+  }
+
+  .gradient(@startColor, @endColor) {
+    background: @endColor; /* Old browsers */
+    background: -moz-linear-gradient(top,  @startColor 0%, @endColor 25%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@startColor), color-stop(25%,@endColor)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  @startColor 0%,@endColor 25%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  @startColor 0%,@endColor 25%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  @startColor 0%,@endColor 25%); /* IE10+ */
+    background: linear-gradient(to bottom,  @startColor 0%,@endColor 25%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@startColor', endColorstr='@endColor',GradientType=0 ); /* IE6-9 */
   }
 }
