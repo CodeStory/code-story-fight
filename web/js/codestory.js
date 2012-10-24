@@ -44,7 +44,7 @@ function unregister(login, talkId, callback) {
 }
 
 function listenRegistrationClicks() {
-  $('.register').live('click', function () {
+  $(document).on('click', '.register', function () {
     var talkId = $(this).attr('data-talk');
 
     if ($(this).html() == "Register") {
