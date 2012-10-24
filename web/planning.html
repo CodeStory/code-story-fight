@@ -43,7 +43,7 @@
       </a>
     </li>
     <li id="mojo">Planning</li>
-    <li id="attribution">By Code-Story</li>
+    <li id="attribution">by Code-Story</li>
   </ul>
   <nav>
     <a id="back" href="index.html">Back</a>
@@ -68,25 +68,27 @@
   {{#days}}
   <div class="day_wrapper">
     <div class="day">{{dayLabel}}</div>
-    <div class="toc">
-      <ul>{{#slots}}
-        <li><a href="#{{slot}}">{{slot}}</a></li>
-        {{/slots}}
-      </ul>
-    </div>
+    <ul class="toc">
+      {{#slots}}
+      <li><a href="#{{slot}}">{{slot}}</a></li>
+      {{/slots}}
+    </ul>
     {{#slots}}
     <div class="slot">
       <div class="hour"><a name="{{slot}}">{{slot}}</a></div>
       {{#talks}}
       <div id="session-{{id}}" class="talk">
-        <div class="title">{{title}} ({{type}})</div>
-        <a href="#" class="register" data-talk="{{id}}">Register</a>
-
-        <div class="speaker">{{speakers_string}} @{{room}} from {{from}} to {{to}}</div>
-        <div class="tags">
-          {{#tags}}
-          <span class="tag">{{.}}</span>
-          {{/tags}}
+        <div class="header">
+          <div class="title">{{title}} ({{type}})</div>
+          <a href="#" class="register" data-talk="{{id}}">Register</a>
+        </div>
+        <div class="details">
+          <div class="speaker">{{speakers_string}} @{{room}} from {{from}} to {{to}}</div>
+          <div class="tags">
+            {{#tags}}
+            <span class="tag">{{.}}</span>
+            {{/tags}}
+          </div>
         </div>
         <div class="summary">{{summary}})</div>
       </div>
