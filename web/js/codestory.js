@@ -83,11 +83,11 @@ function filterTalks() {
     });
   }).hide();
 
-  $('.day_wrapper:not(:has(.talk:visible))').hide();
   $('.slot:not(:has(.talk:visible))').hide();
+  $('.day_wrapper:not(:has(.slot:visible))').hide();
   $('.hour a:hidden').each(function () {
     $('.toc-link[data-toc="' + this.id + '"]').hide();
-  })
+  });
 }
 
 function listenSearch() {
