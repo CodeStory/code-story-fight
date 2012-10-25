@@ -3,6 +3,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
+import com.sun.jersey.api.container.filter.GZIPContentEncodingFilter;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.jersey.api.core.DefaultResourceConfig;
 import com.sun.jersey.api.core.ResourceConfig;
@@ -46,10 +47,15 @@ public class PlanningServer {
   }
 
   private ResourceConfig configuration() {
-    return new DefaultResourceConfig(
+    DefaultResourceConfig config = new DefaultResourceConfig(
         JacksonJsonProvider.class,
         PlanningResource.class,
         FakeAuthenticatorResource.class);
+
+    config.getProperties().put(ResourceConfig.PROPERTY_CONTAINER_REQUEST_FILTERS, GZIPContentEncodingFilter.class.getName());
+    config.getProperties().put(ResourceConfig.PROPERTY_CONTAINER_RESPONSE_FILTERS, GZIPContentEncodingFilter.class.getName());
+
+    return config;
   }
 
   public void stop() {
