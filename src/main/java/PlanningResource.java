@@ -8,10 +8,17 @@ import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import org.lesscss.LessCompiler;
 import org.lesscss.LessException;
+import templating.YamlFrontMatter;
 import twitter4j.TwitterException;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.ws.rs.*;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
@@ -111,6 +118,13 @@ public class PlanningResource {
   }
 
   @GET
+  @Path("{path : .*\\.html}")
+  public Response html(@PathParam("path") String path) throws IOException {
+    String content = new YamlFrontMatter().parse(file(path)).getContent();
+    return Response.ok(content, "text/html").build();
+  }
+
+  @GET
   @Path("{path : .*}")
   public Response staticResource(@PathParam("path") String path) throws IOException {
     return staticResource(file(path));
@@ -127,7 +141,7 @@ public class PlanningResource {
 
   static CacheControl buildCacheControl() {
     CacheControl cacheControl = new CacheControl();
-    //cacheControl.setMaxAge(3600); // 1 hour
+    // cacheControl.setMaxAge(3600); // 1 hour
     return cacheControl;
   }
 
