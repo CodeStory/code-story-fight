@@ -12,7 +12,7 @@ function set_content(selector, template, data) {
 
 function initAuthenticationState() {
   var authenticated = ($.cookie('userId') != null);
-  set_content('#auth', '#header-template', { 'authenticated': authenticated });
+  set_content('#auth', '#header-template', { 'authenticated':authenticated });
 }
 
 function refreshStars() {
@@ -64,32 +64,43 @@ function listenStarClicks() {
   });
 }
 
-function listenSearch() {
-  $('#search input').keyup(function () {
-    $('.day_wrapper, .toc-link, .slot, .talk').show();
+function filterTalks() {
+  $('.day_wrapper, .toc-link, .slot, .talk').show();
 
-    var text = $(this).val();
-    if (text.length < 3) {
-      return;
-    }
+  var text = $('#search input').val();
+  if (text.length < 3) {
+    return;
+  }
 
-    var words = _.filter(text.toLowerCase().split(' '), function (word) {
-      return word.length > 0;
+  var words = _.filter(text.toLowerCase().split(' '), function (word) {
+    return word.length > 0;
+  });
+
+  $('.talk').filter(function () {
+    var fulltext = $(this).text().toLowerCase();
+    return !_.all(words, function (word) {
+      return fulltext.indexOf(word) > 0;
     });
+  }).hide();
 
-    $('.talk').filter(function () {
-      var fulltext = $(this).text().toLowerCase();
-      return !_.all(words, function (word) {
-        return fulltext.indexOf(word) > 0;
-      });
-    }).hide();
-
-    $('.day_wrapper:not(:has(.talk:visible))').hide();
-    $('.slot:not(:has(.talk:visible))').hide();
-    $('.hour a:hidden').each(function () {
-      $('.toc-link[data-toc="' + this.id + '"]').hide();
-    })
+  $('.day_wrapper:not(:has(.talk:visible))').hide();
+  $('.slot:not(:has(.talk:visible))').hide();
+  $('.hour a:hidden').each(function () {
+    $('.toc-link[data-toc="' + this.id + '"]').hide();
   })
+}
+
+function listenSearch() {
+  var searchTimer = null;
+
+  $('#search input').keyup(function () {
+    if (searchTimer == null) {
+      searchTimer = window.setTimeout(function () {
+        searchTimer = null;
+        filterTalks();
+      }, 700);
+    }
+  });
 }
 
 $(document).ready(function () {
