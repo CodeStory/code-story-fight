@@ -30,7 +30,7 @@ public class PlanningServer {
     new PlanningServer(new Module[0]).start(port);
   }
 
-  public PlanningServer(Module[] overridedModules) {
+  public PlanningServer(Module... overridedModules) {
     this.overridedModules = overridedModules;
   }
 
@@ -47,9 +47,9 @@ public class PlanningServer {
 
   private ResourceConfig configuration() {
     return new DefaultResourceConfig(
-      JacksonJsonProvider.class,
-      PlanningResource.class,
-      FakeAuthenticatorResource.class);
+        JacksonJsonProvider.class,
+        PlanningResource.class,
+        FakeAuthenticatorResource.class);
   }
 
   public void stop() {

@@ -18,35 +18,29 @@ should 'Should show teaser', '/', (browser) ->
 should 'Should show sessions', '/planning.html', (browser) ->
   expect(browser.text '#session-759 .title').to.be 'Android Development Code Lab (Hands-on Labs)'
   expect(browser.text '#session-759 .speaker').to.be 'Nick Butcher, Richard Hyndman @BOF 1 from 09:30 to 12:30'
-  expect(browser.text '#session-759 .description').to.contain ''
+  expect(browser.text '#session-759 .summary').to.contain 'Dive into some of the latest'
 
   expect(browser.text '#session-761 .title').to.be 'Modular Architecture Today (University)'
   expect(browser.text '#session-761 .speaker').to.be 'Kirk Knoernschild @Room 8 from 09:30 to 12:30'
-  expect(browser.text '#session-761 .description').to.contain ''
+  expect(browser.text '#session-761 .summary').to.contain 'Modularity is coming to the Java platform!'
 
-should 'Should register while logged in', '/planning.html', (browser) ->
+should 'Should star while logged in', '/planning.html', (browser) ->
   expect(browser.text '#auth a').to.be 'Log In'
   expect(browser.cookies().get 'userId').to.be undefined
-  expect(browser.text '#session-759 a.register').to.be 'Register'
-  expect(browser.text '#session-760 a.register').to.be 'Register'
-  expect(browser.text '#session-761 a.register').to.be 'Register'
+  expect(browser.text '#session-759 a.star').to.be 'star'
+  expect(browser.text '#session-760 a.star').to.be 'star'
+  expect(browser.text '#session-761 a.star').to.be 'star'
 
   browser.clickLink '#login', ->
     expect(browser.text '#auth a').to.be 'Log Out'
     expect(browser.cookies().get 'userId').to.be '42'
-    expect(browser.text '#session-759 a.register').to.be 'Register'
-    expect(browser.text '#session-760 a.register').to.be 'Register'
-    expect(browser.text '#session-761 a.register').to.be 'Register'
+    expect(browser.text '#session-759 a.star').to.be 'star'
 
-    browser.clickLink '#session-759 a.register', ->
-      expect(browser.text '#session-759 a.register').to.be 'Unregister'
-      expect(browser.text '#session-760 a.register').to.be 'Register'
-      expect(browser.text '#session-761 a.register').to.be 'Register'
+    browser.clickLink '#session-759 a.star', ->
+      expect(browser.text '#session-759 a.star').to.be 'unstar'
 
-      browser.clickLink '#session-759 a.register', ->
-        expect(browser.text '#session-759 a.register').to.be 'Register'
-        expect(browser.text '#session-760 a.register').to.be 'Register'
-        expect(browser.text '#session-761 a.register').to.be 'Register'
+      browser.clickLink '#session-759 a.star', ->
+        expect(browser.text '#session-759 a.star').to.be 'star'
 
         browser.clickLink '#logout', ->
           expect(browser.cookies().get 'userId').to.be undefined

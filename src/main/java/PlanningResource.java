@@ -48,11 +48,10 @@ public class PlanningResource {
   private final Authenticator authenticator;
 
   @Inject
-  public PlanningResource(Planning planning, Users users, PlanningLoader planningLoader, Authenticator authenticator) {
+  public PlanningResource(Planning planning, Users users, Authenticator authenticator) {
     this.planning = planning;
     this.users = users;
     this.authenticator = authenticator;
-    planningLoader.createTalks(planning, read("planning.json"));
   }
 
   @GET
@@ -95,25 +94,25 @@ public class PlanningResource {
   }
 
   @POST
-  @Path("register")
-  public void register(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
+  @Path("star")
+  public void star(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
     rejectUnauthenticated(userId);
-    planning.register(userId, talkId);
+    planning.star(userId, talkId);
   }
 
   @POST
-  @Path("unregister")
-  public void unregister(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
+  @Path("unstar")
+  public void unstar(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
     rejectUnauthenticated(userId);
-    planning.unregister(userId, talkId);
+    planning.unstar(userId, talkId);
   }
 
   @GET
-  @Path("registrations")
+  @Path("stars")
   @Produces("application/json;charset=UTF-8")
-  public Iterable<String> myRegistrations(@CookieParam("userId") String userId) {
+  public Iterable<String> stars(@CookieParam("userId") String userId) {
     rejectUnauthenticated(userId);
-    return planning.registrations(userId);
+    return planning.stars(userId);
   }
 
   @GET

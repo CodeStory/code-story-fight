@@ -15,16 +15,16 @@ function initAuthenticationState() {
   set_content('#auth', '#header-template', { 'authenticated': authenticated });
 }
 
-function refreshRegistrationLinks() {
-  $('.register').html('Register');
-  $('.talk').removeClass('registered');
+function refreshStars() {
+  $('.star').html('star');
+  $('.talk').removeClass('starred');
 
   var authenticated = ($.cookie('userId') != null);
   if (authenticated) {
-    $.getJSON('registrations', function (json) {
+    $.getJSON('stars', function (json) {
       _.each(json, function (talkId) {
-        $('#session-' + talkId + ' .register').html('Unregister');
-        $('#session-' + talkId).addClass('registered');
+        $('#session-' + talkId + ' .star').html('unstar');
+        $('#session-' + talkId).addClass('starred');
       });
     });
   }
@@ -46,18 +46,18 @@ function refreshPlanning() {
   $.getJSON('planning.json', function (json) {
     enrichPlanning(json);
     set_content('#content', '#talks-template', json);
-    refreshRegistrationLinks();
+    refreshStars();
   });
 }
 
-function listenRegistrationClicks() {
-  $(document).on('click', '.register', function () {
+function listenStarClicks() {
+  $(document).on('click', '.star', function () {
     var talkId = $(this).attr('data-talk');
 
-    if ($(this).html() == "Register") {
-      $.post('register', { talkId:talkId }, refreshRegistrationLinks);
+    if ($(this).html() == "star") {
+      $.post('star', { talkId:talkId }, refreshStars);
     } else {
-      $.post('unregister', { talkId:talkId }, refreshRegistrationLinks);
+      $.post('unstar', { talkId:talkId }, refreshStars);
     }
 
     return false;
@@ -95,6 +95,6 @@ function listenSearch() {
 $(document).ready(function () {
   initAuthenticationState();
   refreshPlanning();
-  listenRegistrationClicks();
+  listenStarClicks();
   listenSearch();
 })

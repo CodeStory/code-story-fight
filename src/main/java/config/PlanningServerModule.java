@@ -21,6 +21,8 @@ public class PlanningServerModule extends AbstractModule {
     bindConstant().annotatedWith(named("oAuth.secret")).to(env("OAUTH_CONSUMER-SECRET"));
 
     bind(Authenticator.class).to(TwitterAuthenticator.class).asEagerSingleton();
+    // bindConstant().annotatedWith(Names.named("port")).to(8080);
+    // bind(Authenticator.class).to(FakeAuthenticator.class);
   }
 
   @Provides

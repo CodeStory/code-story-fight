@@ -27,31 +27,29 @@ public class PlanningResourceTest {
   private Authenticator authenticator;
   @Mock
   private Users users;
-  @Mock
-  private PlanningLoader planningLoader;
 
   @InjectMocks
   private PlanningResource resource;
 
   @Test
   public void should_register_user_for_talk() {
-    resource.register("user", "talkId");
+    resource.star("user", "talkId");
 
-    verify(planning).register("user", "talkId");
+    verify(planning).star("user", "talkId");
   }
 
   @Test
   public void should_unregister_user_for_talk() {
-    resource.unregister("user", "talkId");
+    resource.unstar("user", "talkId");
 
-    verify(planning).unregister("user", "talkId");
+    verify(planning).unstar("user", "talkId");
   }
 
   @Test
   public void should_get_my_registrations() {
-    when(planning.registrations("user")).thenReturn(newArrayList("talkId1", "talkId2"));
+    when(planning.stars("user")).thenReturn(newArrayList("talkId1", "talkId2"));
 
-    Iterable<String> talkIds = resource.myRegistrations("user");
+    Iterable<String> talkIds = resource.stars("user");
 
     assertThat(talkIds).containsOnly("talkId1", "talkId2");
   }

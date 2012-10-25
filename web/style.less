@@ -147,11 +147,9 @@ body {
       #styles > .horizontal-section;
     }
 
-    .registered {
-      background-color: #F3F9E0 !important;
-
-      .tags {
-        background-color: #F3F9E0 !important;
+    .starred {
+      .star {
+        background-image: url('unstar.png') !important;
       }
     }
 
@@ -171,33 +169,20 @@ body {
 
         .title {
           position: absolute;
+          left: 30px;
           font-weight: bold;
           white-space: nowrap;
         }
 
-        .register {
+        .star {
           position: absolute;
-          right: 0;
-          -moz-box-shadow: inset 0px 0px 0px -10px #ffffff;
-          -webkit-box-shadow: inset 0px 0px 0px -10px #ffffff;
-          box-shadow: inset 0px 0px 0px -10px #ffffff;
-          background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
-          background: -moz-linear-gradient(center top, #ededed 5%, #dfdfdf 100%);
-          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ededed', endColorstr = '#dfdfdf');
-          background-color: #ededed;
-          -moz-border-radius: 6px;
-          -webkit-border-radius: 6px;
-          border-radius: 6px;
-          display: inline-block;
-          font-size: 13px;
-          padding: 0px 20px;
-          text-shadow: 0px 1px 2px #ffffff;
-        }
-
-        .register:hover {
-          background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
-          background: -moz-linear-gradient(center top, #dfdfdf 5%, #ededed 100%);
-          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#dfdfdf', endColorstr = '#ededed');
+          left: 0;
+          width: 25px;
+          height: 25px;
+          background-image: url('star.png');
+          background-size: 25px 25px;
+          background-repeat: no-repeat;
+          color: transparent;
         }
       }
 
@@ -281,7 +266,7 @@ body#index {
     padding: 13px 1em 0 1em;
   }
 
-  .gradient(@startColor, @endColor) {
+  .gradient(@startColor, @endColor){
     background: @endColor; /* Old browsers */
     background: -moz-linear-gradient(top,  @startColor 0%, @endColor 25%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@startColor), color-stop(25%,@endColor)); /* Chrome,Safari4+ */
@@ -289,6 +274,6 @@ body#index {
     background: -o-linear-gradient(top,  @startColor 0%,@endColor 25%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top,  @startColor 0%,@endColor 25%); /* IE10+ */
     background: linear-gradient(to bottom,  @startColor 0%,@endColor 25%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@startColor', endColorstr='@endColor',GradientType=0 ); /* IE6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '@startColor', endColorstr = '@endColor', GradientType = 0); /* IE6-9 */
   }
 }

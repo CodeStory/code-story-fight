@@ -26,6 +26,7 @@ transformTalks = (data) ->
     summary: ''
     room: talk.room
     speaker: talk.speaker
+    day: talk.fromTime[0..9]
     from: talk.fromTime[11..15]
     to: talk.toTime[11..15]
     type: talk.type
