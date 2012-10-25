@@ -13,16 +13,18 @@ import java.net.URL;
 public class TwitterAuthenticator implements Authenticator {
 
   private final Twitter twitter;
+  private final String oAuthCallback;
 
   @Inject
-  public TwitterAuthenticator(Twitter twitter) {
+  public TwitterAuthenticator(Twitter twitter, String oAuthCallback) {
     this.twitter = twitter;
+    this.oAuthCallback = oAuthCallback;
   }
 
   @Override
   public URL getAuthenticateURL() throws AuthenticationException {
     try {
-      return new URL(twitter.getOAuthRequestToken().getAuthenticationURL());
+      return new URL(twitter.getOAuthRequestToken(oAuthCallback).getAuthenticationURL());
     } catch (MalformedURLException e) {
       throw new AuthenticationException(e);
     } catch (TwitterException e) {

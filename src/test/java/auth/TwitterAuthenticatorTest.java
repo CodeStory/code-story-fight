@@ -10,16 +10,13 @@ import twitter4j.TwitterException;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
-import javax.ws.rs.core.Response;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 
-import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TwitterAuthenticatorTest {
@@ -32,7 +29,7 @@ public class TwitterAuthenticatorTest {
 
   @Test
   public void should_generate_an_authentication_URL() throws MalformedURLException, AuthenticationException, TwitterException {
-    when(twitter.getOAuthRequestToken()).thenReturn(new RequestToken("fake", "secret"));
+    when(twitter.getOAuthRequestToken(anyString())).thenReturn(new RequestToken("fake", "secret"));
 
     URL authenticateURL = authenticator.getAuthenticateURL();
 

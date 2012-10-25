@@ -11,12 +11,13 @@ public class PlanningServerModule extends AbstractModule {
 
   private static final String OAUTH_CONSUMER_KEY = "OAUTH_CONSUMER-KEY";
   private static final String OAUTH_CONSUMER_SECRET = "OAUTH_CONSUMER-SECRET";
+  private static final String OAUTH_CALLBACK = "OAUTH_CALLBACK";
 
   @Override
   protected void configure() {
     TwitterFactory twitterFactory = new TwitterFactory(createCodeStoryConfigurationForTwitter());
     bind(Authenticator.class)
-            .toInstance(new TwitterAuthenticator(twitterFactory.getInstance()));
+            .toInstance(new TwitterAuthenticator(twitterFactory.getInstance(), System.getenv(OAUTH_CALLBACK)));
   }
 
   private Configuration createCodeStoryConfigurationForTwitter() {
