@@ -16,6 +16,9 @@ should 'Should show title', '/', (browser) ->
 should 'Should show teaser', '/', (browser) ->
   expect(browser.text '#vote').to.contain 'Create your personal schedule for Devoxx.'
 
+should 'Should show toc','/planning.html', (browser) ->
+  expect(browser.text '.toc a').to.contain '9:30'
+
 should 'Should show sessions', '/planning.html', (browser) ->
   expect(browser.text '#talk-759 h1').to.be 'Android Development Code Lab (Hands-on Labs)'
   expect(browser.text '#talk-759 .speaker').to.be 'Nick Butcher, Richard Hyndman @BOF 1 from 09:30 to 12:30'
