@@ -13,8 +13,8 @@ public class PlanningServerTest {
   public ServiceRule<PlanningServer> web = ServiceRule.startWithRandomPort(PlanningServer.class, new AbstractModule() {
     @Override
     protected void configure() {
-      bind(Authenticator.class).to(FakeAuthenticator.class);
       bindConstant().annotatedWith(Names.named("port")).to(web.getPort());
+      bind(Authenticator.class).to(FakeAuthenticator.class);
     }
   });
 

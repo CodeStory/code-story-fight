@@ -2,6 +2,7 @@ package auth;
 
 import com.google.common.base.Throwables;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.auth.AccessToken;
@@ -11,12 +12,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class TwitterAuthenticator implements Authenticator {
-
   private final Twitter twitter;
   private final String oAuthCallback;
 
   @Inject
-  public TwitterAuthenticator(Twitter twitter, String oAuthCallback) {
+  public TwitterAuthenticator(Twitter twitter, @Named("oAuth.callback") String oAuthCallback) {
     this.twitter = twitter;
     this.oAuthCallback = oAuthCallback;
   }
