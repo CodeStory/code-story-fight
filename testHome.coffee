@@ -3,7 +3,8 @@
 Browser = require 'zombie'
 expect = require 'expect.js'
 
-port = process.argv[2]
+port = 8080
+port = process.argv[2] if process.argv[2]?
 
 should = (name, url, callback) ->
   browser = new Browser( { "maxWait": 10000, "waitFor": 10000 } )
