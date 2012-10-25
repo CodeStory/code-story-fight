@@ -2,6 +2,7 @@ import auth.AuthenticationException;
 import auth.Authenticator;
 import auth.User;
 import com.google.common.base.Charsets;
+import com.google.common.base.Throwables;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -47,11 +48,11 @@ public class PlanningResource {
   private final Authenticator authenticator;
 
   @Inject
-  public PlanningResource(Planning planning, Users users, PlanningLoader planningLoader, Authenticator authenticator) throws IOException {
+  public PlanningResource(Planning planning, Users users, PlanningLoader planningLoader, Authenticator authenticator) {
     this.planning = planning;
     this.users = users;
     this.authenticator = authenticator;
-    planningLoader.createTalks(planning, Files.toString(file("planning.json"), Charsets.UTF_8));
+    planningLoader.createTalks(planning, read("planning.json"));
   }
 
   @GET
@@ -116,6 +117,17 @@ public class PlanningResource {
   }
 
   @GET
+  @Path("main.js")
+  @Produces("application/javascript")
+  public String script() {
+    return read("js/jquery.js") +
+      read("js/jquery.cookie.js") +
+      read("js/underscore.js") +
+      read("js/hogan.js") +
+      read("js/codestory.js");
+  }
+
+  @GET
   @Path("{path : .*\\.less}.css")
   public synchronized Response style(@PathParam("path") String path) throws IOException, LessException {
     File output = new File("target", path + ".css");
@@ -125,14 +137,14 @@ public class PlanningResource {
 
   @GET
   @Path("{path : .*\\.html}")
-  public Response html(@PathParam("path") String path) throws IOException {
-    ContentWithVariables yamlContent = new YamlFrontMatter().parse(file(path));
+  public Response html(@PathParam("path") String path) {
+    ContentWithVariables yamlContent = new YamlFrontMatter().parse(read(path));
     String content = yamlContent.getContent();
     Map<String, String> variables = yamlContent.getVariables();
 
     String layout = variables.get("layout");
     if (layout != null) {
-      content = new Layout(Files.toString(file(layout), Charsets.UTF_8)).apply(content);
+      content = new Layout(read(layout)).apply(content);
     }
 
     String body = new Template().apply(content, variables);
@@ -142,7 +154,7 @@ public class PlanningResource {
 
   @GET
   @Path("{path : .*}")
-  public Response staticResource(@PathParam("path") String path) throws IOException {
+  public Response staticResource(@PathParam("path") String path) {
     return staticResource(file(path));
   }
 
@@ -150,7 +162,7 @@ public class PlanningResource {
     return Response.seeOther(URI.create("planning.html"));
   }
 
-  static Response staticResource(File file) throws IOException {
+  static Response staticResource(File file) {
     String mimeType = new MimetypesFileTypeMap().getContentType(file);
     return Response.ok(file, mimeType).cacheControl(buildCacheControl()).lastModified(new Date()).build();
   }
@@ -161,17 +173,29 @@ public class PlanningResource {
     return cacheControl;
   }
 
-  static File file(String path) throws IOException {
+  static String read(String path) {
+    try {
+      return Files.toString(file(path), Charsets.UTF_8);
+    } catch (IOException e) {
+      throw Throwables.propagate(e);
+    }
+  }
+
+  static File file(String path) {
     if (path.endsWith("/")) {
       throw new NotFoundException();
     }
 
-    File root = new File("web");
-    File file = new File(root, path);
-    if (!file.exists() || !file.getCanonicalPath().startsWith(root.getCanonicalPath())) {
-      throw new NotFoundException();
-    }
+    try {
+      File root = new File("web");
+      File file = new File(root, path);
+      if (!file.exists() || !file.getCanonicalPath().startsWith(root.getCanonicalPath())) {
+        throw new NotFoundException();
+      }
 
-    return file;
+      return file;
+    } catch (IOException e) {
+      throw Throwables.propagate(e);
+    }
   }
 }
