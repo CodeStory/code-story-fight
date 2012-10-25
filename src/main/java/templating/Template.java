@@ -19,6 +19,7 @@ public class Template {
     for (Map.Entry<String, String> variable : variables.entrySet()) {
       template.add(variable.getKey(), variable.getValue());
     }
+    template.add("body", "$body$");
 
     return template;
   }

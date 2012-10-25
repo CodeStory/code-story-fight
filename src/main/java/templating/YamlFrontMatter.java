@@ -41,21 +41,4 @@ public class YamlFrontMatter {
     return variables;
   }
 
-  public static class ContentWithVariables {
-    private final String content;
-    private final Map<String, String> variables;
-
-    ContentWithVariables(String content, Map<String, String> variables) {
-      this.content = content;
-      this.variables = variables;
-    }
-
-    public String getContent() {
-      return content;
-    }
-
-    public Map<String, String> getVariables() {
-      return variables;
-    }
-  }
 }

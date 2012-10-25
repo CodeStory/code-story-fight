@@ -8,6 +8,8 @@ import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import org.lesscss.LessCompiler;
 import org.lesscss.LessException;
+import templating.ContentWithVariables;
+import templating.Layout;
 import templating.Template;
 import templating.YamlFrontMatter;
 import twitter4j.TwitterException;
@@ -32,6 +34,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
+import java.util.Map;
 
 import static java.lang.Long.parseLong;
 import static javax.ws.rs.core.Response.Status.FORBIDDEN;
@@ -42,17 +45,12 @@ public class PlanningResource {
   private final Planning planning;
   private final Users users;
   private final Authenticator authenticator;
-  private final Template template;
-  private final YamlFrontMatter yamlFrontMatter;
 
   @Inject
-  public PlanningResource(Planning planning, Users users, PlanningLoader planningLoader, Authenticator authenticator, Template template, YamlFrontMatter yamlFrontMatter)
-      throws IOException {
+  public PlanningResource(Planning planning, Users users, PlanningLoader planningLoader, Authenticator authenticator) throws IOException {
     this.planning = planning;
     this.users = users;
     this.authenticator = authenticator;
-    this.template = template;
-    this.yamlFrontMatter = yamlFrontMatter;
     planningLoader.createTalks(planning, Files.toString(file("planning.json"), Charsets.UTF_8));
   }
 
@@ -128,11 +126,18 @@ public class PlanningResource {
   @GET
   @Path("{path : .*\\.html}")
   public Response html(@PathParam("path") String path) throws IOException {
-    YamlFrontMatter.ContentWithVariables file = yamlFrontMatter.parse(file(path));
+    ContentWithVariables yamlContent = new YamlFrontMatter().parse(file(path));
+    String content = yamlContent.getContent();
+    Map<String, String> variables = yamlContent.getVariables();
 
-    String content = template.apply(file.getContent(), file.getVariables());
+    String layout = variables.get("layout");
+    if (layout != null) {
+      content = new Layout(Files.toString(file(layout), Charsets.UTF_8)).apply(content);
+    }
 
-    return Response.ok(content, "text/html").build();
+    String body = new Template().apply(content, variables);
+
+    return Response.ok(body, "text/html").build();
   }
 
   @GET
