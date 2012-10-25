@@ -42,12 +42,17 @@ public class PlanningResource {
   private final Planning planning;
   private final Users users;
   private final Authenticator authenticator;
+  private final Template template;
+  private final YamlFrontMatter yamlFrontMatter;
 
   @Inject
-  public PlanningResource(Planning planning, Users users, PlanningLoader planningLoader, Authenticator authenticator) throws IOException {
+  public PlanningResource(Planning planning, Users users, PlanningLoader planningLoader, Authenticator authenticator, Template template, YamlFrontMatter yamlFrontMatter)
+      throws IOException {
     this.planning = planning;
     this.users = users;
     this.authenticator = authenticator;
+    this.template = template;
+    this.yamlFrontMatter = yamlFrontMatter;
     planningLoader.createTalks(planning, Files.toString(file("planning.json"), Charsets.UTF_8));
   }
 
@@ -123,9 +128,9 @@ public class PlanningResource {
   @GET
   @Path("{path : .*\\.html}")
   public Response html(@PathParam("path") String path) throws IOException {
-    YamlFrontMatter.ContentWithVariables file = new YamlFrontMatter().parse(file(path));
+    YamlFrontMatter.ContentWithVariables file = yamlFrontMatter.parse(file(path));
 
-    String content = new Template().apply(file.getContent(), file.getVariables());
+    String content = template.apply(file.getContent(), file.getVariables());
 
     return Response.ok(content, "text/html").build();
   }
@@ -136,7 +141,7 @@ public class PlanningResource {
     return staticResource(file(path));
   }
 
-  private Response.ResponseBuilder planning() {
+  static Response.ResponseBuilder planning() {
     return Response.seeOther(URI.create("planning.html"));
   }
 
