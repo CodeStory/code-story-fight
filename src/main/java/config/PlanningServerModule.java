@@ -6,7 +6,6 @@ import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.name.Named;
-import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
@@ -31,8 +30,8 @@ public class PlanningServerModule extends AbstractModule {
   }
 
   @Provides
-  private Twitter createTwitter(Configuration config) {
-    return new TwitterFactory(config).getInstance();
+  private TwitterFactory createTwitterFactory(Configuration config) {
+    return new TwitterFactory(config);
   }
 
   private static String env(String name) {

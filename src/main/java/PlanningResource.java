@@ -67,9 +67,9 @@ public class PlanningResource {
 
   @GET
   @Path("/authenticated")
-  public Response authenticated(@QueryParam("oauth_verifier") String oauthVerifier) {
+  public Response authenticated(@QueryParam("oauth_token") String oauthToken, @QueryParam("oauth_verifier") String oauthVerifier) {
     try {
-      User user = authenticator.authenticate(oauthVerifier);
+      User user = authenticator.authenticate(oauthToken, oauthVerifier);
       users.add(user);
       return planning().cookie(new NewCookie("userId", user.getId().toString(), "/", null, null, 60 * 60 * 24 * 7, false)).build();
     } catch (IllegalStateException e) {

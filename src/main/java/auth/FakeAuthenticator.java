@@ -23,7 +23,7 @@ public class FakeAuthenticator implements Authenticator {
   }
 
   @Override
-  public User authenticate(String oauthVerifier) throws AuthenticationException {
+  public User authenticate(String oauthToken, String oauthVerifier) throws AuthenticationException {
     return new User(42L, "arnold", "ring", "girl");
   }
 }

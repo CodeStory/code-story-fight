@@ -8,5 +8,5 @@ import java.net.URL;
 public interface Authenticator {
   URL getAuthenticateURL() throws TwitterException, MalformedURLException;
 
-  User authenticate(String oauthVerifier) throws AuthenticationException;
+  User authenticate(String aouthToken, String oauthVerifier) throws AuthenticationException;
 }

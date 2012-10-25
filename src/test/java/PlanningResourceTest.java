@@ -73,9 +73,9 @@ public class PlanningResourceTest {
   @Test
   public void with_granted_user_should_authenticate_on_twitter_callback() throws Exception {
     User user = new User(42L, "screenName", "token", "secret");
-    when(authenticator.authenticate("oauthVerifier")).thenReturn(user);
+    when(authenticator.authenticate("oauthToken", "oauthVerifier")).thenReturn(user);
 
-    Response response = resource.authenticated("oauthVerifier");
+    Response response = resource.authenticated("oauthToken", "oauthVerifier");
 
     verify(users).add(user);
     Map<String, List<Object>> metadata = assertRedirected(response, "planning.html");
