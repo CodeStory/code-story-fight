@@ -1,4 +1,5 @@
-import auth.User;
+package auth;
+
 import com.google.common.collect.Maps;
 
 import java.util.Map;

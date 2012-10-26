@@ -2,6 +2,7 @@ import auth.Authenticator;
 import auth.FakeAuthenticator;
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
+import misc.ServiceRule;
 import net.gageot.test.utils.Shell;
 import org.junit.Rule;
 import org.junit.Test;

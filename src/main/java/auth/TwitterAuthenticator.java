@@ -54,7 +54,7 @@ public class TwitterAuthenticator implements Authenticator {
     try {
       AccessToken oAuthAccessToken = twitter.getOAuthAccessToken(oauthRequestByToken.remove(oauthToken), oauthVerifier);
       return new User(oAuthAccessToken.getUserId(), oAuthAccessToken.getScreenName(), oAuthAccessToken.getToken(),
-              oAuthAccessToken.getTokenSecret());
+          oAuthAccessToken.getTokenSecret());
     } catch (TwitterException e) {
       if (HttpResponseCode.UNAUTHORIZED == e.getStatusCode()) {
         throw new AuthenticationException(e);

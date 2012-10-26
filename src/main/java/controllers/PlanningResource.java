@@ -1,6 +1,9 @@
+package controllers;
+
 import auth.AuthenticationException;
 import auth.Authenticator;
 import auth.User;
+import auth.Users;
 import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
 import com.google.common.io.Files;
@@ -9,6 +12,7 @@ import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import org.lesscss.LessCompiler;
 import org.lesscss.LessException;
+import planning.Planning;
 import templating.ContentWithVariables;
 import templating.Layout;
 import templating.Template;
@@ -170,10 +174,9 @@ public class PlanningResource {
   }
 
   private Response.ResponseBuilder setCache(File file, Response.ResponseBuilder response) {
-    long lastModified = file.lastModified();
     return response
-        .lastModified(new Date(lastModified))
-        .expires(new Date(lastModified + 1000L * 3600 * 24 * 30));
+        .lastModified(new Date(file.lastModified()))
+        .expires(new Date(file.lastModified() + 1000L * 3600 * 24 * 30));
   }
 
   private String read(String path) {

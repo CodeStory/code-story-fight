@@ -1,13 +1,18 @@
+package controllers;
+
 import auth.Authenticator;
 import auth.User;
+import auth.Users;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import planning.Planning;
 
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.Response;
+
 import java.net.URI;
 import java.net.URL;
 import java.util.List;

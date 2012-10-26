@@ -1,4 +1,4 @@
-/*
+package misc;/*
  * This file is part of TestExpert.
  *
  * Copyright (C) 2012

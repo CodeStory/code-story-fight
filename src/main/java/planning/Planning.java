@@ -1,3 +1,5 @@
+package planning;
+
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import com.google.inject.Singleton;

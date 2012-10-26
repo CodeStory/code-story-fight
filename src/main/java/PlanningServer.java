@@ -11,6 +11,7 @@ import com.sun.jersey.core.spi.component.ioc.IoCComponentProviderFactory;
 import com.sun.jersey.guice.spi.container.GuiceComponentProviderFactory;
 import com.sun.net.httpserver.HttpServer;
 import config.PlanningServerModule;
+import controllers.PlanningResource;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import java.io.IOException;
