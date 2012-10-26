@@ -32,6 +32,23 @@ public class YamlFrontMatterTest {
   }
 
   @Test
+  public void should_include_version() throws IOException {
+    Map<String, String> variables = yamlFrontMatter.parse(read("with_header.html")).getVariables();
+
+    assertThat(variables).includes(entry("version", "version-GIT_HASH"));
+  }
+
+  @Test
+  public void should_ignore_commented_variable() throws IOException {
+    Map<String, String> variables = yamlFrontMatter.parse(read("with_comment.html")).getVariables();
+
+    assertThat(variables)
+        .excludes(entry("layout", "standard"))
+        .excludes(entry("#layout", "standard"))
+        .includes(entry("title", "CodeStory - Devoxx Fight"));
+  }
+
+  @Test
   public void should_read_empty_file_content() throws IOException {
     String content = yamlFrontMatter.parse(read("empty.html")).getContent();
 
