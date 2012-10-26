@@ -142,14 +142,11 @@ body {
     #styles > .horizontal-section;
     background-color: @black;
     text-align: center;
-    margin: 0;
 
-    li {
-      display: inline;
+    a {
       margin: 0 10px;
-      a {
-        color: white;
-      }
+      display: inline;
+      color: white;
     }
   }
 
@@ -168,68 +165,59 @@ body {
     }
 
     .talk {
+      position: relative;
       background-color: @white;
       margin: 0 28px 34px;
-      padding: 24px 18px;
+      border: 18px solid @white;
+      overflow: hidden;
 
-      .header {
-        position: relative;
-        height: 30px;
+      .star {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        background-image: url('star.png');
+        background-size: 25px 25px;
+        background-repeat: no-repeat;
+        color: transparent;
+      }
+
+      h1 {
+        position: absolute;
+        top: 3px;
+        left: 30px;
+        font-weight: bold;
         font-size: 125%;
-        line-height: 125%;
-        border-bottom: 1px @gray solid;
-        margin-bottom: 15px;
-        overflow: hidden;
-
-        .title {
-          position: absolute;
-          left: 30px;
-          font-weight: bold;
-          white-space: nowrap;
-        }
-
-        .star {
-          position: absolute;
-          left: 0;
-          width: 25px;
-          height: 25px;
-          background-image: url('star.png');
-          background-size: 25px 25px;
-          background-repeat: no-repeat;
-          color: transparent;
-        }
+        white-space: nowrap;
+        text-align: left;
+        margin: 0;
       }
 
-      .details {
-        position: relative;
-        height: 30px;
-        overflow: hidden;
-
-        .speaker {
-          position: absolute;
-          color: slategray;
-          font-size: 85%;
-          white-space: nowrap;
-        }
-
-        .tags {
-          position: absolute;
-          height: 30px;
-          right: 0;
-          background-color: @white;
-
-          .tag {
-            color: @white;
-            font-size: .8em;
-            padding: 2px 10px;
-            margin-left: 1px;
-            #styles > .rounded-corners(5px);
-            #styles > .colored(@blue_devoxx);
-          }
-        }
+      .speaker {
+        position: absolute;
+        top: 30px;
+        color: slategray;
+        font-size: 85%;
+        white-space: nowrap;
+        width: 100%;
+        border-top: 1px solid @gray;
+        padding-top: 10px;
       }
 
-      .summary {
+      .tag {
+        float: right;
+        color: @white;
+        font-size: .8em;
+        padding: 2px 10px;
+        margin-top: 38px;
+        margin-left: 5px;
+        #styles > .rounded-corners(5px);
+        #styles > .colored(@blue_devoxx);
+      }
+
+      p {
+        margin: 80px 0 0 0;
         text-align: justify;
       }
     }

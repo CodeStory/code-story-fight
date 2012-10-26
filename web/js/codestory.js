@@ -85,8 +85,8 @@ function filterTalks() {
 
   $('.slot:not(:has(.talk:visible))').hide();
   $('.day_wrapper:not(:has(.slot:visible))').hide();
-  $('.hour a:hidden').each(function () {
-    $('.toc-link[data-toc="' + this.id + '"]').hide();
+  $('.hour:hidden').each(function () {
+    $('.toc-link[href="#' + this.id + '"]').hide();
   });
 }
 

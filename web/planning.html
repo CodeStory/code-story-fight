@@ -11,7 +11,7 @@ title: CodeStory - Devoxx Planning
     <li id="logo">
       <a href="planning.html">
         <figure>
-          <img src="devoxx-logo.png" width="280" height="80" />
+          <img src="$version$/devoxx-logo.png" width="280" height="80"/>
         </figure>
       </a>
     </li>
@@ -32,7 +32,7 @@ title: CodeStory - Devoxx Planning
 <div id="content"></div>
 </body>
 
-<script src="main.js"></script>
+<script src="$version$/main.js"></script>
 
 <script type="text/x-template" id="header-template">
   {{#authenticated}}
@@ -47,29 +47,20 @@ title: CodeStory - Devoxx Planning
   {{#days}}
   <div class="day_wrapper">
     <div class="day">{{dayLabel}}</div>
-    <ul class="toc">
-      {{#slots}}
-      <li class="toc-link" data-toc="{{day}}-{{slot}}"><a href="#{{day}}-{{slot}}">{{slot}}</a></li>
-      {{/slots}}
-    </ul>
+    <div class="toc">
+      {{#slots}}<a class="toc-link" href="#{{day}}-{{slot}}">{{slot}}</a>{{/slots}}
+    </div>
     {{#slots}}
     <div class="slot">
-      <div class="hour"><a id="{{day}}-{{slot}}">{{slot}}</a></div>
+      <div class="hour" id="{{day}}-{{slot}}">{{slot}}</div>
       {{#talks}}
-      <div id="session-{{id}}" class="talk">
-        <div class="header">
-          <div class="title">{{title}} ({{type}})</div>
-          <a href="#" class="star" data-talk="{{id}}"></a>
-        </div>
-        <div class="details">
-          <div class="speaker">{{speakers_string}} @{{room}} from {{from}} to {{to}}</div>
-          <div class="tags">
-            {{#tags}}
-            <span class="tag">{{.}}</span>
-            {{/tags}}
-          </div>
-        </div>
-        <div class="summary">{{summary}})</div>
+      <div class="talk" id="session-{{id}}">
+        <a class="star" href="#" data-talk="{{id}}"></a>
+
+        <h1>{{title}} ({{type}})</h1>
+        <div class="speaker">{{speakers_string}} @{{room}} from {{from}} to {{to}}</div>
+        {{#tags}}<span class="tag">{{.}}</span>{{/tags}}
+        <p>{{summary}})</p>
       </div>
       {{/talks}}
     </div>
