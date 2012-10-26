@@ -67,7 +67,7 @@ function listenStarClicks() {
 function filterTalks() {
   $('.day_wrapper, .toc-link, .slot, .talk').show();
 
-  var text = $('#search input').val();
+  var text = $('#search_box').val();
   if (text.length < 3) {
     return;
   }
@@ -93,7 +93,7 @@ function filterTalks() {
 function listenSearch() {
   var searchTimer = null;
 
-  $('#search input').keyup(function () {
+  $('#search_box').keyup(function () {
     if (searchTimer == null) {
       searchTimer = window.setTimeout(function () {
         searchTimer = null;

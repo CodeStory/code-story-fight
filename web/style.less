@@ -54,16 +54,26 @@ body {
       color: darken(@blue_devoxx, 10%);
       font-family: 'Sirin Stencil', cursive;
       font-weight: lighter;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      height: 128px;
 
       #logo {
         height: 80px;
         overflow: hidden;
-      }
-
-      #mojo {
         letter-spacing: 1em;
         padding-left: 1em;
         text-transform: uppercase;
+        background-image: url('img/devoxx-logo.png');
+        background-repeat: no-repeat;
+        background-position: top;
+        height: 100px;
+        display: block;
+        margin: 0 auto;
+        color: darken(@blue_devoxx, 10%);
+        text-decoration: none;
+        line-height: 150px;
+        vertical-align: bottom;
       }
 
       #attribution {
@@ -79,24 +89,25 @@ body {
       font-size: .8em;
       overflow: hidden;
       white-space: nowrap;
+      height: 37px;
 
       #back {
         float: left;
         background: no-repeat url('img/back.png');
+        width: 100px;
+        text-align: left;
       }
 
-      #search {
-        display: inline;
-
-        input {
-          height: 20px;
-          line-height: 20px;
-          font-size: .8em;
-        }
+      #search_box {
+        height: 20px;
+        line-height: 20px;
+        font-size: .8em;
       }
 
       #auth {
         float: right;
+        width: 100px;
+        text-align: right;
       }
 
       a {
@@ -119,16 +130,6 @@ body {
       }
     }
   }
-}
-
-#disclaimer {
-  position: absolute;
-  top: 0;
-  background-color: gold;
-  width: 100%;
-  text-align: center;
-  padding: 3px 0;
-  color: slategray;
 }
 
 #content {
