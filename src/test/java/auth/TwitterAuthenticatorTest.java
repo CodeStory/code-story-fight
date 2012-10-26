@@ -42,9 +42,9 @@ public class TwitterAuthenticatorTest {
     when(twitter.getOAuthRequestToken(anyString())).thenReturn(requestToken);
     when(requestToken.getAuthenticationURL()).thenReturn("http://api.twitter.com/oauth/authenticate?oauth_token=fake");
 
-    URI authenticateURL = authenticator.getAuthenticateURI();
+    URI authenticateURI = authenticator.getAuthenticateURI();
 
-    assertThat(authenticateURL).isEqualTo(URI.create("http://api.twitter.com/oauth/authenticate?oauth_token=fake"));
+    assertThat(authenticateURI).isEqualTo(URI.create("http://api.twitter.com/oauth/authenticate?oauth_token=fake"));
   }
 
   @Test(expected = AuthenticationException.class)

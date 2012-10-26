@@ -25,4 +25,14 @@ public class PlanningServerTest {
 
     assertThat(result).isZero();
   }
+
+  public static void main(String[] args) throws Exception {
+    new PlanningServer(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bindConstant().annotatedWith(Names.named("port")).to(8080);
+        bind(Authenticator.class).to(FakeAuthenticator.class);
+      }
+    }).start(8080);
+  }
 }

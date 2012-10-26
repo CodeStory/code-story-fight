@@ -12,7 +12,7 @@ public class UsersTest {
     User user = new User(42L, "foo", "bar", "baz");
     users.add(user);
 
-    assertThat(users.withId(42L)).isEqualTo(user);
+    assertThat(users.withId(42L)).isSameAs(user);
   }
 
   @Test

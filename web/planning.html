@@ -11,7 +11,7 @@ title: CodeStory - Devoxx Planning
     <li id="logo">
       <a href="planning.html">
         <figure>
-          <img src="$version$/devoxx-logo.png" width="280" height="80"/>
+          <img src="$version$/img/devoxx-logo.png" width="280" height="80"/>
         </figure>
       </a>
     </li>
@@ -36,10 +36,10 @@ title: CodeStory - Devoxx Planning
 
 <script type="text/x-template" id="header-template">
   {{#authenticated}}
-  <a href="/logout" id="logout">Log Out</a>
+  <a href="/user/logout" id="logout">Log Out</a>
   {{/authenticated}}
   {{^authenticated}}
-  <a href="/authenticate" id="login">Log In</a>
+  <a href="/user/authenticate" id="login">Log In</a>
   {{/authenticated}}
 </script>
 
@@ -58,6 +58,7 @@ title: CodeStory - Devoxx Planning
         <a class="star" href="#" data-talk="{{id}}"></a>
 
         <h1>{{title}} ({{type}})</h1>
+
         <div class="speaker">{{speakers_string}} @{{room}} from {{from}} to {{to}}</div>
         {{#tags}}<span class="tag">{{.}}</span>{{/tags}}
         <p>{{summary}})</p>
