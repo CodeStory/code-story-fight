@@ -18,14 +18,20 @@ import static com.google.common.collect.Maps.newHashMap;
 
 public class TwitterAuthenticator implements Authenticator {
   private final TwitterFactory twitterFactory;
-  private final String oAuthCallback;
-  private Map<String, RequestToken> oauthRequestByToken;
+  private String oAuthCallback;
+  private final Map<String, RequestToken> oauthRequestByToken;
+
+  @Inject(optional = true)
+  public TwitterAuthenticator(TwitterFactory twitterFactory, @Named("oAuth.callback") String oAuthCallback) {
+    this(twitterFactory);
+    this.oAuthCallback = oAuthCallback;
+  }
 
   @Inject
-  public TwitterAuthenticator(TwitterFactory twitterFactory, @Named("oAuth.callback") String oAuthCallback) {
+  public TwitterAuthenticator(TwitterFactory twitterFactory) {
     this.twitterFactory = twitterFactory;
-    this.oAuthCallback = oAuthCallback;
     this.oauthRequestByToken = newHashMap();
+    this.oAuthCallback = null;
   }
 
   @Override
