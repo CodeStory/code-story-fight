@@ -16,8 +16,8 @@ public class PlanningServerModule extends AbstractModule {
   @Override
   protected void configure() {
     bindConstant().annotatedWith(named("oAuth.callback")).to(env("OAUTH_CALLBACK"));
-    bindConstant().annotatedWith(named("oAuth.key")).to(env("OAUTH_CONSUMER-KEY"));
-    bindConstant().annotatedWith(named("oAuth.secret")).to(env("OAUTH_CONSUMER-SECRET"));
+    bindConstant().annotatedWith(named("oAuth.key")).to(env("OAUTH_CONSUMER_KEY"));
+    bindConstant().annotatedWith(named("oAuth.secret")).to(env("OAUTH_CONSUMER_SECRET"));
 
     bind(Authenticator.class).to(TwitterAuthenticator.class);
   }
