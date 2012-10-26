@@ -25,7 +25,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
@@ -116,21 +115,23 @@ public class PlanningResource {
   }
 
   @GET
-  @Path("main.js")
-  @Produces("application/javascript")
-  public String script() {
-    return read("js/jquery.js") +
+  @Path("{path : .*}/main.js")
+  public Response script() {
+    String body = read("js/jquery.js") +
       read("js/jquery.cookie.js") +
       read("js/underscore.js") +
       read("js/hogan.js") +
       read("js/codestory.js");
+
+    Response.ResponseBuilder response = Response.ok(body, "application/javascript");
+    return setCache(file("js/codestory.js"), response).build();
   }
 
   @GET
-  @Path("{path : .*\\.less}.css")
+  @Path("{path : .*}.css")
   public synchronized Response style(@PathParam("path") String path) throws IOException, LessException {
     File output = new File("target", path + ".css");
-    new LessCompiler().compile(file(path), output, false);
+    new LessCompiler().compile(file(path + ".less"), output, false);
     return staticResource(output);
   }
 
@@ -148,7 +149,7 @@ public class PlanningResource {
 
     String body = new Template().apply(content, variables);
 
-    return Response.ok(body, "text/html").build();
+    return Response.ok(body, "text/html;charset=UTF-8").build();
   }
 
   @GET
@@ -157,22 +158,25 @@ public class PlanningResource {
     return staticResource(file(path));
   }
 
-  static Response.ResponseBuilder planning() {
+  private Response.ResponseBuilder planning() {
     return Response.seeOther(URI.create("planning.html"));
   }
 
-  static Response staticResource(File file) {
+  private Response staticResource(File file) {
     String mimeType = new MimetypesFileTypeMap().getContentType(file);
-    return Response.ok(file, mimeType).cacheControl(buildCacheControl()).lastModified(new Date()).build();
+
+    Response.ResponseBuilder response = Response.ok(file, mimeType);
+    return setCache(file, response).build();
   }
 
-  static CacheControl buildCacheControl() {
-    CacheControl cacheControl = new CacheControl();
-    // cacheControl.setMaxAge(3600); // 1 hour
-    return cacheControl;
+  private Response.ResponseBuilder setCache(File file, Response.ResponseBuilder response) {
+    long lastModified = file.lastModified();
+    return response
+        .lastModified(new Date(lastModified))
+        .expires(new Date(lastModified + 1000L * 3600 * 24 * 30));
   }
 
-  static String read(String path) {
+  private String read(String path) {
     try {
       return Files.toString(file(path), Charsets.UTF_8);
     } catch (IOException e) {
@@ -180,10 +184,13 @@ public class PlanningResource {
     }
   }
 
-  static File file(String path) {
+  private File file(String path) {
     if (path.endsWith("/")) {
       throw new NotFoundException();
     }
+
+    // Remove version
+    path = path.replaceFirst("version-[^/]*/", "");
 
     try {
       File root = new File("web");
