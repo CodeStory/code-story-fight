@@ -46,7 +46,9 @@ public class AuthenticationResource extends AbstractResource {
       users.add(user);
 
       return redirectToPlanning().cookie(new NewCookie("userId", user.getId().toString(), "/", null, null, 60 * 60 * 24 * 7, false)).build();
-    } catch (IllegalStateException | AuthenticationException e) {
+    } catch (IllegalStateException e) {
+      return seeOther("index.html");
+    } catch (AuthenticationException e) {
       return seeOther("index.html");
     }
   }
