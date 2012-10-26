@@ -89,12 +89,20 @@ body {
       font-size: .8em;
       overflow: hidden;
       white-space: nowrap;
-      height: 37px;
+
+      a {
+        display: block;
+        height: 50px;
+        font-weight: bold;
+        padding-left: 29px;
+        text-decoration: none;
+        color: @black;
+      }
 
       #back {
+        height: 23px;
         float: left;
-        background: no-repeat url('img/back.png');
-        width: 100px;
+        background: url('img/sprites.png') 0 -50px no-repeat;
         text-align: left;
       }
 
@@ -105,24 +113,14 @@ body {
       }
 
       #auth {
+        height: 50px;
         float: right;
-        width: 100px;
         text-align: right;
-      }
-
-      a {
-        padding-bottom: 4px;
-        font-weight: bold;
-      }
-
-      a:link, a:visited {
-        text-decoration: none;
-        color: @black;
-        padding-left: 29px;
+        height: 23px;
       }
 
       #login, #logout {
-        background: no-repeat url('img/login.png');
+        background: url('img/sprites.png') 0 -73px no-repeat !important;
       }
 
       #search_box {
@@ -167,7 +165,7 @@ body {
 
     .starred {
       .star {
-        background-image: url('img/unstar.png') !important;
+        background: url('img/sprites.png') 0 -25px no-repeat !important;
       }
     }
 
@@ -184,9 +182,7 @@ body {
         left: 0;
         width: 25px;
         height: 25px;
-        background-image: url('img/star.png');
-        background-size: 25px 25px;
-        background-repeat: no-repeat;
+        background: url('img/sprites.png') 0 0 no-repeat;
         color: transparent;
       }
 
