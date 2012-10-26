@@ -42,6 +42,13 @@ public class PlanningResource extends AbstractResource {
     return seeOther("index.html");
   }
 
+  @GET
+  @Path("planning.json")
+  @Produces("application/javascript;charset=UTF-8")
+  public Response planning() {
+    return ok(file("planning.json")); // TODO add small cache duration
+  }
+
   @POST
   @Path("star")
   public void star(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
