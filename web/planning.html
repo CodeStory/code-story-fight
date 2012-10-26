@@ -22,7 +22,9 @@ title: CodeStory - Devoxx Planning
   </nav>
 </header>
 
-<div id="content"><div id="loading">Loading talks...</div></div>
+<div id="content">
+  <div id="loading">Loading talks...</div>
+</div>
 </body>
 
 <script src="$version$/main.js"></script>
@@ -47,7 +49,7 @@ title: CodeStory - Devoxx Planning
     <div class="slot">
       <div class="hour" id="{{day}}-{{slot}}">{{slot}}</div>
       {{#talks}}
-      <div class="talk" id="session-{{id}}">
+      <div class="talk" id="talk-{{id}}">
         <a class="star" href="#" data-talk="{{id}}"></a>
 
         <h1>{{title}} ({{type}})</h1>

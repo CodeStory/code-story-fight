@@ -23,8 +23,8 @@ function refreshStars() {
   if (authenticated) {
     $.getJSON('stars', function (json) {
       _.each(json, function (talkId) {
-        $('#session-' + talkId + ' .star').html('unstar');
-        $('#session-' + talkId).addClass('starred');
+        $('#talk-' + talkId + ' .star').html('unstar');
+        $('#talk-' + talkId).addClass('starred');
       });
     });
   }
