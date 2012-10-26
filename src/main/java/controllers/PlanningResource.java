@@ -45,7 +45,7 @@ import static javax.ws.rs.core.Response.Status.FORBIDDEN;
 
 @Path("/")
 @Singleton
-public class PlanningResource {
+public class PlanningResource extends AbstractResource {
   private final Planning planning;
   private final Users users;
   private final Authenticator authenticator;
@@ -65,7 +65,7 @@ public class PlanningResource {
   @GET
   @Path("/authenticate")
   public Response authenticate() throws MalformedURLException, TwitterException, URISyntaxException {
-    return Response.seeOther(authenticator.getAuthenticateURL().toURI()).build();
+    return Response.seeOther(authenticator.getAuthenticateURI()).build();
   }
 
   @GET

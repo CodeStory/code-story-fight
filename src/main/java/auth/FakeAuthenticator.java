@@ -2,10 +2,8 @@ package auth;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import twitter4j.TwitterException;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 
 import static java.lang.String.format;
 
@@ -18,12 +16,12 @@ public class FakeAuthenticator implements Authenticator {
   }
 
   @Override
-  public URL getAuthenticateURL() throws TwitterException, MalformedURLException {
-    return new URL(format("http://localhost:%d/fakeauthenticate", port));
+  public URI getAuthenticateURI() {
+    return URI.create(format("http://localhost:%d/fakeauthenticate", port));
   }
 
   @Override
-  public User authenticate(String oauthToken, String oauthVerifier) throws AuthenticationException {
+  public User authenticate(String oauthToken, String oauthVerifier) {
     return new User(42L, "arnold", "ring", "girl");
   }
 }

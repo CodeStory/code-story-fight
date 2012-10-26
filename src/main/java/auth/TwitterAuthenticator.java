@@ -1,65 +1,53 @@
 package auth;
 
-import com.google.common.base.Throwables;
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
-import twitter4j.internal.http.HttpResponseCode;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 import java.util.Map;
 
 import static com.google.common.collect.Maps.newHashMap;
 
+@Singleton
 public class TwitterAuthenticator implements Authenticator {
   private final TwitterFactory twitterFactory;
-  private String oAuthCallback;
+  private final String callback;
   private final Map<String, RequestToken> oauthRequestByToken;
 
-  @Inject(optional = true)
-  public TwitterAuthenticator(TwitterFactory twitterFactory, @Named("oAuth.callback") String oAuthCallback) {
-    this(twitterFactory);
-    this.oAuthCallback = oAuthCallback;
-  }
-
   @Inject
-  public TwitterAuthenticator(TwitterFactory twitterFactory) {
+  public TwitterAuthenticator(TwitterFactory twitterFactory, @Named("oAuth.callback") String callback) {
     this.twitterFactory = twitterFactory;
     this.oauthRequestByToken = newHashMap();
-    this.oAuthCallback = null;
+    this.callback = Strings.emptyToNull(callback);
   }
 
   @Override
-  public URL getAuthenticateURL() throws AuthenticationException {
+  public URI getAuthenticateURI() {
     Twitter twitter = twitterFactory.getInstance();
     try {
-      RequestToken oauthRequestToken = twitter.getOAuthRequestToken(oAuthCallback);
-      oauthRequestByToken.put(oauthRequestToken.getToken(), oauthRequestToken);
-      return new URL(oauthRequestToken.getAuthenticationURL());
-    } catch (MalformedURLException e) {
-      throw new AuthenticationException(e);
+      RequestToken requestToken = twitter.getOAuthRequestToken(callback);
+      oauthRequestByToken.put(requestToken.getToken(), requestToken);
+      return URI.create(requestToken.getAuthenticationURL());
     } catch (TwitterException e) {
       throw new AuthenticationException(e);
     }
   }
 
   @Override
-  public User authenticate(String oauthToken, String oauthVerifier) throws AuthenticationException {
+  public User authenticate(String oauthToken, String oauthVerifier) {
     Twitter twitter = twitterFactory.getInstance();
     try {
-      AccessToken oAuthAccessToken = twitter.getOAuthAccessToken(oauthRequestByToken.remove(oauthToken), oauthVerifier);
-      return new User(oAuthAccessToken.getUserId(), oAuthAccessToken.getScreenName(), oAuthAccessToken.getToken(),
-          oAuthAccessToken.getTokenSecret());
+      AccessToken accessToken = twitter.getOAuthAccessToken(oauthRequestByToken.remove(oauthToken), oauthVerifier);
+      return new User(accessToken.getUserId(), accessToken.getScreenName(), accessToken.getToken(), accessToken.getTokenSecret());
     } catch (TwitterException e) {
-      if (HttpResponseCode.UNAUTHORIZED == e.getStatusCode()) {
-        throw new AuthenticationException(e);
-      }
-      throw Throwables.propagate(e);
+      throw new AuthenticationException(e);
     }
   }
 }

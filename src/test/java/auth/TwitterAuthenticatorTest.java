@@ -14,7 +14,6 @@ import twitter4j.auth.RequestToken;
 
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
@@ -27,7 +26,6 @@ import static org.mockito.Mockito.when;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({TwitterFactory.class, RequestToken.class})
 public class TwitterAuthenticatorTest {
-
   @Mock
   TwitterFactory twitterFactory;
 
@@ -44,9 +42,9 @@ public class TwitterAuthenticatorTest {
     when(twitter.getOAuthRequestToken(anyString())).thenReturn(requestToken);
     when(requestToken.getAuthenticationURL()).thenReturn("http://api.twitter.com/oauth/authenticate?oauth_token=fake");
 
-    URL authenticateURL = authenticator.getAuthenticateURL();
+    URI authenticateURL = authenticator.getAuthenticateURI();
 
-    assertThat(authenticateURL).isEqualTo(URI.create("http://api.twitter.com/oauth/authenticate?oauth_token=fake").toURL());
+    assertThat(authenticateURL).isEqualTo(URI.create("http://api.twitter.com/oauth/authenticate?oauth_token=fake"));
   }
 
   @Test(expected = AuthenticationException.class)
@@ -71,5 +69,4 @@ public class TwitterAuthenticatorTest {
     verify(accessToken).getToken();
     verify(accessToken).getTokenSecret();
   }
-
 }

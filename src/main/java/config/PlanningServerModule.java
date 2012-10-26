@@ -15,13 +15,11 @@ import static com.google.inject.name.Names.named;
 public class PlanningServerModule extends AbstractModule {
   @Override
   protected void configure() {
-    if (! "".equals(env("OAUTH_CALLBACK"))) {
-      bindConstant().annotatedWith(named("oAuth.callback")).to(env("OAUTH_CALLBACK"));
-    }
+    bindConstant().annotatedWith(named("oAuth.callback")).to(env("OAUTH_CALLBACK"));
     bindConstant().annotatedWith(named("oAuth.key")).to(env("OAUTH_CONSUMER-KEY"));
     bindConstant().annotatedWith(named("oAuth.secret")).to(env("OAUTH_CONSUMER-SECRET"));
 
-    bind(Authenticator.class).to(TwitterAuthenticator.class).asEagerSingleton();
+    bind(Authenticator.class).to(TwitterAuthenticator.class);
   }
 
   @Provides

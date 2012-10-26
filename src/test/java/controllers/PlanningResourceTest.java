@@ -14,7 +14,6 @@ import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.Response;
 
 import java.net.URI;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +60,7 @@ public class PlanningResourceTest {
 
   @Test
   public void should_redirect_to_twitter() throws Exception {
-    when(authenticator.getAuthenticateURL()).thenReturn(new URL("http://exemple.com/"));
+    when(authenticator.getAuthenticateURI()).thenReturn(URI.create("http://exemple.com/"));
 
     Response response = resource.authenticate();
 

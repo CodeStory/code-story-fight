@@ -1,4 +1,4 @@
-package auth;
+package controllers;
 
 import com.google.inject.Singleton;
 
@@ -10,7 +10,7 @@ import java.net.URI;
 
 @Path("/fakeauthenticate")
 @Singleton
-public class FakeAuthenticatorResource {
+public class FakeAuthenticatorResource extends AbstractResource {
   @GET
   public Response fakeAuthenticate() {
     return Response.seeOther(URI.create("/authenticated?oauthToken=foo&oauthVerifier=bar")).build();

@@ -1,12 +1,9 @@
 package auth;
 
-import twitter4j.TwitterException;
-
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 
 public interface Authenticator {
-  URL getAuthenticateURL() throws TwitterException, MalformedURLException;
+  URI getAuthenticateURI() throws AuthenticationException;
 
   User authenticate(String aouthToken, String oauthVerifier) throws AuthenticationException;
 }

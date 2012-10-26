@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class User {
-  final Long id;
-  final String screenName;
-  final String token;
-  final String secret;
+  private final Long id;
+  private final String screenName;
+  private final String token;
+  private final String secret;
 }
