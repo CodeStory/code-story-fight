@@ -15,7 +15,7 @@ import static com.google.inject.name.Names.named;
 public class PlanningServerModule extends AbstractModule {
   @Override
   protected void configure() {
-    bindConstant().annotatedWith(named("oAuth.callback")).to(env("OAUTH_CALLBACK"));
+    bindConstant().annotatedWith(named("oAuth.callback")).to(Strings.emptyToNull(env("OAUTH_CALLBACK")));
     bindConstant().annotatedWith(named("oAuth.key")).to(env("OAUTH_CONSUMER-KEY"));
     bindConstant().annotatedWith(named("oAuth.secret")).to(env("OAUTH_CONSUMER-SECRET"));
 
