@@ -4,7 +4,7 @@ var dayLabels = {
   '2012-11-14':'Wednesday, Nov. 14 2012',
   '2012-11-15':'Thursday, Nov. 15 2012',
   '2012-11-16':'Friday, Nov. 16 2012'
-}
+};
 
 function set_content(selector, template, data) {
   $(selector).html(Hogan.compile($(template).html()).render(data));
@@ -108,4 +108,4 @@ $(document).ready(function () {
   refreshPlanning();
   listenStarClicks();
   listenSearch();
-})
+});
