@@ -55,13 +55,17 @@ function listenStarClicks() {
     var talkId = $(this).attr('data-talk');
 
     if ($(this).hasClass('starred')) {
-      $.post('unstar', { talkId:talkId }, refreshStars);
+      $.post('unstar', { talkId:talkId }, refreshStars).error(redirectToAuthentication());
     } else {
-      $.post('star', { talkId:talkId }, refreshStars);
+      $.post('star', { talkId:talkId }, refreshStars).error(redirectToAuthentication());
     }
 
     return false;
   });
+}
+
+function redirectToAuthentication() {
+  window.location = "/user/authenticate";
 }
 
 function filterTalks() {

@@ -28,6 +28,11 @@ should 'Should show sessions', '/planning.html', (browser) ->
   expect(browser.text '#talk-761 .speaker').to.be 'Kirk Knoernschild @Room 8 from 09:30 to 12:30'
   expect(browser.text '#talk-761 p').to.contain 'Modularity is coming to the Java platform!'
 
+should 'Should redirect to authentication when user star', '/planning.html', (browser) ->
+  browser.clickLink '#talk-759 .star', ->
+    expect(browser.location.href).to.contain '/planning.html'
+    expect(browser.text '#auth a').to.be 'Log Out'
+
 should 'Should star while logged in', '/planning.html', (browser) ->
   expect(browser.text '#auth a').to.be 'Log In'
   expect(browser.cookies().get 'userId').to.be undefined
