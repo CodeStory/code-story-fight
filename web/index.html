@@ -8,9 +8,10 @@ style: index.css
 
 <body>
 <div id="front">
-  <div id="teaser">Want to know who's gonna win?
-  </div>
+  <div id="teaser">Want to know who's gonna win?</div>
   <img src="img/fight.jpg"/>
+
+  <div class="more">Let the CodeStory Team tell you...</div>
   <a id="toggle" href="#"></a>
 </div>
 <div id="back">
@@ -36,8 +37,20 @@ style: index.css
     <div class="more">The application to create fights and see the winners will be coded <a
       href="http://www.devoxx.com/display/DV12/Code+Story">live at Devoxx</a> by the <a href="http://code-story.net/">CodeStory
       Team</a></div>
+    <a id="tweet" href="https://twitter.com/share" class="twitter-share-button" data-url="http://fight.code-story.net"
+       data-via="codestory">Tweet</a>
+
   </section>
 </div>
 </body>
 
 <script src="$version$/index.js"></script>
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, "script", "twitter-wjs");</script>

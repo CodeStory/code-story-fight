@@ -40,6 +40,19 @@ section {
   z-index: 999;
 }
 
+#front .more {
+  position: absolute;
+  color: black;
+  font-size: 3em;
+  font-family: 'Sirin Stencil', cursive;
+  bottom: 75px;
+  margin: 0 auto;
+  margin-left: -400px;
+  left: 50%;
+  width: 800px;
+  height: 90px;
+}
+
 #teaser {
   position: relative;
   text-align: center;
@@ -270,4 +283,8 @@ section#fight {
 
 .Seconds {
   margin-left: 2px;
+}
+
+.twitter-share-button {
+  margin-top: 50px;
 }
