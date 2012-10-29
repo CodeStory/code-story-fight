@@ -34,6 +34,7 @@ li {
 h1 {
   display: block;
   margin: 0 auto;
+  width: 800px;
   text-align: center;
   margin-top: 30px;
 }
@@ -83,54 +84,52 @@ body {
     }
 
     nav {
-      top: 0;
+      #styles > .horizontal-section;
       background-color: @gray;
       font-size: .8em;
       overflow: hidden;
       white-space: nowrap;
-      width: 100%;
-      z-index: 2000;
 
       a {
+        display: block;
+        height: 50px;
         font-weight: bold;
-        padding-top: 3px;
         padding-left: 29px;
         text-decoration: none;
         color: @black;
       }
 
-      #back-wrapper {
-        float: left;
+      #back {
         height: 23px;
-        #styles > .horizontal-section;
+        float: left;
+        background: url('img/sprites.png') 0 -50px no-repeat;
+        text-align: left;
+      }
 
-        #back {
-          background: url('img/sprites.png') 0 -50px no-repeat;
-        }
+      #search_box {
+        height: 20px;
+        line-height: 20px;
+        font-size: .8em;
       }
 
       #auth {
+        height: 50px;
         float: right;
-        #styles > .horizontal-section;
+
+        #screenName {
+          float: right;
+          color: @black;
+          margin-right: 12px;
+        }
 
         #login, #logout {
           background: url('img/sprites.png') 0 -73px no-repeat !important;
-        }
-
-        #screenName {
-          color: @black;
+          float: right;
         }
       }
 
-      #search {
-        #styles > .horizontal-section;
-
-        #search_box {
-          width: 300px;
-          height: 20px;
-          line-height: 20px;
-          font-size: .8em;
-        }
+      #search_box {
+        width: 300px;
       }
     }
   }
@@ -163,11 +162,10 @@ body {
 
   .slot {
     #styles > .gradient(lighten(@blue_devoxx, 35%), @gray);
-    #styles > .horizontal-section;
 
     .hour {
-      #styles > .horizontal-section;
       font-size: 1.5em;
+      #styles > .horizontal-section;
     }
 
     .talk {
@@ -295,7 +293,8 @@ body {
   }
 
   .horizontal-section {
-    padding: 13px 1em;
+    height: 37px;
+    padding: 13px 1em 0 1em;
   }
 
   .gradient(@startColor, @endColor){

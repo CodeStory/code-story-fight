@@ -12,13 +12,11 @@ title: CodeStory - Devoxx Planning
     <div id="attribution">by Code-Story</div>
   </div>
   <nav>
-    <div id="auth" class="horizontal-section"></div>
+    <div id="auth"></div>
 
-    <div id="back-wrapper" class="horizontal-section">
-      <a id="back" href="index.html">Back</a>
-    </div>
+    <a id="back" href="index.html">Back</a>
 
-    <form id="search" class="horizontal-section" action="#">
+    <form id="search" action="#">
       <input id="search_box" autofocus="autofocus" placeholder="Search for talks/speakers/room..."/>
     </form>
   </nav>
@@ -33,8 +31,8 @@ title: CodeStory - Devoxx Planning
 
 <script type="text/x-template" id="header-template">
   {{#authenticated}}
-  <span id="screenName">@{{screenName}}</span>
   <a href="/user/logout" id="logout">Log Out</a>
+  <div id="screenName">@{{screenName}}</div>
   {{/authenticated}}
   {{^authenticated}}
   <a href="/user/authenticate" id="login">Log In</a>
