@@ -84,12 +84,12 @@ public class PlanningResource extends AbstractResource {
   }
 
   @GET
-  @Path("{path : .*}/jump.js")
+  @Path("{path : .*}/index.js")
   @Produces("application/javascript;charset=UTF-8")
   public Response jump() {
-    String body = read("js/jquery.js") + read("js/underscore.js") + read("js/jump.js");
+    String body = read("js/jquery.js") + read("js/underscore.js") + read("js/index.js");
 
-    return ok(body, file("js/jump.js").lastModified());
+    return ok(body, file("js/index.js").lastModified());
   }
 
   @GET
