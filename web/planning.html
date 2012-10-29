@@ -33,6 +33,7 @@ title: CodeStory - Devoxx Planning
 
 <script type="text/x-template" id="header-template">
   {{#authenticated}}
+  <span id="screenName">@{{screenName}}</span>
   <a href="/user/logout" id="logout">Log Out</a>
   {{/authenticated}}
   {{^authenticated}}

@@ -7,14 +7,9 @@ import auth.Users;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import javax.ws.rs.CookieParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.*;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
-
 import java.net.URI;
 
 import static java.lang.Long.parseLong;
@@ -23,6 +18,7 @@ import static javax.ws.rs.core.Response.Status.FORBIDDEN;
 @Singleton
 @Path("/user")
 public class AuthenticationResource extends AbstractResource {
+  public static final int MAX_AGE = 60 * 60 * 24 * 7;
   private final Users users;
   private final Authenticator authenticator;
 
@@ -44,8 +40,10 @@ public class AuthenticationResource extends AbstractResource {
     try {
       User user = authenticator.authenticate(oauthToken, oauthVerifier);
       users.add(user);
-
-      return redirectToPlanning().cookie(new NewCookie("userId", user.getId().toString(), "/", null, null, 60 * 60 * 24 * 7, false)).build();
+      return redirectToPlanning().cookie(
+        new NewCookie("userId", user.getId().toString(), "/", null, null, MAX_AGE, false),
+        new NewCookie("screenName", user.getScreenName(), "/", null, null, MAX_AGE, false)
+      ).build();
     } catch (IllegalStateException e) {
       return seeOther("index.html");
     } catch (AuthenticationException e) {
@@ -60,7 +58,10 @@ public class AuthenticationResource extends AbstractResource {
 
     users.remove(parseLong(userId));
 
-    return redirectToPlanning().cookie(new NewCookie("userId", null, "/", null, null, 0, false)).build();
+    return redirectToPlanning().cookie(
+      new NewCookie("userId", null, "/", null, null, 0, false),
+      new NewCookie("screenName", null, "/", null, null, 0, false)
+    ).build();
   }
 
   private static Response.ResponseBuilder redirectToPlanning() {

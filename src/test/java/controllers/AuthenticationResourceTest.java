@@ -50,7 +50,7 @@ public class AuthenticationResourceTest {
 
   @Test
   public void with_granted_user_should_authenticate_on_twitter_callback() throws Exception {
-    User user = new User(42L, "screenName", "token", "secret");
+    User user = new User(42L, "arnold", "token", "secret");
     when(authenticator.authenticate("oauthToken", "oauthVerifier")).thenReturn(user);
 
     Response response = resource.authenticated("oauthToken", "oauthVerifier");
@@ -58,9 +58,12 @@ public class AuthenticationResourceTest {
     verify(users).add(user);
     Map<String, List<Object>> metadata = assertRedirected(response, "planning.html");
     List<Object> cookies = metadata.get("Set-Cookie");
-    assertThat(cookies).hasSize(1);
+    assertThat(cookies).hasSize(2);
     Cookie userIdCookie = (Cookie) cookies.get(0);
     assertThat(userIdCookie.getName()).isEqualTo("userId");
     assertThat(userIdCookie.getValue()).isEqualTo("42");
+    Cookie screenNameCookie = (Cookie) cookies.get(1);
+    assertThat(screenNameCookie.getName()).isEqualTo("screenName");
+    assertThat(screenNameCookie.getValue()).isEqualTo("arnold");
   }
 }

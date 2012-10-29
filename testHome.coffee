@@ -45,7 +45,9 @@ should 'Should star while logged in', '/planning.html', (browser) ->
 
   browser.clickLink '#login', ->
     expect(browser.text '#auth a').to.be 'Log Out'
+    expect(browser.text '#screenName').to.be '@arnold'
     expect(browser.cookies().get 'userId').to.be '42'
+    expect(browser.cookies().get 'screenName').to.be 'arnold'
     expect(browser.query '#talk-759 .star').to.be.ok()
     expect(browser.query '#talk-759 .starred').to.not.be.ok()
 

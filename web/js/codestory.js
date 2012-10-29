@@ -12,7 +12,13 @@ function set_content(selector, template, data) {
 
 function initAuthenticationState() {
   var authenticated = ($.cookie('userId') != null);
-  set_content('#auth', '#header-template', { 'authenticated':authenticated });
+  var headerTemplateParameters = {
+    'authenticated': authenticated
+  };
+  if (authenticated) {
+    headerTemplateParameters.screenName = $.cookie('screenName');
+  }
+  set_content('#auth', '#header-template', headerTemplateParameters);
 }
 
 function refreshStars() {
