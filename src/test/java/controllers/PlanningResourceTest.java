@@ -1,5 +1,6 @@
 package controllers;
 
+import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -7,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import planning.Planning;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,7 +36,7 @@ public class PlanningResourceTest {
 
   @Test
   public void should_get_my_registrations() {
-    when(planning.stars("user")).thenReturn(newArrayList("talkId1", "talkId2"));
+    when(planning.stars("user")).thenReturn(ImmutableSet.of("talkId1", "talkId2"));
 
     Iterable<String> talkIds = resource.stars("user");
 
