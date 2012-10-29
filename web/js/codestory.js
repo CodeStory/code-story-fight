@@ -61,9 +61,9 @@ function listenStarClicks() {
     var talkId = $(this).attr('data-talk');
 
     if ($(this).hasClass('starred')) {
-      $.post('unstar', { talkId:talkId }, refreshStars).error(redirectToAuthentication());
+      $.post('unstar', { talkId:talkId }, refreshStars).error(redirectToAuthentication);
     } else {
-      $.post('star', { talkId:talkId }, refreshStars).error(redirectToAuthentication());
+      $.post('star', { talkId:talkId }, refreshStars).error(redirectToAuthentication);
     }
 
     return false;
