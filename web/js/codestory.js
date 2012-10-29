@@ -16,18 +16,18 @@ function initAuthenticationState() {
 }
 
 function refreshStars() {
-  $('.star').html('star');
-  $('.talk').removeClass('starred');
-
   var authenticated = ($.cookie('userId') != null);
-  if (authenticated) {
-    $.getJSON('stars', function (json) {
-      _.each(json, function (talkId) {
-        $('#talk-' + talkId + ' .star').html('unstar');
-        $('#talk-' + talkId).addClass('starred');
-      });
-    });
+  if (!authenticated) {
+    return;
   }
+
+  $.getJSON('stars', function (json) {
+    $('.star').removeClass('starred');
+
+    _.each(json, function (talkId) {
+      $('#talk-' + talkId + ' .star').addClass('starred');
+    });
+  });
 }
 
 function enrichPlanning(planning) {
@@ -54,10 +54,10 @@ function listenStarClicks() {
   $(document).on('click', '.star', function () {
     var talkId = $(this).attr('data-talk');
 
-    if ($(this).html() == "star") {
-      $.post('star', { talkId:talkId }, refreshStars);
-    } else {
+    if ($(this).hasClass('starred')) {
       $.post('unstar', { talkId:talkId }, refreshStars);
+    } else {
+      $.post('star', { talkId:talkId }, refreshStars);
     }
 
     return false;

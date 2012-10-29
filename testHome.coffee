@@ -27,20 +27,25 @@ should 'Should show sessions', '/planning.html', (browser) ->
 should 'Should star while logged in', '/planning.html', (browser) ->
   expect(browser.text '#auth a').to.be 'Log In'
   expect(browser.cookies().get 'userId').to.be undefined
-  expect(browser.text '#talk-759 .star').to.be 'star'
-  expect(browser.text '#talk-760 .star').to.be 'star'
-  expect(browser.text '#talk-761 .star').to.be 'star'
+  expect(browser.query '#talk-759 .star').to.be.ok()
+  expect(browser.query '#talk-760 .star').to.be.ok()
+  expect(browser.query '#talk-761 .star').to.be.ok()
+  expect(browser.query '#talk-759 .starred').to.not.be.ok()
+  expect(browser.query '#talk-760 .starred').to.not.be.ok()
+  expect(browser.query '#talk-761 .starred').to.not.be.ok()
 
   browser.clickLink '#login', ->
     expect(browser.text '#auth a').to.be 'Log Out'
     expect(browser.cookies().get 'userId').to.be '42'
-    expect(browser.text '#talk-759 .star').to.be 'star'
+    expect(browser.query '#talk-759 .star').to.be.ok()
+    expect(browser.query '#talk-759 .starred').to.not.be.ok()
 
     browser.clickLink '#talk-759 .star', ->
-      expect(browser.text '#talk-759 .star').to.be 'unstar'
+      expect(browser.query '#talk-759 .starred').to.be.ok()
 
       browser.clickLink '#talk-759 .star', ->
-        expect(browser.text '#talk-759 .star').to.be 'star'
+        expect(browser.query '#talk-759 .star').to.be.ok()
+        expect(browser.query '#talk-759 .starred').to.not.be.ok()
 
         browser.clickLink '#logout', ->
           expect(browser.cookies().get 'userId').to.be undefined
