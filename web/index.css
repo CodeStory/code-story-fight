@@ -103,7 +103,7 @@ section {
   float: left;
   width: 299px;
   height: 590px;
-  margin: 30px auto;
+  margin: 30px auto 0 auto;
   background: url('$version$/img/iphone.png');
 }
 
@@ -294,4 +294,8 @@ section#fight {
 
 .twitter-share-button {
   margin-top: 50px;
+}
+
+#planning a {
+  color: white;
 }
