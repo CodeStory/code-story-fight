@@ -36,8 +36,12 @@ abstract class AbstractResource {
   }
 
   protected String read(String path) {
+    return read(file(path));
+  }
+
+  protected String read(File file) {
     try {
-      return Files.toString(file(path), Charsets.UTF_8);
+      return Files.toString(file, Charsets.UTF_8);
     } catch (IOException e) {
       throw Throwables.propagate(e);
     }

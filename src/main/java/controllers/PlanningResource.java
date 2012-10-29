@@ -99,21 +99,25 @@ public class PlanningResource extends AbstractResource {
     File output = new File("target", path + ".css");
     new LessCompiler().compile(file(path + ".less"), output, false);
 
-    return ok(output, output.lastModified());
+    return templatize(read(output));
   }
 
   @GET
   @Path("{path : .*}/index.css")
   @Produces("text/css;charset=UTF-8")
   public synchronized Response indexStyle() {
-    return staticResource("index.css");
+    return templatize(read("index.css"));
   }
 
   @GET
   @Path("{path : .*\\.html}")
   @Produces("text/html;charset=UTF-8")
   public Response html(@PathParam("path") String path) {
-    ContentWithVariables yamlContent = new YamlFrontMatter().parse(read(path));
+    return templatize(read(path));
+  }
+
+  private Response templatize(String text) {
+    ContentWithVariables yamlContent = new YamlFrontMatter().parse(text);
     String content = yamlContent.getContent();
     Map<String, String> variables = yamlContent.getVariables();
 

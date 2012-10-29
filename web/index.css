@@ -104,7 +104,7 @@ section {
   width: 299px;
   height: 590px;
   margin: 30px auto;
-  background: url('img/iphone.png');
+  background: url('$version$/img/iphone.png');
 }
 
 #planning #laptop {
@@ -113,7 +113,7 @@ section {
   width: 504px;
   height: 309px;
   margin: 100px 0 0 100px;
-  background: url('img/laptop.png');
+  background: url('$version$/img/laptop.png');
   -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white));
 }
 
@@ -135,7 +135,7 @@ section {
   margin-left: 350px;
   width: 100px;
   height: 90px;
-  background: url('img/arrow.png') no-repeat;
+  background: url('$version$/img/arrow.png') no-repeat;
   background-size: 100px 100px;
   z-index: 999;
 }
