@@ -7,7 +7,7 @@ port = 8080
 port = process.argv[2] if process.argv[2]?
 
 should = (name, url, callback) ->
-  browser = new Browser( { "maxWait": 10000, "waitFor": 10000 } )
+  browser = new Browser({ "maxWait": 10000, "waitFor": 10000 })
   browser.visit "http://localhost:#{port}#{url}", -> callback(browser)
 
 should 'Should show title', '/', (browser) ->
@@ -16,15 +16,15 @@ should 'Should show title', '/', (browser) ->
 should 'Should show teaser', '/', (browser) ->
   expect(browser.text '#vote').to.contain 'Create your personal schedule for Devoxx.'
 
-should 'Should show toc','/planning.html', (browser) ->
+should 'Should show toc', '/planning.html', (browser) ->
   expect(browser.text '.toc a').to.contain '9:30'
 
 should 'Should show sessions', '/planning.html', (browser) ->
-  expect(browser.text '#talk-759 h1').to.be 'Android Development Code Lab (Hands-on Labs)'
+  expect(browser.text '#talk-759 h2').to.be 'Android Development Code Lab (Hands-on Labs)'
   expect(browser.text '#talk-759 .speaker').to.be 'Nick Butcher, Richard Hyndman @BOF 1 from 09:30 to 12:30'
   expect(browser.text '#talk-759 p').to.contain 'Dive into some of the latest'
 
-  expect(browser.text '#talk-761 h1').to.be 'Modular Architecture Today (University)'
+  expect(browser.text '#talk-761 h2').to.be 'Modular Architecture Today (University)'
   expect(browser.text '#talk-761 .speaker').to.be 'Kirk Knoernschild @Room 8 from 09:30 to 12:30'
   expect(browser.text '#talk-761 p').to.contain 'Modularity is coming to the Java platform!'
 
