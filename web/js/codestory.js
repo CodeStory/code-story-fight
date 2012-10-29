@@ -103,9 +103,36 @@ function listenSearch() {
   });
 }
 
+function listenScroll() {
+  clone = $('nav').clone();
+  $('nav').after(clone);
+  $('nav:last').hide();
+
+  offset = $('nav').offset();
+  var fromtop = offset.top;
+
+  $(document).scroll(function() {
+    doc = $(this);
+    dist = $(this).scrollTop();
+
+    if (dist >= fromtop) {
+      $('nav:last').show();
+      $('nav:first').css({
+        'position': 'fixed'
+      });
+    } else {
+      $('nav:first').css({
+        'position': 'static'
+      });
+      $('nav:last').hide();
+    }
+  });
+}
+
 $(document).ready(function () {
   initAuthenticationState();
   refreshPlanning();
   listenStarClicks();
   listenSearch();
+  listenScroll();
 });

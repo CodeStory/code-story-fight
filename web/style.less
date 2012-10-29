@@ -34,7 +34,6 @@ li {
 h1 {
   display: block;
   margin: 0 auto;
-  width: 800px;
   text-align: center;
   margin-top: 30px;
 }
@@ -84,47 +83,50 @@ body {
     }
 
     nav {
-      #styles > .horizontal-section;
+      top: 0;
       background-color: @gray;
       font-size: .8em;
       overflow: hidden;
       white-space: nowrap;
+      width: 100%;
+      z-index: 2000;
 
       a {
-        display: block;
-        height: 50px;
         font-weight: bold;
+        padding-top: 3px;
         padding-left: 29px;
         text-decoration: none;
         color: @black;
       }
 
-      #back {
-        height: 23px;
+      #back-wrapper {
         float: left;
-        background: url('img/sprites.png') 0 -50px no-repeat;
-        text-align: left;
-      }
+        height: 23px;
+        #styles > .horizontal-section;
 
-      #search_box {
-        height: 20px;
-        line-height: 20px;
-        font-size: .8em;
+        #back {
+          background: url('img/sprites.png') 0 -50px no-repeat;
+        }
       }
 
       #auth {
-        height: 50px;
         float: right;
-        text-align: right;
-        height: 23px;
+        #styles > .horizontal-section;
+
+        #login, #logout {
+          background: url('img/sprites.png') 0 -73px no-repeat !important;
+        }
       }
 
-      #login, #logout {
-        background: url('img/sprites.png') 0 -73px no-repeat !important;
-      }
+      #search {
+        #styles > .horizontal-section;
 
-      #search_box {
-        width: 300px;
+        #search_box {
+          width: 300px;
+          height: 20px;
+          line-height: 20px;
+          font-size: .8em;
+        }
       }
     }
   }
@@ -157,10 +159,11 @@ body {
 
   .slot {
     #styles > .gradient(lighten(@blue_devoxx, 35%), @gray);
+    #styles > .horizontal-section;
 
     .hour {
-      font-size: 1.5em;
       #styles > .horizontal-section;
+      font-size: 1.5em;
     }
 
     .talk {
@@ -265,8 +268,7 @@ body#index {
   }
 
   .horizontal-section {
-    height: 37px;
-    padding: 13px 1em 0 1em;
+    padding: 13px 1em;
   }
 
   .gradient(@startColor, @endColor){
