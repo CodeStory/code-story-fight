@@ -1,35 +1,43 @@
 ---
 layout: layouts/default.html
-title: CodeStory - Devoxx Fight
+title: Devoxx Fight by CodeStory
+style: index.css
 ---
 
-<body id="index">
-<header>
-  <div id="logo-section">
-    <a id="logo" href="index.html">Fight</a>
+<link rel="stylesheet" href="fonts/stylesheet.css">
 
-    <div id="attribution">by Code-Story</div>
+<body>
+<div id="front">
+  <div id="teaser">Want to know who's gonna win?
   </div>
-</header>
-
-<div id="fight">
-  <img id="teaser" src="$version$/img/coming-soon.png"/>
+  <img src="img/fight.jpg"/>
+  <a id="toggle" href="#"></a>
 </div>
+<div id="back">
+  <section id="soon">
+    <div class="text">Devoxx is coming soon!</div>
+    <div id="counter"></div>
+    <div class="more">Don't wait until it's too late to prepare you schedule...</div>
+  </section>
+  <section id="planning">
+    <div class="text">Choose the talks you'd like to see</div>
+    <div id="images">
+      <a id="iphone" href="planning.html"></a>
+      <a id="laptop" href="planning.html"></a>
+    </div>
+    <div class="more">All you have to do is use Stars.</div>
+  </section>
+  <section id="fight">
+    <div class="text">Each star will count to make your favourites win!</div>
+    <img src="img/fight2.jpg"/>
 
-<div id="tweet">
-  <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://fight.code-story.net" data-via="codestory">Tweet</a>
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</div>
-
-<div id="vote">
-  <p>Create your personal schedule for Devoxx. Each time you "Star" a session, that's a vote.
-    A vote that can change the balance in a fight. But which fight? Java vs Scala. Your favorite speaker vs Mister
-    boring.
-    Room B vs Room A. Any fight that you'll come up with and share with other users.</p>
-
-  <p>This site will be coded live at Devoxx by the <a href="http://www.devoxx.com/display/DV12/Code+Story">CodeStory
-    Team</a>.</p>
+    <div id="score_left">12</div>
+    <div id="score_right">15</div>
+    <div class="more">The application to create fights and see the winners will be coded <a
+      href="http://www.devoxx.com/display/DV12/Code+Story">live at Devoxx</a> by the <a href="http://code-story.net/">CodeStory
+      Team</a></div>
+  </section>
 </div>
 </body>
 
-<script src="$version$/jump.js"></script>
+<script src="$version$/index.js"></script>

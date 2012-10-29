@@ -1,16 +1,13 @@
-$(function () {
-  var previousScrollTop, currentScrollTop, yPosition = 0;
-  $(window).scroll(function () {
-    currentScrollTop = $(window).scrollTop();
-    var diff = previousScrollTop - currentScrollTop;
-    if (isNaN(diff)) {
-      diff = 0;
-    }
-    yPosition = yPosition + diff;
-    previousScrollTop = currentScrollTop;
-    $('body').css('background-position', '0 ' + yPosition + 'px, ' + //
-      '0 ' + yPosition * 2 + 'px, ' + //
-      '0 ' + yPosition * 5 + 'px, ' + //
-      '0 0');
+$(document).ready(function () {
+  $('#toggle').click(function () {
+    $('#front').slideToggle('slow');
+    $('#back').toggle();
   });
+
+  $('#counter').countdown({
+    timestamp:(new Date(2012, 10, 12, 8, 0, 0, 0)).getTime()
+  });
+
+  $('#score_left').text(Math.floor((Math.random() * 99) + 1));
+  $('#score_right').text(Math.floor((Math.random() * 99) + 1));
 });

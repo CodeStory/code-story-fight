@@ -1,6 +1,7 @@
 ---
 layout: layouts/default.html
 title: CodeStory - Devoxx Planning
+style: style.css
 ---
 
 <body>
@@ -32,6 +33,7 @@ title: CodeStory - Devoxx Planning
 <script type="text/x-template" id="header-template">
   {{#authenticated}}
   <a href="/user/logout" id="logout">Log Out</a>
+
   <div id="screenName">@{{screenName}}</div>
   {{/authenticated}}
   {{^authenticated}}

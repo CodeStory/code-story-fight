@@ -1,0 +1,273 @@
+@font-face {
+  font-family: 'Sirin Stencil';
+  font-style: normal;
+  font-weight: 400;
+  src: local('SirinStencil'), local('SirinStencil-Regular'), url(http://themes.googleusercontent.com/static/fonts/sirinstencil/v1/pRpLdo0SawzO7MoBpvowsE-MuKPVvYIo0wJmbsvCQvE.woff) format('woff');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 960px;
+}
+
+#back {
+  color: #009ee3;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+
+section {
+  overflow: hidden;
+}
+
+#front {
+  color: white;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #009ee3; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #009ee3 0%, #2e657c 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #009ee3), color-stop(100%, #2e657c)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #009ee3 0%, #2e657c 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #009ee3 0%, #2e657c 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #009ee3 0%, #2e657c 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center, #009ee3 0%, #2e657c 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#009ee3', endColorstr = '#2e657c', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
+  text-align: center;
+  z-index: 999;
+}
+
+#teaser {
+  position: relative;
+  text-align: center;
+  font-size: 4em;
+  font-family: 'Sirin Stencil', cursive;
+  width: 700px;
+  height: 234px;
+  margin: -470px auto;
+  top: 50%;
+}
+
+.text {
+  text-align: center;
+  font-size: 5em;
+  font-family: 'Sirin Stencil', cursive;
+}
+
+#soon .more {
+  color: black;
+  text-align: center;
+  font-size: 3em;
+  font-family: 'Sirin Stencil', cursive;
+  margin-top: 50px;
+}
+
+#planning .more {
+  color: black;
+  text-align: center;
+  font-size: 3em;
+  font-family: 'Sirin Stencil', cursive;
+  margin: 60px auto;
+}
+
+#planning #images {
+  width: 920px;
+  height: 590px;
+  margin: 0 auto;
+}
+
+#planning #iphone {
+  display: block;
+  float: left;
+  width: 299px;
+  height: 590px;
+  margin: 30px auto;
+  background: url('img/iphone.png');
+}
+
+#planning #laptop {
+  float: left;
+  display: block;
+  width: 504px;
+  height: 309px;
+  margin: 100px 0 0 100px;
+  background: url('img/laptop.png');
+  -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white));
+}
+
+#front img {
+  display: block;
+  position: relative;
+  text-align: center;
+  width: 886px;
+  height: 500px;
+  margin: 470px auto;
+  top: 50%;
+  z-index: 999;
+}
+
+#front a {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -50px;
+  width: 100px;
+  height: 90px;
+  background: url('img/arrow.png') no-repeat;
+  background-size: 100px 100px;
+}
+
+#fight img {
+  margin-top: 80px;
+}
+
+#fight .text {
+  width: 850px;
+  margin: 0 auto;
+}
+
+#fight .more {
+  color: black;
+  text-align: center;
+  font-size: 3em;
+  font-family: 'Sirin Stencil', cursive;
+  margin: -20px auto;
+  width: 900px;
+}
+
+#fight a {
+  color: #009ee3;
+}
+
+#fight #score_left, #fight #score_right {
+  color: black;
+  font-size: 2em;
+  position: relative;
+}
+
+#fight #score_left {
+  left: -320px;
+  top: -210px;
+}
+
+#fight #score_right {
+  left: 316px;
+  top: -245px;
+}
+
+section#soon {
+  height: 600px;
+  background: rgb(255, 255, 255); /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(229, 229, 229, 1))); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#e5e5e5', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
+}
+
+section#planning {
+  height: 900px;
+  color: white;
+  background: #009ee3; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #009ee3 0%, #2e657c 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #009ee3), color-stop(100%, #2e657c)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #009ee3 0%, #2e657c 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #009ee3 0%, #2e657c 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #009ee3 0%, #2e657c 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center, #009ee3 0%, #2e657c 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#009ee3', endColorstr = '#2e657c', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
+}
+
+section#fight {
+  height: 1000px;
+  background: rgb(255, 255, 255); /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(229, 229, 229, 1))); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#e5e5e5', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
+}
+
+/* Counter */
+#counter {
+  width: 700px;
+  height: 145px;
+  margin: 55px auto 0 auto;
+  font-family: sans-serif;
+  font-size: 66px;
+  color: #272727;
+  text-shadow: 0 1px 0 #fff;
+  overflow: hidden;
+  margin-top: 100px;
+}
+
+.countDays, .countHours, .countMinutes, .countSeconds {
+  float: left;
+  width: 102px;
+  height: 138px;
+  padding-left: 36px;
+  background: #e7e7e7;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .1)), to(rgba(0, 0, 0, .07)));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, .1), rgba(0, 0, 0, .07));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, .1), rgba(0, 0, 0, .07));
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, .1), rgba(0, 0, 0, .07));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, .1), rgba(0, 0, 0, .07));
+  background-image: linear-gradient(top, rgba(255, 255, 255, .1), rgba(0, 0, 0, .07));
+  border: 1px solid #ccc;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: 0 2px 3px 0 rgba(255, 255, 255, .2) inset, 0 2px 2px 0 rgba(0, 0, 0, .1);
+  -webkit-box-shadow: 0 2px 3px 0 rgba(255, 255, 255, .2) inset, 0 2px 2px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 3px 0 rgba(255, 255, 255, .2) inset, 0 2px 2px 0 rgba(0, 0, 0, .1);
+}
+
+.points {
+  float: left;
+  width: 40px;
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 44px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 138px;
+  text-shadow: none;
+}
+
+.position {
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 92px;
+  margin: 8px 0 0 0;
+}
+
+.digit {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.boxName {
+  float: left;
+  width: 80px;
+  margin: -5px 0 0 -11px;
+  font-size: 36px;
+  color: #a6a6a6;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+.Hours {
+  margin-left: 5px;
+}
+
+.Seconds {
+  margin-left: 2px;
+}

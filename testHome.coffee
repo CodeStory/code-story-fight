@@ -11,10 +11,7 @@ should = (name, url, callback) ->
   browser.visit "http://localhost:#{port}#{url}", -> callback(browser)
 
 should 'Should show title', '/', (browser) ->
-  expect(browser.text 'title').to.be 'CodeStory - Devoxx Fight'
-
-should 'Should show teaser', '/', (browser) ->
-  expect(browser.text '#vote').to.contain 'Create your personal schedule for Devoxx.'
+  expect(browser.text 'title').to.be 'Devoxx Fight by CodeStory'
 
 should 'Should show toc', '/planning.html', (browser) ->
   expect(browser.text '.toc a').to.contain '9:30'

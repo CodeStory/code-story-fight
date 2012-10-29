@@ -77,7 +77,7 @@ public class PlanningResource extends AbstractResource {
   @GET
   @Path("{path : .*}/main.js")
   @Produces("application/javascript;charset=UTF-8")
-  public Response main() {
+  public Response main_script() {
     String body = read("js/jquery.js") + read("js/jquery.cookie.js") + read("js/underscore.js") + read("js/hogan.js") + read("js/codestory.js");
 
     return ok(body, file("js/codestory.js").lastModified());
@@ -86,8 +86,8 @@ public class PlanningResource extends AbstractResource {
   @GET
   @Path("{path : .*}/index.js")
   @Produces("application/javascript;charset=UTF-8")
-  public Response jump() {
-    String body = read("js/jquery.js") + read("js/underscore.js") + read("js/index.js");
+  public Response index_script() {
+    String body = read("js/jquery.js") + read("js/jquery.countdown.js") + read("js/index.js");
 
     return ok(body, file("js/index.js").lastModified());
   }
@@ -100,6 +100,13 @@ public class PlanningResource extends AbstractResource {
     new LessCompiler().compile(file(path + ".less"), output, false);
 
     return ok(output, output.lastModified());
+  }
+
+  @GET
+  @Path("{path : .*}/index.css")
+  @Produces("text/css;charset=UTF-8")
+  public synchronized Response indexStyle() {
+    return staticResource("index.css");
   }
 
   @GET
