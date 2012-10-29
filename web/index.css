@@ -45,12 +45,18 @@ section {
   color: black;
   font-size: 3em;
   font-family: 'Sirin Stencil', cursive;
-  bottom: 75px;
+  bottom: 0px;
   margin: 0 auto;
   margin-left: -400px;
   left: 50%;
   width: 800px;
   height: 90px;
+  z-index: 999;
+}
+
+#front img {
+  width: 886px;
+  height: 500px;
 }
 
 #teaser {
@@ -126,11 +132,12 @@ section {
   position: absolute;
   bottom: 0;
   left: 50%;
-  margin-left: -50px;
+  margin-left: 350px;
   width: 100px;
   height: 90px;
   background: url('img/arrow.png') no-repeat;
   background-size: 100px 100px;
+  z-index: 999;
 }
 
 #fight img {
