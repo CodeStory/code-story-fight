@@ -42,4 +42,17 @@ public class PlanningServerTest {
 
     assertThat(result).isZero();
   }
+
+  public static void main(String[] args) throws IOException {
+    new PlanningServer(new AbstractModule() {
+      @Override
+      protected void configure() {
+        File root = new File("data");
+
+        bindConstant().annotatedWith(Names.named("port")).to(8080);
+        bind(Authenticator.class).to(FakeAuthenticator.class);
+        bind(File.class).annotatedWith(named("planning.root")).toInstance(root);
+      }
+    }).start(8080);
+  }
 }
