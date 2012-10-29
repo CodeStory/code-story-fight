@@ -228,12 +228,26 @@ body {
   }
 }
 
-body#index {
+#index {
+  margin: 0;
+  padding: 0;
+  background: url('img/close-stars.png') repeat, url('img/middle-stars.png') repeat, url('img/far-stars.png') repeat, url('img/background-repeat.png') repeat;
+
+  header {
+    width: 886px;
+    margin: 0 auto;
+    background-color: transparent;
+  }
+
+  a {
+    color: @blue_devoxx;
+  }
+
   #teaser {
-    width: 454px / 3;
-    height: 510px / 3;
-    margin-top: -55px;
-    margin-left: -55px;
+    width: 454px / 2;
+    height: 510px / 2;
+    margin-top: -110px;
+    margin-left: -110px;
   }
 
   #fight {
@@ -248,6 +262,9 @@ body#index {
     width: 886px;
     height: 100px;
     margin: 50px auto;
+    color: @white;
+    font-size: 1.5em;
+    text-align: justify;
   }
 }
 
