@@ -1,7 +1,6 @@
 package templating;
 
 import com.google.common.collect.ImmutableMap;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -9,12 +8,7 @@ import java.io.IOException;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class TemplateTest {
-  Template template;
-
-  @Before
-  public void setUp() {
-    template = new Template();
-  }
+  Template template = new Template();
 
   @Test
   public void should_get_original_content() {
