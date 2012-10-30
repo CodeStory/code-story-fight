@@ -9,7 +9,7 @@
 }(document, "script", "twitter-wjs");
 
 $(document).ready(function () {
-  $('#toggle').click(function () {
+  $('#front a').click(function () {
     $('#front').slideToggle('slow');
     $('#back').toggle();
   });
