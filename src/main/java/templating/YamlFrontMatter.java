@@ -1,12 +1,9 @@
 package templating;
 
-import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Maps;
-import com.google.common.io.Resources;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class YamlFrontMatter {
@@ -36,17 +33,6 @@ public class YamlFrontMatter {
       }
     }
 
-    variables.put("version", "version-" + readGitHash());
-
     return variables;
-  }
-
-  private static String readGitHash() {
-    try {
-      String hash = Resources.toString(Resources.getResource("version.txt"), Charsets.UTF_8);
-      return hash.replace("$Format:%H$", "");
-    } catch (IOException e) {
-      throw new IllegalStateException("Unable to read version.txt in the classpath");
-    }
   }
 }

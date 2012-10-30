@@ -32,13 +32,6 @@ public class YamlFrontMatterTest {
   }
 
   @Test
-  public void should_include_version() throws IOException {
-    Map<String, String> variables = yamlFrontMatter.parse(read("with_header.html")).getVariables();
-
-    assertThat(variables).includes(entry("version", "version-GIT_HASH"));
-  }
-
-  @Test
   public void should_ignore_commented_variable() throws IOException {
     Map<String, String> variables = yamlFrontMatter.parse(read("with_comment.html")).getVariables();
 

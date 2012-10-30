@@ -16,6 +16,7 @@ body {
   position: absolute;
   width: 100%;
   text-align: center;
+  display: none;
 }
 
 section {
@@ -41,7 +42,6 @@ section {
 }
 
 #front {
-  display: none;
   color: white;
   position: absolute;
   width: 100%;
@@ -55,7 +55,7 @@ section {
   background: radial-gradient(ellipse at center, #009ee3 0%, #2e657c 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#009ee3', endColorstr = '#2e657c', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
   text-align: center;
-  z-index: 999;
+  z-index: 1000;
 
   img {
     display: block;
@@ -75,7 +75,7 @@ section {
     margin-left: 350px;
     width: 100px;
     height: 90px;
-    background: url('$version$/img/arrow.png') no-repeat;
+    background: url('../img/arrow.png') no-repeat;
     background-size: 100px 100px;
     z-index: 999;
   }
@@ -136,7 +136,7 @@ section {
     width: 299px;
     height: 590px;
     margin: 30px auto 0 auto;
-    background: url('$version$/img/iphone.png');
+    background: url('../img/iphone.png');
   }
 
   #laptop {
@@ -145,7 +145,7 @@ section {
     width: 504px;
     height: 309px;
     margin: 100px 0 0 100px;
-    background: url('$version$/img/laptop.png');
+    background: url('../img/laptop.png');
     -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white));
   }
 
