@@ -28,10 +28,10 @@ function refreshStars() {
   }
 
   $.getJSON('stars', function (json) {
-    $('.star').removeClass('starred');
+    $('.star').removeClass('starred').html('');
 
     _.each(json, function (talkId) {
-      $('#talk-' + talkId + ' .star').addClass('starred');
+      $('#talk-' + talkId + ' .star').addClass('starred').html('starred');
     });
   });
 }
