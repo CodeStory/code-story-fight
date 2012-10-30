@@ -9,10 +9,10 @@ import com.sun.jersey.core.spi.component.ioc.IoCComponentProviderFactory;
 import com.sun.jersey.guice.spi.container.GuiceComponentProviderFactory;
 import com.sun.net.httpserver.HttpServer;
 import config.PlanningServerModule;
-import controllers.AuthenticationResource;
-import controllers.FakeAuthenticatorResource;
-import controllers.PlanningResource;
-import controllers.StaticResource;
+import resources.AuthenticationResource;
+import resources.FakeAuthenticatorResource;
+import resources.PlanningResource;
+import resources.StaticResource;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import java.io.IOException;

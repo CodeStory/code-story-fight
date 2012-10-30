@@ -21,7 +21,7 @@ public class Template {
       }
     }
     template.add("body", "$body$");
-    template.add("version", "version-" + readGitHash());
+    template.add("version", readGitHash());
 
     return template;
   }

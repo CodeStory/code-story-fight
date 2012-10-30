@@ -37,6 +37,6 @@ public class TemplateTest {
     String content = "$version$";
     String result = template.apply(content, null);
 
-    assertThat(result).isEqualTo("version-GIT_HASH");
+    assertThat(result).isEqualTo("GIT_HASH");
   }
 }

@@ -1,4 +1,4 @@
-package controllers;
+package resources;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
@@ -75,9 +75,6 @@ abstract class AbstractResource {
     if (path.endsWith("/")) {
       throw new NotFoundException();
     }
-
-    // Strip version
-    path = path.replaceFirst("version-[^/]*/", "");
 
     try {
       File root = new File("web");

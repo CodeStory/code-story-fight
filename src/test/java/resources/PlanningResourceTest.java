@@ -1,4 +1,4 @@
-package controllers;
+package resources;
 
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;

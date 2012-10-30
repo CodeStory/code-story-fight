@@ -1,4 +1,4 @@
-package controllers;
+package resources;
 
 import auth.Authenticator;
 import auth.User;
