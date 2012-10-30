@@ -1,7 +1,0 @@
-# the format is <mime type> <space separated file extensions>
-application/javascript js
-image/png png
-image/jpeg jpg
-text/css css
-text/html html
-image/x-icon ico

@@ -32,10 +32,6 @@ abstract class AbstractResource {
     return Response.ok(entity).lastModified(new Date(modified)).expires(new Date(modified + ONE_MONTH)).build();
   }
 
-  protected Response ok(Object entity, String mimeType, long modified) {
-    return Response.ok(entity, mimeType).lastModified(new Date(modified)).expires(new Date(modified + ONE_MONTH)).build();
-  }
-
   protected Response ok(Object entity) {
     return Response.ok(entity).build();
   }
