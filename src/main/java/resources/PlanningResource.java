@@ -11,6 +11,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
@@ -45,16 +46,16 @@ public class PlanningResource extends AbstractResource {
 
   @GET
   @Path("stars")
-  @Produces("application/json;charset=UTF-8")
-  public Iterable<String> stars(@CookieParam("userId") String userId) {
-    return planning.stars(rejectUnauthenticated(userId));
+  @Produces("application/javascript;charset=UTF-8")
+  public String stars(@CookieParam("userId") String userId, @QueryParam("callback") String callback) {
+    return jsonp(planning.stars(rejectUnauthenticated(userId)), callback);
   }
 
   @GET
   @Path("planning.json")
   @Produces("application/javascript;charset=UTF-8")
-  public Response planning() {
-    return ok(file("planning.json")); // TODO add small cache duration
+  public String planning(@QueryParam("callback") String callback) {
+    return jsonp(read("planning.json"), callback); // TODO add small cache duration
   }
 
   @GET

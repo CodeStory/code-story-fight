@@ -38,8 +38,8 @@ public class PlanningResourceTest {
   public void should_get_my_registrations() {
     when(planning.stars("user")).thenReturn(ImmutableSet.of("talkId1", "talkId2"));
 
-    Iterable<String> talkIds = resource.stars("user");
+    String talkIds = resource.stars("user", "");
 
-    assertThat(talkIds).containsOnly("talkId1", "talkId2");
+    assertThat(talkIds).contains("talkId1").contains("talkId2");
   }
 }

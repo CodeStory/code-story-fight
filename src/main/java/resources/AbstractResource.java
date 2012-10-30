@@ -3,6 +3,7 @@ package resources;
 import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
 import com.google.common.io.Files;
+import com.google.gson.Gson;
 import com.sun.jersey.api.NotFoundException;
 import templating.ContentWithVariables;
 import templating.Layout;
@@ -34,6 +35,16 @@ abstract class AbstractResource {
 
   protected Response ok(Object entity) {
     return Response.ok(entity).build();
+  }
+
+  protected String jsonp(Object entity, String callback) {
+    String json = (entity instanceof String) ? (String) entity : new Gson().toJson(entity);
+
+    if (callback != null) {
+      return callback + "(" + json + ")";
+    }
+
+    return json;
   }
 
   protected Response concat(String... paths) {
