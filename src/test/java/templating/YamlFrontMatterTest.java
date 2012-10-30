@@ -1,13 +1,7 @@
 package templating;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
-import com.google.common.io.Resources;
+import com.google.common.base.Joiner;
 import org.junit.Test;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.MapAssert.entry;
@@ -16,53 +10,60 @@ public class YamlFrontMatterTest {
   YamlFrontMatter yamlFrontMatter = new YamlFrontMatter();
 
   @Test
-  public void should_read_empty_header_variables() throws IOException {
-    Map<String, String> variables = yamlFrontMatter.parse(read("without_header.html")).getVariables();
+  public void should_read_empty_file() {
+    String content = fileContent("");
 
-    assertThat(variables).isEmpty();
+    ContentWithVariables parsed = yamlFrontMatter.parse(content);
+
+    assertThat(parsed.getVariables()).isEmpty();
+    assertThat(parsed.getContent()).isEmpty();
   }
 
   @Test
-  public void should_read_header_variables() throws IOException {
-    Map<String, String> variables = yamlFrontMatter.parse(read("with_header.html")).getVariables();
+  public void should_read_file_without_headers() {
+    String content = fileContent("CONTENT");
 
-    assertThat(variables).includes(
+    ContentWithVariables parsed = yamlFrontMatter.parse(content);
+
+    assertThat(parsed.getVariables()).isEmpty();
+    assertThat(parsed.getContent()).isEqualTo("CONTENT");
+  }
+
+  @Test
+  public void should_read_header_variables() {
+    String content = fileContent(
+        "---",
+        "layout: standard",
+        "title: CodeStory - Devoxx Fight",
+        "---",
+        "CONTENT");
+
+    ContentWithVariables parsed = yamlFrontMatter.parse(content);
+
+    assertThat(parsed.getVariables()).includes(
         entry("layout", "standard"),
         entry("title", "CodeStory - Devoxx Fight"));
+    assertThat(parsed.getContent()).isEqualTo("CONTENT");
   }
 
   @Test
-  public void should_ignore_commented_variable() throws IOException {
-    Map<String, String> variables = yamlFrontMatter.parse(read("with_comment.html")).getVariables();
+  public void should_ignore_commented_variable() {
+    String content = fileContent(
+        "---",
+        "#layout: standard",
+        "title: CodeStory - Devoxx Fight",
+        "---",
+        "CONTENT");
 
-    assertThat(variables)
+    ContentWithVariables parsed = yamlFrontMatter.parse(content);
+
+    assertThat(parsed.getVariables())
         .excludes(entry("layout", "standard"))
         .excludes(entry("#layout", "standard"))
         .includes(entry("title", "CodeStory - Devoxx Fight"));
   }
 
-  @Test
-  public void should_read_empty_file_content() throws IOException {
-    String content = yamlFrontMatter.parse(read("empty.html")).getContent();
-
-    assertThat(content).isEmpty();
-  }
-
-  @Test
-  public void should_read_standard_file_content() throws IOException {
-    String content = yamlFrontMatter.parse(read("without_header.html")).getContent();
-
-    assertThat(content).isEqualTo("CONTENT");
-  }
-
-  @Test
-  public void should_read_file_content() throws IOException {
-    String content = yamlFrontMatter.parse(read("with_header.html")).getContent();
-
-    assertThat(content).isEqualTo("CONTENT");
-  }
-
-  static String read(String path) throws IOException {
-    return Files.toString(new File(Resources.getResource(path).getFile()), Charsets.UTF_8);
+  static String fileContent(String... lines) {
+    return Joiner.on("\n").join(lines);
   }
 }
