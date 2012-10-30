@@ -1,5 +1,3 @@
-package config;
-
 import auth.Authenticator;
 import auth.TwitterAuthenticator;
 import com.google.inject.AbstractModule;

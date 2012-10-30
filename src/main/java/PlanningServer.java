@@ -8,12 +8,10 @@ import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.jersey.core.spi.component.ioc.IoCComponentProviderFactory;
 import com.sun.jersey.guice.spi.container.GuiceComponentProviderFactory;
 import com.sun.net.httpserver.HttpServer;
-import config.PlanningServerModule;
 import resources.AuthenticationResource;
 import resources.FakeAuthenticatorResource;
 import resources.PlanningResource;
 import resources.StaticResource;
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import java.io.IOException;
 
@@ -57,7 +55,6 @@ public class PlanningServer {
 
   private ResourceConfig configuration() {
     DefaultResourceConfig config = new DefaultResourceConfig(
-        JacksonJsonProvider.class,
         AuthenticationResource.class,
         FakeAuthenticatorResource.class,
         StaticResource.class,
