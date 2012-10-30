@@ -23,6 +23,12 @@ section {
   overflow: hidden;
 }
 
+.text {
+  text-align: center;
+  font-size: 5em;
+  font-family: 'Sirin Stencil', cursive;
+}
+
 #front {
   color: white;
   position: absolute;
@@ -38,147 +44,57 @@ section {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#009ee3', endColorstr = '#2e657c', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
   text-align: center;
   z-index: 999;
+
+  .more {
+    position: absolute;
+    color: black;
+    font-size: 3em;
+    font-family: 'Sirin Stencil', cursive;
+    bottom: 0px;
+    margin: 0 auto;
+    margin-left: -400px;
+    left: 50%;
+    width: 800px;
+    height: 90px;
+    z-index: 999;
+  }
+
+  img {
+    display: block;
+    position: relative;
+    text-align: center;
+    width: 886px;
+    height: 500px;
+    margin: 470px auto;
+    top: 50%;
+    z-index: 999;
+  }
+
+  a {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: 350px;
+    width: 100px;
+    height: 90px;
+    background: url('$version$/img/arrow.png') no-repeat;
+    background-size: 100px 100px;
+    z-index: 999;
+  }
+
+  #teaser {
+    position: relative;
+    text-align: center;
+    font-size: 4em;
+    font-family: 'Sirin Stencil', cursive;
+    width: 850px;
+    height: 234px;
+    margin: -370px auto -550px auto;
+    top: 50%;
+  }
 }
 
-#front .more {
-  position: absolute;
-  color: black;
-  font-size: 3em;
-  font-family: 'Sirin Stencil', cursive;
-  bottom: 0px;
-  margin: 0 auto;
-  margin-left: -400px;
-  left: 50%;
-  width: 800px;
-  height: 90px;
-  z-index: 999;
-}
-
-#front img {
-  width: 886px;
-  height: 500px;
-}
-
-#teaser {
-  position: relative;
-  text-align: center;
-  font-size: 4em;
-  font-family: 'Sirin Stencil', cursive;
-  width: 850px;
-  height: 234px;
-  margin: -370px auto -550px auto;
-  top: 50%;
-}
-
-.text {
-  text-align: center;
-  font-size: 5em;
-  font-family: 'Sirin Stencil', cursive;
-}
-
-#soon .more {
-  color: black;
-  text-align: center;
-  font-size: 3em;
-  font-family: 'Sirin Stencil', cursive;
-  margin-top: 50px;
-}
-
-#planning .more {
-  color: black;
-  text-align: center;
-  font-size: 3em;
-  font-family: 'Sirin Stencil', cursive;
-  margin: 60px auto;
-}
-
-#planning #images {
-  width: 920px;
-  height: 590px;
-  margin: 0 auto;
-}
-
-#planning #iphone {
-  display: block;
-  float: left;
-  width: 299px;
-  height: 590px;
-  margin: 30px auto 0 auto;
-  background: url('$version$/img/iphone.png');
-}
-
-#planning #laptop {
-  float: left;
-  display: block;
-  width: 504px;
-  height: 309px;
-  margin: 100px 0 0 100px;
-  background: url('$version$/img/laptop.png');
-  -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white));
-}
-
-#front img {
-  display: block;
-  position: relative;
-  text-align: center;
-  width: 886px;
-  height: 500px;
-  margin: 470px auto;
-  top: 50%;
-  z-index: 999;
-}
-
-#front a {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  margin-left: 350px;
-  width: 100px;
-  height: 90px;
-  background: url('$version$/img/arrow.png') no-repeat;
-  background-size: 100px 100px;
-  z-index: 999;
-}
-
-#fight img {
-  margin-top: 80px;
-}
-
-#fight .text {
-  width: 850px;
-  margin: 0 auto;
-}
-
-#fight .more {
-  color: black;
-  text-align: center;
-  font-size: 3em;
-  font-family: 'Sirin Stencil', cursive;
-  margin: -20px auto;
-  width: 900px;
-}
-
-#fight a {
-  color: #009ee3;
-}
-
-#fight #score_left, #fight #score_right {
-  color: black;
-  font-size: 2em;
-  position: relative;
-}
-
-#fight #score_left {
-  left: -320px;
-  top: -210px;
-}
-
-#fight #score_right {
-  left: 316px;
-  top: -245px;
-}
-
-section#soon {
+#soon {
   height: 600px;
   background: rgb(255, 255, 255); /* Old browsers */
   background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* FF3.6+ */
@@ -188,9 +104,17 @@ section#soon {
   background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* IE10+ */
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#e5e5e5', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
+
+  .more {
+    color: black;
+    text-align: center;
+    font-size: 3em;
+    font-family: 'Sirin Stencil', cursive;
+    margin-top: 50px;
+  }
 }
 
-section#planning {
+#planning {
   height: 900px;
   color: white;
   background: #009ee3; /* Old browsers */
@@ -201,9 +125,46 @@ section#planning {
   background: -ms-radial-gradient(center, ellipse cover, #009ee3 0%, #2e657c 100%); /* IE10+ */
   background: radial-gradient(ellipse at center, #009ee3 0%, #2e657c 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#009ee3', endColorstr = '#2e657c', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
+
+  .more {
+    color: black;
+    text-align: center;
+    font-size: 3em;
+    font-family: 'Sirin Stencil', cursive;
+    margin: 60px auto;
+  }
+
+  #images {
+    width: 920px;
+    height: 590px;
+    margin: 0 auto;
+  }
+
+  #iphone {
+    display: block;
+    float: left;
+    width: 299px;
+    height: 590px;
+    margin: 30px auto 0 auto;
+    background: url('$version$/img/iphone.png');
+  }
+
+  #laptop {
+    float: left;
+    display: block;
+    width: 504px;
+    height: 309px;
+    margin: 100px 0 0 100px;
+    background: url('$version$/img/laptop.png');
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white));
+  }
+
+  a {
+    color: white;
+  }
 }
 
-section#fight {
+#fight {
   height: 1000px;
   background: rgb(255, 255, 255); /* Old browsers */
   background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* FF3.6+ */
@@ -213,6 +174,48 @@ section#fight {
   background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* IE10+ */
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#e5e5e5', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
+
+  img {
+    margin-top: 80px;
+  }
+
+  .text {
+    width: 850px;
+    margin: 0 auto;
+  }
+
+  .more {
+    color: black;
+    text-align: center;
+    font-size: 3em;
+    font-family: 'Sirin Stencil', cursive;
+    margin: -20px auto;
+    width: 900px;
+  }
+
+  a {
+    color: #009ee3;
+  }
+
+  #score_left, #score_right {
+    color: black;
+    font-size: 2em;
+    position: relative;
+  }
+
+  #score_left {
+    left: -320px;
+    top: -210px;
+  }
+
+  #score_right {
+    left: 316px;
+    top: -245px;
+  }
+
+  .twitter-share-button {
+    margin-top: 50px;
+  }
 }
 
 /* Counter */
@@ -232,7 +235,8 @@ section#fight {
   float: left;
   width: 102px;
   height: 138px;
-  padding-left: 36px;
+  padding-left: 30px;
+  padding-right: 6px;
   background: #e7e7e7;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .1)), to(rgba(0, 0, 0, .07)));
   background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, .1), rgba(0, 0, 0, .07));
@@ -285,17 +289,17 @@ section#fight {
 }
 
 .Hours {
-  margin-left: 5px;
+  margin-left: 14px;
+}
+
+.Minutes {
+  margin-left: 6px;
+}
+
+.Days {
+  margin-left: 4px;
 }
 
 .Seconds {
   margin-left: 2px;
-}
-
-.twitter-share-button {
-  margin-top: 50px;
-}
-
-#planning a {
-  color: white;
 }

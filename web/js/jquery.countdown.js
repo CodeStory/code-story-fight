@@ -87,7 +87,7 @@
         boxName = "HRS";
       }
       else if (this == "Minutes") {
-        boxName = "MIN";
+        boxName = "MINS";
       }
       else {
         boxName = "SECS";

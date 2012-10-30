@@ -103,13 +103,6 @@ public class PlanningResource extends AbstractResource {
   }
 
   @GET
-  @Path("{path : .*}/index.css")
-  @Produces("text/css;charset=UTF-8")
-  public synchronized Response indexStyle() {
-    return templatize(read("index.css"));
-  }
-
-  @GET
   @Path("{path : .*\\.html}")
   @Produces("text/html;charset=UTF-8")
   public Response html(@PathParam("path") String path) {
