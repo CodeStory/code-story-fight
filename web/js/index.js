@@ -1,16 +1,10 @@
-!function (d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (!d.getElementById(id)) {
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }
-}(document, "script", "twitter-wjs");
-
 $(document).ready(function () {
   $('#front a').click(function () {
-    $('#front').slideToggle('slow');
+    $('#front').animate({
+      top:'-10000px'
+    }, 3000, function () {
+      $('#front').hide();
+    });
     $('#back').toggle();
   });
 
@@ -20,6 +14,6 @@ $(document).ready(function () {
 
   $('#score_left').text(Math.floor((Math.random() * 99) + 1));
   $('#score_right').text(Math.floor((Math.random() * 99) + 1));
-});
+})
 
 
