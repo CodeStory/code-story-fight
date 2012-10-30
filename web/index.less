@@ -16,10 +16,10 @@ body {
   position: absolute;
   width: 100%;
   text-align: center;
-  display: none;
 }
 
 section {
+  position: relative;
   overflow: hidden;
 }
 
@@ -29,7 +29,19 @@ section {
   font-family: 'Sirin Stencil', cursive;
 }
 
+.more {
+  position: absolute;
+  bottom: 50px;
+  color: black;
+  font-size: 3em;
+  font-family: 'Sirin Stencil', cursive;
+  text-align: center;
+  width: 100%;
+  z-index: 999;
+}
+
 #front {
+  display: none;
   color: white;
   position: absolute;
   width: 100%;
@@ -44,20 +56,6 @@ section {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#009ee3', endColorstr = '#2e657c', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
   text-align: center;
   z-index: 999;
-
-  .more {
-    position: absolute;
-    color: black;
-    font-size: 3em;
-    font-family: 'Sirin Stencil', cursive;
-    bottom: 0px;
-    margin: 0 auto;
-    margin-left: -400px;
-    left: 50%;
-    width: 800px;
-    height: 90px;
-    z-index: 999;
-  }
 
   img {
     display: block;
@@ -126,14 +124,6 @@ section {
   background: radial-gradient(ellipse at center, #009ee3 0%, #2e657c 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#009ee3', endColorstr = '#2e657c', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
 
-  .more {
-    color: black;
-    text-align: center;
-    font-size: 3em;
-    font-family: 'Sirin Stencil', cursive;
-    margin: 60px auto;
-  }
-
   #images {
     width: 920px;
     height: 590px;
@@ -165,7 +155,7 @@ section {
 }
 
 #fight {
-  height: 1000px;
+  height: 900px;
   background: rgb(255, 255, 255); /* Old browsers */
   background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* FF3.6+ */
   background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(229, 229, 229, 1))); /* Chrome,Safari4+ */
@@ -185,12 +175,7 @@ section {
   }
 
   .more {
-    color: black;
-    text-align: center;
-    font-size: 3em;
-    font-family: 'Sirin Stencil', cursive;
-    margin: -20px auto;
-    width: 900px;
+    margin-bottom: 50px;
   }
 
   a {
@@ -214,7 +199,7 @@ section {
   }
 
   .twitter-share-button {
-    margin-top: 50px;
+    margin-top: 200px;
   }
 }
 
