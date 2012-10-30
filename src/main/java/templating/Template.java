@@ -29,7 +29,7 @@ public class Template {
   private static String readGitHash() {
     try {
       String hash = Resources.toString(Resources.getResource("version.txt"), Charsets.UTF_8);
-      return hash.replace("$Format:%H$", "");
+      return hash.replace("$Format:%H$", "GIT_HASH");
     } catch (IOException e) {
       throw new IllegalStateException("Unable to read version.txt in the classpath");
     }

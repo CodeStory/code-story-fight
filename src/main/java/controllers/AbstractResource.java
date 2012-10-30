@@ -80,7 +80,7 @@ abstract class AbstractResource {
       throw new NotFoundException();
     }
 
-    // Remove version
+    // Strip version
     path = path.replaceFirst("version-[^/]*/", "");
 
     try {

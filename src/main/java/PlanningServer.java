@@ -12,6 +12,7 @@ import config.PlanningServerModule;
 import controllers.AuthenticationResource;
 import controllers.FakeAuthenticatorResource;
 import controllers.PlanningResource;
+import controllers.StaticResource;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import java.io.IOException;
@@ -59,6 +60,7 @@ public class PlanningServer {
         JacksonJsonProvider.class,
         AuthenticationResource.class,
         FakeAuthenticatorResource.class,
+        StaticResource.class,
         PlanningResource.class);
 
     config.getProperties().put(PROPERTY_CONTAINER_REQUEST_FILTERS, GZIPContentEncodingFilter.class);
