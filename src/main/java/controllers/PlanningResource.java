@@ -37,36 +37,30 @@ public class PlanningResource extends AbstractResource {
     return seeOther("index.html");
   }
 
-  @GET
-  @Path("planning.json")
-  @Produces("application/javascript;charset=UTF-8")
-  public Response planning() {
-    return ok(file("planning.json")); // TODO add small cache duration
-  }
-
   @POST
   @Path("star")
   public void star(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
-    rejectUnauthenticated(userId);
-
-    planning.star(userId, talkId);
+    planning.star(rejectUnauthenticated(userId), talkId);
   }
 
   @POST
   @Path("unstar")
   public void unstar(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
-    rejectUnauthenticated(userId);
-
-    planning.unstar(userId, talkId);
+    planning.unstar(rejectUnauthenticated(userId), talkId);
   }
 
   @GET
   @Path("stars")
   @Produces("application/json;charset=UTF-8")
   public Iterable<String> stars(@CookieParam("userId") String userId) {
-    rejectUnauthenticated(userId);
+    return planning.stars(rejectUnauthenticated(userId));
+  }
 
-    return planning.stars(userId);
+  @GET
+  @Path("planning.json")
+  @Produces("application/javascript;charset=UTF-8")
+  public Response planning() {
+    return ok(file("planning.json")); // TODO add small cache duration
   }
 
   @GET
@@ -105,13 +99,13 @@ public class PlanningResource extends AbstractResource {
   public Response staticResource(@PathParam("path") String path) {
     File file = file(path);
     String mimeType = new MimetypesFileTypeMap().getContentType(file);
-
     return ok(file, mimeType, file.lastModified());
   }
 
-  private static void rejectUnauthenticated(String userId) {
+  private static String rejectUnauthenticated(String userId) {
     if (userId == null) {
       throw new WebApplicationException(FORBIDDEN);
     }
+    return userId;
   }
 }
