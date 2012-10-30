@@ -35,6 +35,14 @@ abstract class AbstractResource {
     return Response.ok(entity).build();
   }
 
+  protected Response concat(String... paths) {
+    StringBuilder body = new StringBuilder();
+    for (String path : paths) {
+      body.append(read(path));
+    }
+    return ok(body.toString(), file(paths[paths.length - 1]).lastModified());
+  }
+
   protected String read(String path) {
     return read(file(path));
   }
