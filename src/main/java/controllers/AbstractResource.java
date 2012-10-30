@@ -4,6 +4,10 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
 import com.google.common.io.Files;
 import com.sun.jersey.api.NotFoundException;
+import templating.ContentWithVariables;
+import templating.Layout;
+import templating.Template;
+import templating.YamlFrontMatter;
 
 import javax.ws.rs.core.Response;
 
@@ -11,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Date;
+import java.util.Map;
 
 abstract class AbstractResource {
   private static final long ONE_MONTH = 1000L * 3600 * 24 * 30;
@@ -41,6 +46,21 @@ abstract class AbstractResource {
       body.append(read(path));
     }
     return ok(body.toString(), file(paths[paths.length - 1]).lastModified());
+  }
+
+  protected Response templatize(String text) {
+    ContentWithVariables yaml = new YamlFrontMatter().parse(text);
+    String content = yaml.getContent();
+    Map<String, String> variables = yaml.getVariables();
+
+    String layout = variables.get("layout");
+    if (layout != null) {
+      content = new Layout(read(layout)).apply(content);
+    }
+
+    String body = new Template().apply(content, variables);
+
+    return ok(body);
   }
 
   protected String read(String path) {

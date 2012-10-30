@@ -5,10 +5,6 @@ import com.google.inject.Singleton;
 import org.lesscss.LessCompiler;
 import org.lesscss.LessException;
 import planning.Planning;
-import templating.ContentWithVariables;
-import templating.Layout;
-import templating.Template;
-import templating.YamlFrontMatter;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.ws.rs.CookieParam;
@@ -23,7 +19,6 @@ import javax.ws.rs.core.Response;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 
 import static javax.ws.rs.core.Response.Status.FORBIDDEN;
 
@@ -103,21 +98,6 @@ public class PlanningResource extends AbstractResource {
   @Produces("text/html;charset=UTF-8")
   public Response html(@PathParam("path") String path) {
     return templatize(read(path));
-  }
-
-  private Response templatize(String text) {
-    ContentWithVariables yamlContent = new YamlFrontMatter().parse(text);
-    String content = yamlContent.getContent();
-    Map<String, String> variables = yamlContent.getVariables();
-
-    String layout = variables.get("layout");
-    if (layout != null) {
-      content = new Layout(read(layout)).apply(content);
-    }
-
-    String body = new Template().apply(content, variables);
-
-    return ok(body);
   }
 
   @GET
