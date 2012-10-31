@@ -9,12 +9,14 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
+import com.google.common.util.concurrent.AtomicLongMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
 @Singleton
@@ -26,6 +28,7 @@ public class Planning {
       return Sets.newHashSet();
     }
   });
+  private final AtomicLongMap<String> starsPerTalk = AtomicLongMap.create();
 
   @Inject
   public Planning(@Named("planning.root") File root) throws IOException {
@@ -47,6 +50,7 @@ public class Planning {
 
       writeToFile(login, "+", talkId);
     }
+    starsPerTalk.incrementAndGet(talkId);
   }
 
   public void unstar(String login, String talkId) {
@@ -56,6 +60,7 @@ public class Planning {
 
       writeToFile(login, "-", talkId);
     }
+    starsPerTalk.decrementAndGet(talkId);
   }
 
   private void writeToFile(String login, String action, String talkId) {
@@ -84,6 +89,10 @@ public class Planning {
       Set<String> talkIds = loadUserTalks(file);
 
       talksPerUser.put(login, talkIds);
+
+      for (String talkId : talkIds) {
+        starsPerTalk.incrementAndGet(talkId);
+      }
     }
   }
 
@@ -109,5 +118,9 @@ public class Planning {
         return talkIds;
       }
     });
+  }
+
+  public Map<String, Long> countPerTalk() {
+    return starsPerTalk.asMap();
   }
 }

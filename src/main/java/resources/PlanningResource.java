@@ -45,6 +45,13 @@ public class PlanningResource extends AbstractResource {
   }
 
   @GET
+  @Path("planning.json")
+  @Produces("application/javascript;charset=UTF-8")
+  public String planning(@QueryParam("callback") String callback) {
+    return jsonp(read("planning.json"), callback); // TODO add small cache duration
+  }
+
+  @GET
   @Path("stars")
   @Produces("application/javascript;charset=UTF-8")
   public String stars(@CookieParam("userId") String userId, @QueryParam("callback") String callback) {
@@ -52,10 +59,10 @@ public class PlanningResource extends AbstractResource {
   }
 
   @GET
-  @Path("planning.json")
+  @Path("starsPerTalk")
   @Produces("application/javascript;charset=UTF-8")
-  public String planning(@QueryParam("callback") String callback) {
-    return jsonp(read("planning.json"), callback); // TODO add small cache duration
+  public String starsPerTalk(@QueryParam("callback") String callback) {
+    return jsonp(planning.countPerTalk(), callback);
   }
 
   @GET
