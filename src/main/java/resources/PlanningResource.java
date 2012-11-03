@@ -35,13 +35,13 @@ public class PlanningResource extends AbstractResource {
   @POST
   @Path("star")
   public void star(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
-    planning.star(rejectUnauthenticated(userId), talkId);
+    planning.star(assertAuthenticated(userId), talkId);
   }
 
   @POST
   @Path("unstar")
   public void unstar(@CookieParam("userId") String userId, @FormParam("talkId") String talkId) {
-    planning.unstar(rejectUnauthenticated(userId), talkId);
+    planning.unstar(assertAuthenticated(userId), talkId);
   }
 
   @GET
@@ -55,7 +55,7 @@ public class PlanningResource extends AbstractResource {
   @Path("stars")
   @Produces("application/javascript;charset=UTF-8")
   public String stars(@CookieParam("userId") String userId, @QueryParam("callback") String callback) {
-    return jsonp(planning.stars(rejectUnauthenticated(userId)), callback);
+    return jsonp(planning.stars(assertAuthenticated(userId)), callback);
   }
 
   @GET
@@ -72,7 +72,7 @@ public class PlanningResource extends AbstractResource {
     return templatize(read(path));
   }
 
-  private static String rejectUnauthenticated(String userId) {
+  private static String assertAuthenticated(String userId) {
     if (userId == null) {
       throw new WebApplicationException(FORBIDDEN);
     }
