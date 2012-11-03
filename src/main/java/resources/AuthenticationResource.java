@@ -3,7 +3,6 @@ package resources;
 import auth.AuthenticationException;
 import auth.Authenticator;
 import auth.User;
-import auth.Users;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -17,19 +16,15 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
 
-import static java.lang.Long.parseLong;
-
 @Singleton
 @Path("/user")
 public class AuthenticationResource extends AbstractResource {
   private static final int MAX_AGE = (int) TimeUnit.DAYS.toSeconds(7);
 
-  private final Users users;
   private final Authenticator authenticator;
 
   @Inject
-  public AuthenticationResource(Users users, Authenticator authenticator) {
-    this.users = users;
+  public AuthenticationResource(Authenticator authenticator) {
     this.authenticator = authenticator;
   }
 
@@ -44,7 +39,6 @@ public class AuthenticationResource extends AbstractResource {
   public Response authenticated(@QueryParam("oauth_token") String token, @QueryParam("oauth_verifier") String verifier) {
     try {
       User user = authenticator.authenticate(token, verifier);
-      users.add(user);
 
       return redirectToPlanning().cookie(
           new NewCookie("userId", user.getId().toString(), "/", null, null, MAX_AGE, false),
@@ -60,10 +54,6 @@ public class AuthenticationResource extends AbstractResource {
   @GET
   @Path("logout")
   public Response logout(@CookieParam("userId") String userId) {
-    if (null != userId) {
-      users.remove(parseLong(userId));
-    }
-
     return redirectToPlanning().cookie(
         new NewCookie("userId", null, "/", null, null, 0, false),
         new NewCookie("screenName", null, "/", null, null, 0, false))

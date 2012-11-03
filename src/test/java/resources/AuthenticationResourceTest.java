@@ -2,7 +2,6 @@ package resources;
 
 import auth.Authenticator;
 import auth.User;
-import auth.Users;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,15 +18,12 @@ import java.util.Map;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.MapAssert.entry;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthenticationResourceTest {
   @Mock
   private Authenticator authenticator;
-  @Mock
-  private Users users;
 
   @InjectMocks
   private AuthenticationResource resource;
@@ -55,7 +51,6 @@ public class AuthenticationResourceTest {
 
     Response response = resource.authenticated("oauthToken", "oauthVerifier");
 
-    verify(users).add(user);
     Map<String, List<Object>> metadata = assertRedirected(response, "planning.html");
     List<Object> cookies = metadata.get("Set-Cookie");
     assertThat(cookies).hasSize(2);
