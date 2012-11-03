@@ -13,25 +13,25 @@ import javax.ws.rs.core.Response;
 import java.io.File;
 import java.io.IOException;
 
-@Path("/static")
+@Path("/static/{version : [^/]*}/")
 @Singleton
 public class StaticResource extends AbstractResource {
   @GET
-  @Path("{version : .*}/planning.js")
+  @Path("planning.js")
   @Produces("application/javascript;charset=UTF-8")
   public Response planning() {
     return concat("js/jquery.js", "js/jquery.cookie.js", "js/underscore.js", "js/hogan.js", "js/planning.js");
   }
 
   @GET
-  @Path("{version : .*}/index.js")
+  @Path("index.js")
   @Produces("application/javascript;charset=UTF-8")
   public Response index() {
     return concat("js/jquery.js", "js/jquery.countdown.js", "js/index.js");
   }
 
   @GET
-  @Path("{version : [^/]*}/{path : .*}.css")
+  @Path("{path : .*}.css")
   @Produces("text/css;charset=UTF-8")
   public synchronized Response css(@PathParam("path") String path) throws IOException, LessException {
     File output = new File("target", path + ".css");
@@ -40,14 +40,14 @@ public class StaticResource extends AbstractResource {
   }
 
   @GET
-  @Path("{version : [^/]*}/{path : .*\\.png}")
+  @Path("{path : .*\\.png}")
   @Produces("image/png")
   public Response png(@PathParam("path") String path) {
     return ok(file(path), file(path).lastModified());
   }
 
   @GET
-  @Path("{version : [^/]*}/{path : .*\\.jpg}")
+  @Path("{path : .*\\.jpg}")
   @Produces("image/jpeg")
   public Response jpeg(@PathParam("path") String path) {
     return ok(file(path), file(path).lastModified());
