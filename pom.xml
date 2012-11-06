@@ -75,11 +75,22 @@
       <version>1.4.12</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-core</artifactId>
+      <version>1.4.12</version>
+      <scope>test</scope>
+    </dependency>
 
     <!-- OTHER -->
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-server</artifactId>
+      <version>${jersey.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-core</artifactId>
       <version>${jersey.version}</version>
     </dependency>
     <dependency>
@@ -116,6 +127,11 @@
       <groupId>org.antlr</groupId>
       <artifactId>stringtemplate</artifactId>
       <version>4.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+        <version>3.1</version>
     </dependency>
   </dependencies>
 </project>
