@@ -36,7 +36,7 @@ public class StaticResource extends AbstractResource {
   public synchronized Response css(@PathParam("path") String path) throws IOException, LessException {
     File output = new File("target", path + ".css");
     new LessCompiler().compile(file(path + ".less"), output, false);
-    return templatize(read(output));
+    return ok(templatize(read(output)), output.lastModified());
   }
 
   @GET
