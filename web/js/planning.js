@@ -121,9 +121,14 @@ function supports_html5_storage() {
   }
 }
 
+function set_filter_from_query_string() {
+  $('#search_box').val($.url().param('q'));
+}
+
 $(document).ready(function () {
   initAuthenticationState();
   refreshPlanning();
   listenStarClicks();
   listenSearch();
+  set_filter_from_query_string();
 });

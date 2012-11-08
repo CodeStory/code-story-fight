@@ -58,3 +58,6 @@ should 'Should star while logged in', '/planning.html', (browser) ->
         browser.clickLink '#logout', ->
           expect(browser.cookies().get 'userId').to.be undefined
           expect(browser.text '#auth a').to.be 'Log In'
+
+should 'Should filter with URI', '/planning.html?q=foo', (browser) ->
+  expect(browser.query('#search_box').value).to.be 'foo'
