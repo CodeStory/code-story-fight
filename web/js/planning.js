@@ -13,7 +13,7 @@ function set_content(selector, template, data) {
 function initAuthenticationState() {
   var authenticated = ($.cookie('userId') != null);
   var headerTemplateParameters = {
-    'authenticated': authenticated
+    'authenticated':authenticated
   };
   if (authenticated) {
     headerTemplateParameters.screenName = $.cookie('screenName');
@@ -111,6 +111,14 @@ function listenSearch() {
       }, 700);
     }
   });
+}
+
+function supports_html5_storage() {
+  try {
+    return 'localStorage' in window && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
 }
 
 $(document).ready(function () {
