@@ -55,7 +55,7 @@ abstract class AbstractResource {
     return ok(body.toString(), file(paths[paths.length - 1]).lastModified());
   }
 
-  protected Response templatize(String text) {
+  protected String templatize(String text) {
     ContentWithVariables yaml = new YamlFrontMatter().parse(text);
     String content = yaml.getContent();
     Map<String, String> variables = yaml.getVariables();
@@ -65,9 +65,7 @@ abstract class AbstractResource {
       content = new Layout(read(layout)).apply(content);
     }
 
-    String body = new Template().apply(content, variables);
-
-    return ok(body);
+    return new Template().apply(content, variables);
   }
 
   protected String read(String path) {

@@ -69,7 +69,7 @@ public class PlanningResource extends AbstractResource {
   @Path("{path : .*\\.html}")
   @Produces("text/html;charset=UTF-8")
   public Response html(@PathParam("path") String path) {
-    return templatize(read(path));
+    return ok(templatize(read(path)));
   }
 
   private static String assertAuthenticated(String userId) {
