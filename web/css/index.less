@@ -211,24 +211,51 @@ h3 {
   background: radial-gradient(ellipse at center, #009ee3 0%, #2e657c 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#009ee3', endColorstr = '#2e657c', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
 
-  #portraits {
+  h3 {
+    position: absolute;
+    bottom: 30px;
+  }
+
+  #photos {
     margin: 0 auto;
     width: (160px+10px)*4;
-    height: 190px;
+    height: 232px;
 
-    figure {
+    .fig {
       position: relative;
       width: 160px;
-      height: 190px;
+      height: 232px;
       float: left;
       margin: 60px 5px 0px 5px;
 
-      img {
+      a {
         position: absolute;
         top: 0;
         left: 0;
         width: 160px;
-        height: 160px;
+        height: 202px;
+        display: block;
+        background-size: 160px 202px;
+      }
+
+      #david {
+        background-image: url('../img/david.png');
+        -webkit-animation: deg_1 .3s ease infinite alternate;
+      }
+
+      #eric {
+        background-image: url('../img/eric.png');
+        -webkit-animation: deg_2 .8s ease infinite alternate;
+      }
+
+      #jean-laurent {
+        background-image: url('../img/jean-laurent.png');
+        -webkit-animation: deg_3 .6s ease infinite alternate;
+      }
+
+      #sebastian {
+        background-image: url('../img/sebastian.png');
+        -webkit-animation: deg_4 2s ease infinite alternate;
       }
 
       p {
@@ -328,4 +355,45 @@ h3 {
 
 .Seconds {
   margin-left: 2px;
+}
+
+/* Animations */
+@-webkit-keyframes
+deg_1 {
+  from {
+    -webkit-transform: rotate(-3deg);
+  }
+  to {
+    -webkit-transform: rotate(3deg);
+  }
+}
+
+@-webkit-keyframes
+deg_2 {
+  from {
+    -webkit-transform: rotate(2deg);
+  }
+  to {
+    -webkit-transform: rotate(-2deg);
+  }
+}
+
+@-webkit-keyframes
+deg_3 {
+  from {
+    -webkit-transform: rotate(-6deg);
+  }
+  to {
+    -webkit-transform: rotate(6deg);
+  }
+}
+
+@-webkit-keyframes
+deg_4 {
+  from {
+    -webkit-transform: rotate(5deg);
+  }
+  to {
+    -webkit-transform: rotate(-5deg);
+  }
 }
