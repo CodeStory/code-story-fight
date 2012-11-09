@@ -49,7 +49,8 @@ script: planning.js
     </div>
     {{#slots}}
     <div class="slot">
-      <div class="hour" id="{{day}}-{{slot}}">{{slot}}</div>
+      <div class="hour">{{slot}}</div>
+      <div class="anchor" id="{{day}}-{{slot}}">{{slot}}</div>
       {{#talks}}
       <div class="talk" id="talk-{{id}}">
         <a class="star" href="#" data-talk="{{id}}"></a>
