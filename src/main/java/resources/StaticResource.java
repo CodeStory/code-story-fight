@@ -20,7 +20,7 @@ public class StaticResource extends AbstractResource {
   @Path("planning.js")
   @Produces("application/javascript;charset=UTF-8")
   public Response planning() {
-    return concat("js/jquery.js", "js/purl.js", "js/jquery.cookie.js", "js/underscore.js", "js/hogan.js", "js/planning.js");
+    return concat("js/jquery.js", "js/purl.js", "js/jquery.scrollTo.js", "js/jquery.cookie.js", "js/underscore.js", "js/hogan.js", "js/planning.js");
   }
 
   @GET

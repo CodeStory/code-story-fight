@@ -183,6 +183,15 @@ function ignoreEnterKey() {
   });
 }
 
+function animateLinks() {
+  console.log('animate links');
+  $(document).on('click', 'a[href^="#"]', function() {
+    console.log(this.hash);
+    $.scrollTo(this.hash, 500, {});
+    return false;
+  });
+}
+
 $(document).ready(function () {
   initAuthenticationState();
   ignoreEnterKey();
@@ -191,5 +200,6 @@ $(document).ready(function () {
     listenStarClicks();
     listenSearch();
     listenBackButton();
+    animateLinks();
   });
 });
