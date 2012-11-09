@@ -45,12 +45,12 @@ script: planning.js
   <div class="day_wrapper">
     <div class="day">{{dayLabel}}</div>
     <div class="toc">
-      {{#slots}}<a class="toc-link" href="#{{day}}-{{slot}}">{{slot}}</a>{{/slots}}
+      {{#slots}}<a class="toc-link" href="#{{day}}-{{slot_slug}}">{{slot}}</a>{{/slots}}
     </div>
     {{#slots}}
     <div class="slot">
       <div class="hour">{{slot}}</div>
-      <div class="anchor" id="{{day}}-{{slot}}">{{slot}}</div>
+      <div class="hour" id="{{day}}-{{slot_slug}}">{{slot}}</div>
       {{#talks}}
       <div class="talk" id="talk-{{id}}">
         <a class="star" href="#" data-talk="{{id}}"></a>

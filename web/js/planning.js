@@ -50,6 +50,7 @@ function enrichPlanning(planning) {
     day.dayName = dayNames[day.day];
 
     _.each(day.slots, function (slot) {
+      slot.slot_slug = slot.slot.replace(':','');
       _.each(slot.talks, function (talk) {
         talk.speakers_string = talk.speakers.join(', ');
       });
