@@ -24,10 +24,10 @@ function initAuthenticationState() {
 function refreshStars() {
   var authenticated = ($.cookie('userId') != null);
   if (!authenticated) {
-    return;
+    return $.when();
   }
 
-  $.getJSON('stars', function (json) {
+  return $.getJSON('stars', function (json) {
     $('.star').removeClass('starred').html('');
 
     _.each(json, function (talkId) {
@@ -49,10 +49,10 @@ function enrichPlanning(planning) {
 }
 
 function refreshPlanning() {
-  $.getJSON('planning.json', function (json) {
+  return $.getJSON('planning.json', function (json) {
     enrichPlanning(json);
     set_content('#content', '#talks-template', json);
-    refreshStars();
+    refreshStars().done(filterTalks);
   });
 }
 
@@ -74,10 +74,18 @@ function redirectToAuthentication() {
   window.location = "/user/authenticate";
 }
 
+var filter = undefined;
+
 function filterTalks() {
+  var text = $('#search_box').val();
+  if (text == filter) {
+    return;
+  }
+  filter = text;
+  console.log('Filtering on "' + filter + '" on ' + new Date());
+
   $('.day_wrapper, .toc-link, .slot, .talk').show();
 
-  var text = $('#search_box').val();
   if (text.length < 3) {
     return;
   }
@@ -168,10 +176,11 @@ function ignoreEnterKey() {
 
 $(document).ready(function () {
   initAuthenticationState();
-  refreshPlanning();
-  listenStarClicks();
-  listenSearch();
-  setFilterFromQueryString();
-  listenBackButton();
   ignoreEnterKey();
+  setFilterFromQueryString();
+  refreshPlanning().done(function () {
+    listenStarClicks();
+    listenSearch();
+    listenBackButton();
+  });
 });
