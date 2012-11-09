@@ -75,12 +75,12 @@ h3 {
     display: block;
     top: 50%;
     left: 50%;
-    width: 590px;
+    width: 727px;
     height: 333px;
-    margin-left: -590px/2;
+    margin-left: -727px/2;
     margin-top: -333px/2;
     background-image: url('../img/fight.jpg');
-    background-size: 590px 333px;
+    background-size: 727px 333px;
     border: 1px solid #ccc;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -170,10 +170,16 @@ h3 {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#e5e5e5', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
 
   img {
-    margin-top: 80px;
-    width: 886px;
-    height: 261px;
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    width: 727px;
+    height: 333px;
+    margin-left: -727px/2;
+    margin-top: -333px/2;
     background-image: url('../img/fight2.jpg');
+    background-size: 727px 333px; //background-image: url('../img/fight2.jpg');
     border: 1px solid #ccc;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -183,24 +189,13 @@ h3 {
     box-shadow: 0 2px 3px 0 rgba(255, 255, 255, .2) inset, 0 2px 2px 0 rgba(0, 0, 0, .1);
   }
 
+  h3 {
+    position: absolute;
+    bottom: 20px;
+  }
+
   a {
     color: #009ee3;
-  }
-
-  #score_left, #score_right {
-    color: black;
-    font-size: 2em;
-    position: relative;
-  }
-
-  #score_left {
-    left: -320px;
-    top: -215px;
-  }
-
-  #score_right {
-    left: 316px;
-    top: -261px;
   }
 }
 
@@ -245,36 +240,6 @@ h3 {
         margin: 0;
       }
     }
-  }
-}
-
-#nighthacking {
-  height: 700px;
-  background: rgb(255, 255, 255); /* Old browsers */
-  background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(229, 229, 229, 1))); /* Chrome,Safari4+ */
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* Opera 12+ */
-  background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* IE10+ */
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#e5e5e5', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
-
-  a {
-    color: #009ee3;
-  }
-
-  img {
-    margin-top: 80px;
-    width: 256px;
-    height: 256px;
-    background-image: url('../img/nighthacker.png');
-    border: 1px solid #ccc;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    -moz-box-shadow: 0 2px 3px 0 rgba(255, 255, 255, .2) inset, 0 2px 2px 0 rgba(0, 0, 0, .1);
-    -webkit-box-shadow: 0 2px 3px 0 rgba(255, 255, 255, .2) inset, 0 2px 2px 0 rgba(0, 0, 0, .1);
-    box-shadow: 0 2px 3px 0 rgba(255, 255, 255, .2) inset, 0 2px 2px 0 rgba(0, 0, 0, .1);
   }
 }
 
