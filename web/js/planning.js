@@ -6,6 +6,14 @@ var dayLabels = {
   '2012-11-16':'Friday, Nov. 16 2012'
 };
 
+var dayNames = {
+  '2012-11-12':'Monday',
+  '2012-11-13':'Tuesday',
+  '2012-11-14':'Wednesday',
+  '2012-11-15':'Thursday',
+  '2012-11-16':'Friday'
+};
+
 function set_content(selector, template, data) {
   $(selector).html(Hogan.compile($(template).html()).render(data));
 }
@@ -39,6 +47,7 @@ function refreshStars() {
 function enrichPlanning(planning) {
   _.each(planning.days, function (day) {
     day.dayLabel = dayLabels[day.day];
+    day.dayName = dayNames[day.day];
 
     _.each(day.slots, function (slot) {
       _.each(slot.talks, function (talk) {

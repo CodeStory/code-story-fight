@@ -19,7 +19,7 @@ script: planning.js
     <a id="back" href="index.html">Back</a>
 
     <form id="search" action="#">
-      <input id="search_box" autofocus="autofocus" placeholder="Search for talk,speaker,room,starred..."/>
+      <input id="search_box" autofocus="autofocus" placeholder="Search for day,talk,speaker,starred..."/>
     </form>
   </nav>
 </header>
@@ -57,7 +57,7 @@ script: planning.js
 
         <h2>{{title}} ({{type}})</h2>
 
-        <div class="speaker">{{speakers_string}} @{{room}} from {{from}} to {{to}}</div>
+        <div class="speaker">{{speakers_string}} @{{room}} {{dayName}} from {{from}} to {{to}}</div>
         {{#tags}}<span class="tag">{{.}}</span>{{/tags}}
         <p>{{summary}})</p>
       </div>

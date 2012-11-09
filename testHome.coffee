@@ -18,11 +18,11 @@ should 'Should show toc', '/planning.html', (browser) ->
 
 should 'Should show sessions', '/planning.html', (browser) ->
   expect(browser.text '#talk-759 h2').to.be 'Android Development Code Lab (Hands-on Labs)'
-  expect(browser.text '#talk-759 .speaker').to.be 'Nick Butcher, Richard Hyndman @BOF 1 from 09:30 to 12:30'
+  expect(browser.text '#talk-759 .speaker').to.be 'Nick Butcher, Richard Hyndman @BOF 1 Monday from 09:30 to 12:30'
   expect(browser.text '#talk-759 p').to.contain 'Dive into some of the latest'
 
   expect(browser.text '#talk-761 h2').to.be 'Modular Architecture Today (University)'
-  expect(browser.text '#talk-761 .speaker').to.be 'Kirk Knoernschild @Room 8 from 09:30 to 12:30'
+  expect(browser.text '#talk-761 .speaker').to.be 'Kirk Knoernschild @Room 8 Monday from 09:30 to 12:30'
   expect(browser.text '#talk-761 p').to.contain 'Modularity is coming to the Java platform!'
 
 should 'Should redirect to authentication when user star', '/planning.html', (browser) ->
