@@ -271,6 +271,59 @@ h3 {
   }
 }
 
+#schedule {
+  height: 430px;
+  background: rgb(255, 255, 255); /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(229, 229, 229, 1))); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#e5e5e5', GradientType = 1); /* IE6-9 fallback on horizontal gradient */
+
+  h3 {
+    position: absolute;
+    bottom: 30px;
+  }
+
+  #bieres {
+    margin: 0 auto;
+    width: (160px+10px)*4;
+    height: 140px;
+
+    .fig {
+      position: relative;
+      width: 160px;
+      height: 140px;
+      float: left;
+      margin: 60px 5px 0px 5px;
+
+      a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 160px;
+        height: 110px;
+        display: block;
+        background-size: 160px 110px;
+        background-image: url('../img/biere.jpg');
+      }
+
+      p {
+        color: black;
+        position: absolute;
+        bottom: 0;
+        width: 160px;
+        height: 30px;
+        vertical-position: bottom;
+        line-height: 30px;
+        margin: 0;
+      }
+    }
+  }
+}
+
 /* Counter */
 #counter {
   width: 700px;
