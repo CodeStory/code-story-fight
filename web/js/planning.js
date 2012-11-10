@@ -91,7 +91,6 @@ function filterTalks() {
     return;
   }
   filter = text;
-  console.log('Filtering on "' + filter + '" on ' + new Date());
 
   $('.day_wrapper, .toc-link, .slot, .talk').show();
 

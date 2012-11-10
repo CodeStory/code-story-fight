@@ -31,10 +31,10 @@ describe 'Planning', ->
     browser = newBrowser()
     browser.visit planning, ->
       browser.text('#talk-759 h2').should.equal 'Android Development Code Lab (Hands-on Labs)'
-      browser.text('#talk-759 .speaker').should.equal 'Nick Butcher, Richard Hyndman @BOF 1 from 09:30 to 12:30'
+      browser.text('#talk-759 .speaker').should.equal 'Nick Butcher, Richard Hyndman @BOF 1 Monday from 09:30 to 12:30'
       browser.text('#talk-759 p').should.contain 'Dive into some of the latest'
       browser.text('#talk-761 h2').should.equal 'Modular Architecture Today (University)'
-      browser.text('#talk-761 .speaker').should.equal 'Kirk Knoernschild @Room 8 from 09:30 to 12:30'
+      browser.text('#talk-761 .speaker').should.equal 'Kirk Knoernschild @Room 8 Monday from 09:30 to 12:30'
       browser.text('#talk-761 p').substring(0,42).should.equal 'Modularity is coming to the Java platform!'
       done()
 

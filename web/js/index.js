@@ -12,5 +12,3 @@ $(document).ready(function () {
     timestamp:(new Date(2012, 10, 12, 8, 0, 0, 0)).getTime()
   });
 })
-
-
