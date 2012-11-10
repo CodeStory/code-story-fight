@@ -240,22 +240,22 @@ h3 {
 
       #david {
         background-image: url('../img/david.png');
-        -webkit-animation: deg_1 .3s ease infinite alternate;
+        .animation(deg_1, .3s, ease, infinite, alternate);
       }
 
       #eric {
         background-image: url('../img/eric.png');
-        -webkit-animation: deg_2 .8s ease infinite alternate;
+        .animation(deg_2, .8s, ease, infinite, alternate);
       }
 
       #jean-laurent {
         background-image: url('../img/jean-laurent.png');
-        -webkit-animation: deg_3 .6s ease infinite alternate;
+        .animation(deg_3, .6s, ease, infinite, alternate);
       }
 
       #sebastian {
         background-image: url('../img/sebastian.png');
-        -webkit-animation: deg_4 2s ease infinite alternate;
+        .animation(deg_4, 2s, ease, infinite, alternate);
       }
 
       p {
@@ -358,15 +358,25 @@ h3 {
 }
 
 /* Animations */
+.animation(@name, @duration, @timingFunction, @delay, @direction) {
+  -webkit-animation: @arguments;
+  animation: @arguments;
+}
 .rotateMixin(@rotateFrom, @rotateTo) {
   from {
     -webkit-transform: rotate(@rotateFrom);
+    transform: rotate(@rotateFrom);
   }
   to {
     -webkit-transform: rotate(@rotateTo);
+    transform: rotate(@rotateTo);
   }
 }
 @-webkit-keyframes deg_1 { .rotateMixin(-3deg, 3deg); }
+@keyframes deg_1 { .rotateMixin(-3deg, 3deg); }
 @-webkit-keyframes deg_2 { .rotateMixin(2deg, -2deg); }
+@keyframes deg_2 { .rotateMixin(2deg, -2deg); }
 @-webkit-keyframes deg_3 { .rotateMixin(-6deg, 6deg); }
+@keyframes deg_3 { .rotateMixin(-6deg, 6deg ); }
 @-webkit-keyframes deg_4 { .rotateMixin(5deg, -5deg); }
+@keyframes deg_4 { .rotateMixin(5deg, -5deg); }
