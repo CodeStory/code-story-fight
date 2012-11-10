@@ -38,8 +38,7 @@ public class PlanningServerTest {
 
   @Test
   public void should_show_homepage() {
-    int result = new Shell().execute("./testHome.coffee %d", web.getPort());
-
+    int result = new Shell().execute("./etc/junit_run_mocha.sh ./src/test/acceptance %d", web.getPort());
     assertThat(result).isZero();
   }
 
