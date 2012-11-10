@@ -358,42 +358,15 @@ h3 {
 }
 
 /* Animations */
-@-webkit-keyframes
-deg_1 {
+.rotateMixin(@rotateFrom, @rotateTo) {
   from {
-    -webkit-transform: rotate(-3deg);
+    -webkit-transform: rotate(@rotateFrom);
   }
   to {
-    -webkit-transform: rotate(3deg);
+    -webkit-transform: rotate(@rotateTo);
   }
 }
-
-@-webkit-keyframes
-deg_2 {
-  from {
-    -webkit-transform: rotate(2deg);
-  }
-  to {
-    -webkit-transform: rotate(-2deg);
-  }
-}
-
-@-webkit-keyframes
-deg_3 {
-  from {
-    -webkit-transform: rotate(-6deg);
-  }
-  to {
-    -webkit-transform: rotate(6deg);
-  }
-}
-
-@-webkit-keyframes
-deg_4 {
-  from {
-    -webkit-transform: rotate(5deg);
-  }
-  to {
-    -webkit-transform: rotate(-5deg);
-  }
-}
+@-webkit-keyframes deg_1 { .rotateMixin(-3deg, 3deg); }
+@-webkit-keyframes deg_2 { .rotateMixin(2deg, -2deg); }
+@-webkit-keyframes deg_3 { .rotateMixin(-6deg, 6deg); }
+@-webkit-keyframes deg_4 { .rotateMixin(5deg, -5deg); }
