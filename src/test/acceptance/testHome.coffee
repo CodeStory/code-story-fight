@@ -14,10 +14,11 @@ newBrowser = ->
 #Browser.debug=true
 
 describe 'Planning', ->
-  it 'should show the title', (done) ->
+
+	it 'should show the title', (done) ->
     browser = newBrowser()
     browser.visit home, ->
-      browser.text('title').should.equal 'CodeStory - Devoxx Planning'
+      browser.text('title').should.equal 'Devoxx Fight by CodeStory'
       done()
 
   it 'should show toc', (done) ->
@@ -34,7 +35,7 @@ describe 'Planning', ->
       browser.text('#talk-759 p').should.contain 'Dive into some of the latest'
       browser.text('#talk-761 h2').should.equal 'Modular Architecture Today (University)'
       browser.text('#talk-761 .speaker').should.equal 'Kirk Knoernschild @Room 8 Monday from 09:30 to 12:30'
-      browser.text('#talk-761 p').substring(0, 42).should.equal 'Modularity is coming to the Java platform!'
+      browser.text('#talk-761 p').substring(0,42).should.equal 'Modularity is coming to the Java platform!'
       done()
 
   it 'should redirect to authentication when user star', (done) ->
@@ -76,6 +77,6 @@ describe 'Planning', ->
 
   it 'Should filter with Url', (done) ->
     browser = newBrowser()
-    browser.visit "#{planning}?q=foo", ->
+    browser.visit "#{planning}?q=foo",  ->
       browser.query('#search_box').value.should.equal 'foo'
       done()

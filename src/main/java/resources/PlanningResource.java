@@ -28,14 +28,8 @@ public class PlanningResource extends AbstractResource {
   }
 
   @GET
-  public Response redirectHomeToPlanning() {
-    return seeOther("planning.html");
-  }
-
-  @GET
-  @Path("index.html")
-  public Response redirectIndexToPlanning() {
-    return seeOther("planning.html");
+  public Response redirectToIndex() {
+    return seeOther("index.html");
   }
 
   @POST
