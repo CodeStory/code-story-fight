@@ -45,6 +45,13 @@ body {
   margin: 0;
   padding: 0;
 
+  .anchor {
+    margin-top: -255px;
+    padding-top: 255px;
+    visibility: hidden;
+    height: 0;
+  }
+
   header {
     background-color: @black;
     text-align: center;
@@ -151,6 +158,17 @@ body {
 #content {
   margin-top: 208px;
 
+  .day_wrapper {
+
+    .goto {
+      float: right;
+      background: url('../img/sprites.png') 0 -96px no-repeat;
+      height: 23px;
+      width: 23px;
+    }
+
+  }
+
   #loading {
     text-align: center;
     margin: 0 auto;
@@ -175,11 +193,6 @@ body {
     }
   }
 
-  .anchor {
-    margin-top: -255px;
-    padding-top: 255px;
-    visibility: hidden;
-  }
 
   .slot {
     #styles > .gradient(lighten(@blue_devoxx, 35%), @gray);
@@ -219,13 +232,6 @@ body {
         white-space: nowrap;
         text-align: left;
         margin: 0;
-      }
-
-      .top {
-        float: right;
-        background: url('../img/sprites.png') 0 -96px no-repeat;
-        height: 23px;
-        width: 23px;
       }
 
       .speaker {
