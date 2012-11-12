@@ -5,7 +5,7 @@ style: css/planning.css
 script: planning.js
 ---
 
-<body>
+<body id="top">
 
 <header>
   <div id="logo-section">
@@ -50,12 +50,14 @@ script: planning.js
     {{#slots}}
     <div class="slot">
       <div class="hour">{{slot}}</div>
-      <div class="hour" id="{{day}}-{{slot_slug}}">{{slot}}</div>
+      <div class="anchor" id="{{day}}-{{slot_slug}}">{{slot}}</div>
       {{#talks}}
       <div class="talk" id="talk-{{id}}">
         <a class="star" href="#" data-talk="{{id}}"></a>
 
         <h2>{{title}} ({{type}})</h2>
+
+        <a class="top" href="#top">Back to Top</a>
 
         <div class="speaker">{{speakers_string}} @{{room}} {{dayName}} from {{from}} to {{to}}</div>
         {{#tags}}<span class="tag">{{.}}</span>{{/tags}}

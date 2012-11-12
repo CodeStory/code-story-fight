@@ -183,8 +183,7 @@ function ignoreEnterKey() {
   });
 }
 
-function animateLinks() {
-  console.log('animate links');
+function listenGoto() {
   $(document).on('click', 'a[href^="#"]', function() {
     console.log(this.hash);
     $.scrollTo(this.hash, 500, {});
@@ -200,6 +199,6 @@ $(document).ready(function () {
     listenStarClicks();
     listenSearch();
     listenBackButton();
-    animateLinks();
+    listenGoto();
   });
 });
