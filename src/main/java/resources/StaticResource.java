@@ -27,7 +27,7 @@ public class StaticResource extends AbstractResource {
   @Path("index.js")
   @Produces("application/javascript;charset=UTF-8")
   public Response index() {
-    return concat("js/jquery.js", "js/jquery.countdown.js", "js/index.js");
+    return concat("js/jquery.js", "js/index.js");
   }
 
   @GET
