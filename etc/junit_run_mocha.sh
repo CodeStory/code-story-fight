@@ -4,5 +4,5 @@ if [ -n "$2" ]; then
 fi
 export NODE_PATH=/usr/local/share/npm/lib/node_modules
 
-/usr/local/share/npm/bin/mocha --no-colors --compilers coffee:coffee-script --timeout 4000 $1
+/usr/local/share/npm/bin/mocha --no-colors --compilers coffee:coffee-script --timeout 5000 $1
 #> /dev/null 2>&1
