@@ -22,20 +22,20 @@ import static com.sun.jersey.api.core.ResourceConfig.PROPERTY_CONTAINER_RESPONSE
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 
-public class PlanningServer {
+public class FightServer {
   public static final String DEFAULT_PORT = "8080";
 
   private final Module[] modules;
   private HttpServer server;
 
-  public PlanningServer(Module... modules) {
+  public FightServer(Module... modules) {
     this.modules = modules;
   }
 
   public static void main(String[] args) throws IOException {
     int port = parseInt(firstNonNull(System.getenv("PORT"), DEFAULT_PORT));
 
-    new PlanningServer().start(port);
+    new FightServer().start(port);
   }
 
   public void start(int port) throws IOException {

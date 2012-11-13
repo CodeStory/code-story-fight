@@ -15,12 +15,12 @@ import java.io.IOException;
 import static com.google.inject.name.Names.named;
 import static org.fest.assertions.Assertions.assertThat;
 
-public class PlanningServerTest {
+public class FightServerTest {
   @Rule
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
   @Rule
-  public ServiceRule<PlanningServer> web = ServiceRule.startWithRandomPort(PlanningServer.class, new AbstractModule() {
+  public ServiceRule<FightServer> web = ServiceRule.startWithRandomPort(FightServer.class, new AbstractModule() {
     @Override
     protected void configure() {
       File root;
@@ -43,7 +43,7 @@ public class PlanningServerTest {
   }
 
   public static void main(String[] args) throws IOException {
-    new PlanningServer(new AbstractModule() {
+    new FightServer(new AbstractModule() {
       @Override
       protected void configure() {
         File root = new File("data");
