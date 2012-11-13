@@ -1,1 +1,1 @@
-This is the preparation project for CodeStory session that will take place at Devoxx World on November 14th&15th.
+This is the project coded live at Devoxx World on November 14th&15th.
