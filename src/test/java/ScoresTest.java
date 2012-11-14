@@ -24,7 +24,6 @@ public class ScoresTest {
 
 	@Test
 	public void should_sum_up_scores_with_a_real_URL() throws IOException {
-
 		Scores scores = new Scores(Resources.getResource("starsPerTalk.json"));
 		assertThat(scores.getScore(newArrayList(931, 805))).isEqualTo(37);
 	}
