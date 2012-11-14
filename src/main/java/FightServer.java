@@ -9,8 +9,14 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class FightServer {
+		HttpServer server;
+
 	public static void main(String[] args) throws Exception {
-		HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+		new FightServer().start(8080);
+	}
+
+	public void start(int port) throws IOException {
+		server = HttpServer.create(new InetSocketAddress(port), 0);
 		server.createContext("/", new HttpHandler() {
 			@Override
 			public void handle(HttpExchange exchange) throws IOException {
@@ -24,6 +30,9 @@ public class FightServer {
 			}
 		});
 		server.start();
+	}
 
+	public void stop() {
+		server.stop(0);
 	}
 }
