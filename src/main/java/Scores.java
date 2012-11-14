@@ -25,7 +25,7 @@ public class Scores {
 		}
 	}
 
-	public Integer getScore(List<Integer> talkIds) {
+	public Integer getScore(Iterable<Integer> talkIds) {
 		Integer sum = 0;
 		for (Integer talkId : talkIds) {
 			sum += firstNonNull(talksIds.get(talkId), 0);
