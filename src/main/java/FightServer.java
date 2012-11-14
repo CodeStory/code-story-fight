@@ -1,5 +1,6 @@
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import com.google.common.io.Resources;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -7,7 +8,6 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.URI;
 import java.net.URL;
 
 public class FightServer implements HttpHandler {
@@ -19,10 +19,14 @@ public class FightServer implements HttpHandler {
 	}
 
 	public static void main(String[] args) throws Exception {
-		URL planningUrl = URI.create("http://planning.code-story.net/planning.json").toURL();
-		URL votesUrl = URI.create("http://planning.code-story.net/starsPerTalk").toURL();
+		URL planningUrl = Resources.getResource("planning.json");
+		URL votesUrl = Resources.getResource("starsPerTalk.json");
 
-		new FightServer(new Scorer(new TalkIds(planningUrl), new Votes(votesUrl))).start(8080);
+		TalkIds talkIds = new TalkIds(planningUrl);
+		Votes scores = new Votes(votesUrl);
+		Scorer scorer = new Scorer(talkIds, scores);
+
+		new FightServer(scorer).start(8080);
 	}
 
 	@Override
