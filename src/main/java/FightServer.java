@@ -7,12 +7,22 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URI;
+import java.net.URL;
 
 public class FightServer {
-		HttpServer server;
+	final Scorer scorer;
+	HttpServer server;
+
+	FightServer(Scorer scorer) {
+		this.scorer = scorer;
+	}
 
 	public static void main(String[] args) throws Exception {
-		new FightServer().start(8080);
+		URL planningUrl = URI.create("http://planning.code-story.net/planning.json").toURL();
+		URL votesUrl = URI.create("http://planning.code-story.net/planning.json").toURL();
+
+		new FightServer(new Scorer(new TalkIds(planningUrl), new Scores(votesUrl))).start(8080);
 	}
 
 	public void start(int port) throws IOException {

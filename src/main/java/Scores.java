@@ -1,3 +1,4 @@
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.google.gson.Gson;
@@ -6,20 +7,21 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Objects.firstNonNull;
 
 public class Scores {
-	private Map<Integer, Integer> talksIds;
+	private final Map<Integer, Integer> talksIds;
 
-	public Scores(Map<Integer, Integer> talksIds) {
+	@VisibleForTesting
+	Scores(Map<Integer, Integer> talksIds) {
 		this.talksIds = talksIds;
 	}
 
 	public Scores(String talkIdsJson) {
-		Type typeToken = new TypeToken<Map<Integer, Integer>>(){}.getType();
+		Type typeToken = new TypeToken<Map<Integer, Integer>>() {
+		}.getType();
 		this.talksIds = new Gson().fromJson(talkIdsJson, typeToken);
 	}
 

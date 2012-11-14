@@ -17,10 +17,8 @@ public class ScorerTest {
 		when(scores.getScore(ImmutableSet.of(1, 2))).thenReturn(100);
 
 		Scorer scorer = new Scorer(talkIds, scores);
-
 		int score = scorer.get("angularJs");
 
 		assertThat(score).isEqualTo(100);
 	}
-
 }
