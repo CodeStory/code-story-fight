@@ -36,11 +36,11 @@ public class FightServer implements HttpHandler {
 		DefaultMustacheFactory mustacheFactory = new DefaultMustacheFactory();
 		Mustache mustacheTemplate = mustacheFactory.compile("index.html");
 		StringWriter writer = new StringWriter();
-		Map<String, String> data = ImmutableMap.of(
+		Map<String, Object> data = ImmutableMap.<String, Object>of(
 			"leftKeyword", "AngularJS",
 			"rightKeyword", "JavaFX",
-			"leftScore", "37",
-			"rightScore", "42");
+			"leftScore", scorer.get("AngularJS"),
+			"rightScore", scorer.get("JavaFX"));
 		mustacheTemplate.execute(writer, data);
 
 

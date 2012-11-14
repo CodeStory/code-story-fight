@@ -25,5 +25,5 @@ describe 'Server', ->
 			browser.text('#leftKeyword').should.contain "AngularJS"
 			browser.text('#leftScore').should.contain "37"
 			browser.text('#rightKeyword').should.contain "JavaFX"
-			browser.text('#rightScore').should.contain "42"
+			browser.text('#rightScore').should.contain "51"
 			done()
