@@ -81,5 +81,15 @@
       <artifactId>jersey-server</artifactId>
       <version>1.12</version>
     </dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey.contribs</groupId>
+      <artifactId>jersey-guice</artifactId>
+      <version>1.12</version>
+    </dependency>
   </dependencies>
 </project>
