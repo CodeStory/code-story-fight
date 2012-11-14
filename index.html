@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Code-Story Fight for Devoxx</title>
-  <style>
-	.keyword {
-		width: 400px;
-		text-align:center;
-	}
-	#vs {
-		width:224px;
-	}
-	#fight {
-		width: 1024px;
-	}
-	#left, #vs, #right {
-		float:left;
-	}
-  </style>
+	<title>Code-Story Fight for Devoxx</title>
+	<link rel="stylesheet/less" type="text/css" href="/style.less">
+	<script src="http://cloud.github.com/downloads/cloudhead/less.js/less-1.3.1.min.js"></script>
 </head>
 <body>
 <div id="fight">
 	<div id="left" class="keyword">
-	  <input id="leftKeyword" type="text" name="leftKeyword" value="{{leftKeyword}}"/><br/>
-	  <a id="leftScore" title="{{leftKeyword}} needs your vote !" href="http://planning.code-story.net/planning.html?q={{leftKeyword}}" target="_blank">{{leftScore}}</a>
+		<input id="leftKeyword" type="text" name="leftKeyword" value="{{leftKeyword}}"/><br/>
+		<a id="leftScore" title="{{leftKeyword}} needs your vote !"
+		   href="http://planning.code-story.net/planning.html?q={{leftKeyword}}" target="_blank">{{leftScore}}</a>
 	</div>
 	<div id="vs">
-	VS
+		<button id="letsfight">Fight !</button>
 	</div>
 	<div id="right" class="keyword">
 		<input id="rightKeyword" type="text" name="rightKeyword" value="{{rightKeyword}}"/><br/>
-		<a id="rightScore" title="{{rightKeyword}} needs your vote !" href="http://planning.code-story.net/planning.html?q={{rightKeyword}}" target="_blank">{{rightScore}}</a>
+		<a id="rightScore" title="{{rightKeyword}} needs your vote !"
+		   href="http://planning.code-story.net/planning.html?q={{rightKeyword}}" target="_blank">{{rightScore}}</a>
 	</div>
 </div>
-<!--<button name="fight">Fight !</button>-->
 
 <footer>
 	<a href="http://planning.code-story.net/" target="_blank">Vote for your favorite speaker,talks</a>
 </footer>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$(document).on('click', '#letsfight', function () {
+			var leftKeyword = $('#leftKeyword').val();
+			var rightKeyword = $('#rightKeyword').val();
+			window.location = "/fight/" + leftKeyword + "/" + rightKeyword;
+			return false;
+		})
+	});
+</script>
 </body>
 </html>

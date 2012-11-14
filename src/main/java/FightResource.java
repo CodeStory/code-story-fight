@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URI;
@@ -31,6 +32,13 @@ public class FightResource {
 	@GET
 	public Response index() {
 		return Response.seeOther(URI.create("/fight/AngularJS/JavaFX")).build();
+	}
+
+	@GET
+	@Path("style.less")
+	@Produces("text/css;charset=UTF-8")
+	public File style() {
+		return new File("style.less");
 	}
 
 	@GET
