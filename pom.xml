@@ -76,6 +76,10 @@
       <version>1.9.5-rc1</version>
       <scope>test</scope>
     </dependency>
-
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-server</artifactId>
+      <version>1.12</version>
+    </dependency>
   </dependencies>
 </project>

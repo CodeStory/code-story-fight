@@ -27,3 +27,10 @@ describe 'Server', ->
 			browser.text('#rightKeyword').should.contain "JavaFX"
 			browser.text('#rightScore').should.contain "51"
 			done()
+
+	it 'should display scores for java and scala', (done) ->
+		browser = new Browser
+		browser.visit "#{home}/fight/java/scala", ->
+			browser.text('#leftKeyword').should.contain "java"
+			browser.text('#rightKeyword').should.contain "scala"
+			done()
