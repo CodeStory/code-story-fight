@@ -1,4 +1,6 @@
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Charsets;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.io.Resources;
 import com.google.gson.Gson;
@@ -13,10 +15,10 @@ import java.util.Set;
 import static com.google.common.collect.Sets.newHashSet;
 
 public class TalkIds {
+	private final Map<Integer, List<String>> keywordsByIds;
 
-	private Map<Integer, List<String>> keywordsByIds;
-
-	public TalkIds(Map<Integer, List<String>> keywordsByIds) {
+	@VisibleForTesting
+	 TalkIds(Map<Integer, List<String>> keywordsByIds) {
 		this.keywordsByIds = keywordsByIds;
 	}
 
@@ -27,7 +29,12 @@ public class TalkIds {
 		for (Day day : days.days) {
 			for (Slot slot : day.slots) {
 				for (Talk talk : slot.talks) {
-					keywordsByIds.put(talk.id, Arrays.asList(talk.title, talk.summary));
+					List<String> keywords = Lists.newArrayList();
+					keywords.add(talk.title);
+					keywords.add(talk.summary);
+					keywords.addAll(talk.tags);
+					keywords.addAll(talk.speakers);
+					keywordsByIds.put(talk.id, keywords);
 				}
 			}
 		}
@@ -58,5 +65,7 @@ public class TalkIds {
 		int id;
 		String title;
 		String summary;
+		List<String> tags;
+		List<String> speakers;
 	}
 }

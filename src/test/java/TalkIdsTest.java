@@ -10,7 +10,6 @@ import java.util.Set;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class TalkIdsTest {
-
 	@Test
 	public void should_find_ids_from_keywords() {
 		TalkIds talkIds = new TalkIds(ImmutableMap.of(
@@ -42,4 +41,12 @@ public class TalkIdsTest {
 		assertThat(ids).containsOnly(931, 805);
 	}
 
+	@Test
+	public void should_search_on_all_metata_data() throws IOException {
+		TalkIds talkIds = new TalkIds(Resources.getResource("planning.json"));
+
+		Set<Integer> ids = talkIds.withKeyword("JavaFX");
+
+		assertThat(ids).hasSize(13);
+	}
 }
