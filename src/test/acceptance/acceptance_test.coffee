@@ -31,8 +31,8 @@ describe 'Server', ->
 	it 'should display scores for java and scala', (done) ->
 		browser = new Browser
 		browser.visit "#{home}/fight/java/scala", ->
-			browser.text('#leftKeyword').should.contain "java"
-			browser.text('#rightKeyword').should.contain "scala"
+			browser.field('input[id="leftKeyword"]').value.should.equal "java"
+			browser.field('input[id="rightKeyword"]').value.should.equal "scala"
 			done()
 
 #			browser.clickLink '#leftKeyword a', ->
