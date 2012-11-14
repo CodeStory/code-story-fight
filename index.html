@@ -2,23 +2,40 @@
 <html>
 <head>
   <title>Code-Story Fight for Devoxx</title>
+  <style>
+	.keyword {
+		width: 400px;
+		text-align:center;
+	}
+	#vs {
+		width:224px;
+	}
+	#fight {
+		width: 1024px;
+	}
+	#left, #vs, #right {
+		float:left;
+	}
+  </style>
 </head>
 <body>
+<div id="fight">
+	<div id="left" class="keyword">
+	  <input id="leftKeyword" type="text" name="leftKeyword" value="{{leftKeyword}}"/><br/>
+	  <a id="leftScore" title="{{leftKeyword}} needs your vote !" href="http://planning.code-story.net/planning.html?q={{leftKeyword}}" target="_blank">{{leftScore}}</a>
+	</div>
+	<div id="vs">
+	VS
+	</div>
+	<div id="right" class="keyword">
+		<input id="rightKeyword" type="text" name="rightKeyword" value="{{rightKeyword}}"/><br/>
+		<a id="rightScore" title="{{rightKeyword}} needs your vote !" href="http://planning.code-story.net/planning.html?q={{rightKeyword}}" target="_blank">{{rightScore}}</a>
+	</div>
+</div>
+<!--<button name="fight">Fight !</button>-->
 
-<div id="leftKeyword">
-  <a title="{{leftKeyword}} needs your vote !" href="http://planning.code-story.net/planning.html?q={{leftKeyword}}" target="_blank">{{leftKeyword}}</a>
-</div>
-<div id="leftScore">
-  {{leftScore}}
-</div>
-<div id="rightKeyword">
-	<a title="{{rightKeyword}} needs your vote !" href="http://planning.code-story.net/planning.html?q={{rightKeyword}}" target="_blank">{{rightKeyword}}</a>
-</div>
-<div id="rightScore">
-  {{rightScore}}
-</div>
-
-<a href="http://planning.code-story.net/" target="_blank">Vote for your favorite speaker,talks</a>
-
+<footer>
+	<a href="http://planning.code-story.net/" target="_blank">Vote for your favorite speaker,talks</a>
+</footer>
 </body>
 </html>

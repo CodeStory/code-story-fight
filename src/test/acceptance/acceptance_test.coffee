@@ -22,9 +22,9 @@ describe 'Server', ->
 	it 'should display scores', (done) ->
 		browser = new Browser
 		browser.visit home, ->
-			browser.text('#leftKeyword').should.contain "AngularJS"
+			browser.field('input[id="leftKeyword"]').value.should.equal 'AngularJS'
 			browser.text('#leftScore').should.contain "37"
-			browser.text('#rightKeyword').should.contain "JavaFX"
+			browser.field('input[id="rightKeyword"]').value.should.equal 'JavaFX'
 			browser.text('#rightScore').should.contain "51"
 			done()
 
