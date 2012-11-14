@@ -35,6 +35,9 @@
 			window.location = "/fight/" + leftKeyword + "/" + rightKeyword;
 			return false;
 		})
+		$(document).on('click','input', function(event) {
+			event.srcElement.select();
+		})
 	});
 </script>
 </body>
