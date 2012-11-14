@@ -20,7 +20,7 @@ public class FightServer implements HttpHandler {
 
 	public static void main(String[] args) throws Exception {
 		URL planningUrl = URI.create("http://planning.code-story.net/planning.json").toURL();
-		URL votesUrl = URI.create("http://planning.code-story.net/planning.json").toURL();
+		URL votesUrl = URI.create("http://planning.code-story.net/starsPerTalk").toURL();
 
 		new FightServer(new Scorer(new TalkIds(planningUrl), new Scores(votesUrl))).start(8080);
 	}
