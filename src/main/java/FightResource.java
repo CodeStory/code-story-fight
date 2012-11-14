@@ -29,6 +29,12 @@ public class FightResource {
 	}
 
 	@GET
+	@Path("index.html")
+	public Response oldIndex() {
+		return index();
+	}
+
+	@GET
 	@Path("style.less")
 	@Produces("text/css;charset=UTF-8")
 	public File style() {
