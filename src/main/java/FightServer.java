@@ -1,4 +1,7 @@
 import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.jersey.api.core.DefaultResourceConfig;
 import com.sun.jersey.api.core.ResourceConfig;
@@ -13,7 +16,12 @@ import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 
 public class FightServer {
+	final Injector injector;
 	HttpServer httpServer;
+
+	public FightServer(Module... modules) {
+		injector = Guice.createInjector(Modules.override(new JerseyModule()).with(modules));
+	}
 
 	public static void main(String[] args) throws Exception {
 		int port = parseInt(firstNonNull(System.getenv("PORT"), "8080"));
@@ -22,7 +30,7 @@ public class FightServer {
 
 	public void start(int port) throws IOException {
 		ResourceConfig configuration = new DefaultResourceConfig(FightResource.class);
-		GuiceComponentProviderFactory ioc = new GuiceComponentProviderFactory(configuration, Guice.createInjector(new JerseyModule()));
+		GuiceComponentProviderFactory ioc = new GuiceComponentProviderFactory(configuration, injector);
 
 		httpServer = HttpServerFactory.create(
 			URI.create(format("http://localhost:%d/", port)),

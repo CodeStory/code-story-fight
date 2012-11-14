@@ -1,8 +1,11 @@
+import com.google.common.io.Resources;
 import com.google.inject.AbstractModule;
 import net.gageot.test.rules.ServiceRule;
 import net.gageot.test.utils.Shell;
 import org.junit.Rule;
 import org.junit.Test;
+
+import java.net.URL;
 
 import static com.google.inject.name.Names.named;
 import static org.fest.assertions.Assertions.assertThat;
@@ -21,8 +24,8 @@ public class FightServerTest {
 	static class JerseyModuleForTest extends AbstractModule {
 		@Override
 		protected void configure() {
-			bindConstant().annotatedWith(named("planningUrl")).to("planning.json");
-			bindConstant().annotatedWith(named("vote")).to("starsPerTalk.json");
+			bind(URL.class).annotatedWith(named("planningUrl")).toInstance(Resources.getResource("planning.json"));
+			bind(URL.class).annotatedWith(named("vote")).toInstance(Resources.getResource("starsPerTalk.json"));
 		}
 	}
 }
