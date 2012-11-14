@@ -34,3 +34,7 @@ describe 'Server', ->
 			browser.text('#leftKeyword').should.contain "java"
 			browser.text('#rightKeyword').should.contain "scala"
 			done()
+
+#			browser.clickLink '#leftKeyword a', ->
+#				browser.location.href.should.contain '/planning.html?q=AngularJS'
+#				done()
