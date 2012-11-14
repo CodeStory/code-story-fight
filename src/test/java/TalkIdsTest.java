@@ -1,7 +1,9 @@
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.io.Resources;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +31,15 @@ public class TalkIdsTest {
 		Set<Integer> ids = talkIds.withKeyword("JAVAfx");
 
 		assertThat(ids).containsOnly(42);
+	}
+
+	@Test
+	public void should_read_planning_as_json() throws IOException {
+		TalkIds talkIds = new TalkIds(Resources.getResource("planning.json"));
+
+		Set<Integer> ids = talkIds.withKeyword("AngularJs");
+
+		assertThat(ids).containsOnly(931, 805);
 	}
 
 }

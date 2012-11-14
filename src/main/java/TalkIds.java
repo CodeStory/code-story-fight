@@ -1,3 +1,11 @@
+import com.google.common.base.Charsets;
+import com.google.common.collect.Maps;
+import com.google.common.io.Resources;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,15 +20,43 @@ public class TalkIds {
 		this.keywordsByIds = keywordsByIds;
 	}
 
+	public TalkIds(URL planningUrl) throws IOException {
+		keywordsByIds = Maps.newHashMap();
+
+		Days days = new Gson().fromJson(Resources.toString(planningUrl, Charsets.UTF_8), Days.class);
+		for (Day day : days.days) {
+			for (Slot slot : day.slots) {
+				for (Talk talk : slot.talks) {
+					keywordsByIds.put(talk.id, Arrays.asList(talk.title, talk.summary));
+				}
+			}
+		}
+	}
+
 	public Set<Integer> withKeyword(String keyword) {
 		Set<Integer> ids = newHashSet();
 		for (Map.Entry<Integer, List<String>> keywordsForId : keywordsByIds.entrySet()) {
 			for (String talkKeyword : keywordsForId.getValue()) {
-				if (talkKeyword.equalsIgnoreCase(keyword)) {
+				if (talkKeyword.toLowerCase().contains(keyword.toLowerCase())) {
 					ids.add(keywordsForId.getKey());
 				}
 			}
 		}
 		return ids;
+	}
+
+	static class Days {
+		List<Day> days;
+	}
+	static class Day {
+		List<Slot> slots;
+	}
+	static class Slot {
+		List<Talk> talks;
+	}
+	static class Talk {
+		int id;
+		String title;
+		String summary;
 	}
 }
