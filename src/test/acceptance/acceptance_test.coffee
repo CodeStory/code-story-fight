@@ -16,7 +16,7 @@ describe 'Server', ->
 	it 'should show hello world in the homepage', (done) ->
 		browser = new Browser
 		browser.visit home, ->
-			browser.text('h1').should.equal "Hello World"
+			browser.text('title').should.equal "Code-Story Fight for Devoxx"
 			done()
 
 	it 'should display scores', (done) ->
