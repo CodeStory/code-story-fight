@@ -1,9 +1,7 @@
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import java.util.Set;
 
-@Singleton
 public class Scorer {
 	private final TalkIds talkIds;
 	private final Votes scores;

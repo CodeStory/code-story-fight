@@ -4,7 +4,6 @@ import com.google.common.io.Resources;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 import java.io.IOException;
@@ -14,7 +13,6 @@ import java.util.Map;
 
 import static com.google.common.base.Objects.firstNonNull;
 
-@Singleton
 public class Votes {
 	private final Map<Integer, Integer> talksIds;
 
