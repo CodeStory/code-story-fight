@@ -1,13 +1,15 @@
-import com.google.common.base.Splitter;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Objects.firstNonNull;
-import static com.google.common.collect.Iterables.getFirst;
-import static com.google.common.collect.Iterables.getLast;
-import static com.google.common.collect.Maps.newHashMap;
-import static java.lang.Integer.valueOf;
 
 public class Scores {
 	private Map<Integer, Integer> talksIds;
@@ -17,12 +19,12 @@ public class Scores {
 	}
 
 	public Scores(String talkIdsJson) {
-		this.talksIds = newHashMap();
-		Iterable<String> talkAndScores = Splitter.on(",").split(talkIdsJson.subSequence(1, talkIdsJson.length() - 1));
-		for (String talkAndScore : talkAndScores) {
-			Iterable<String> split = Splitter.on(':').trimResults().split(talkAndScore);
-			this.talksIds.put(valueOf(getFirst(split, "-1")), valueOf(getLast(split, "-1")));
-		}
+		Type typeToken = new TypeToken<Map<Integer, Integer>>(){}.getType();
+		this.talksIds = new Gson().fromJson(talkIdsJson, typeToken);
+	}
+
+	public Scores(URL resource) throws IOException {
+		this(Resources.toString(resource, Charsets.UTF_8));
 	}
 
 	public Integer getScore(Iterable<Integer> talkIds) {
