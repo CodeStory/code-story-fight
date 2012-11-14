@@ -4,6 +4,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.io.Resources;
 import com.google.gson.Gson;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,6 +16,7 @@ import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
 
+@Singleton
 public class TalkIds {
 	private final Map<Integer, List<String>> keywordsByIds;
 
@@ -21,7 +25,8 @@ public class TalkIds {
 		this.keywordsByIds = keywordsByIds;
 	}
 
-	public TalkIds(URL planningUrl) throws IOException {
+	@Inject
+	public TalkIds(@Named("planningUrl") URL planningUrl) throws IOException {
 		keywordsByIds = Maps.newHashMap();
 
 		Days days = new Gson().fromJson(Resources.toString(planningUrl, Charsets.UTF_8), Days.class);
@@ -29,11 +34,11 @@ public class TalkIds {
 			for (Slot slot : day.slots) {
 				for (Talk talk : slot.talks) {
 					keywordsByIds.put(talk.id, ImmutableList.<String>builder()
-							.add(talk.title)
-							.add(talk.summary)
-							.addAll(talk.tags)
-							.addAll(talk.speakers)
-							.build());
+						.add(talk.title)
+						.add(talk.summary)
+						.addAll(talk.tags)
+						.addAll(talk.speakers)
+						.build());
 				}
 			}
 		}
