@@ -43,11 +43,10 @@ public class FightResource {
 			"leftScore", scorer.get(leftKeyword),
 			"rightScore", scorer.get(rightKeyword));
 
-		DefaultMustacheFactory mustacheFactory = new DefaultMustacheFactory();
-		Mustache mustacheTemplate = mustacheFactory.compile("index.html");
-		StringWriter writer = new StringWriter();
-		mustacheTemplate.execute(writer, data);
+		Mustache template = new DefaultMustacheFactory().compile("index.html");
+		StringWriter html = new StringWriter();
+		template.execute(html, data);
 
-		return writer.toString();
+		return html.toString();
 	}
 }
