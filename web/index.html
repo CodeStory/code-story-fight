@@ -9,7 +9,7 @@
 <h1>Code-Story Fight for Devoxx</h1>
 <div id="fight">
 	<div id="left" class="keyword">
-		<input id="leftKeyword" type="text" name="leftKeyword" value="{{leftKeyword}}"/><br/>
+		<input id="leftKeyword" type="text" name="leftKeyword" value="{{leftKeyword}}" tabindex="1"/><br/>
 		<a id="leftScore" title="{{leftKeyword}} needs your vote !"
 		   href="http://planning.code-story.net/planning.html?q={{leftKeyword}}" target="_blank">{{leftScore}}</a>
 	</div>
@@ -17,7 +17,7 @@
 		<button id="letsfight">Fight !</button>
 	</div>
 	<div id="right" class="keyword">
-		<input id="rightKeyword" type="text" name="rightKeyword" value="{{rightKeyword}}"/><br/>
+		<input id="rightKeyword" type="text" name="rightKeyword" value="{{rightKeyword}}" tabindex="2"/><br/>
 		<a id="rightScore" title="{{rightKeyword}} needs your vote !"
 		   href="http://planning.code-story.net/planning.html?q={{rightKeyword}}" target="_blank">{{rightScore}}</a>
 	</div>
@@ -32,16 +32,24 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$(document).ready(function () {
-		$(document).on('click', '#letsfight', function () {
+		launchFight = function () {
 			var leftKeyword = $('#leftKeyword').val();
 			var rightKeyword = $('#rightKeyword').val();
 			window.location = "/fight/" + leftKeyword + "/" + rightKeyword;
 			return false;
-		})
+		}
+
+		$(document).on('click', '#letsfight', launchFight)
 		$(document).on('click','input', function(event) {
 			event.srcElement.select();
 		})
+		$(document).live("keypress", function(event) {
+			if (event.keyCode == 13) {
+				launchFight();
+			}
+		});
 	});
+
 </script>
 </body>
 </html>
