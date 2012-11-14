@@ -22,7 +22,7 @@ public class FightServer implements HttpHandler {
 		URL planningUrl = URI.create("http://planning.code-story.net/planning.json").toURL();
 		URL votesUrl = URI.create("http://planning.code-story.net/starsPerTalk").toURL();
 
-		new FightServer(new Scorer(new TalkIds(planningUrl), new Scores(votesUrl))).start(8080);
+		new FightServer(new Scorer(new TalkIds(planningUrl), new Votes(votesUrl))).start(8080);
 	}
 
 	@Override

@@ -11,26 +11,27 @@ import java.util.Map;
 
 import static com.google.common.base.Objects.firstNonNull;
 
-public class Scores {
+public class Votes {
 	private final Map<Integer, Integer> talksIds;
 
+	public Votes(URL resource) throws IOException {
+		this(Resources.toString(resource, Charsets.UTF_8));
+	}
+
 	@VisibleForTesting
-	Scores(Map<Integer, Integer> talksIds) {
+	Votes(Map<Integer, Integer> talksIds) {
 		this.talksIds = talksIds;
 	}
 
-	public Scores(String talkIdsJson) {
+	@VisibleForTesting
+	Votes(String talkIdsJson) {
 		Type typeToken = new TypeToken<Map<Integer, Integer>>() {
 		}.getType();
 		this.talksIds = new Gson().fromJson(talkIdsJson, typeToken);
 	}
 
-	public Scores(URL resource) throws IOException {
-		this(Resources.toString(resource, Charsets.UTF_8));
-	}
-
 	public Integer getScore(Iterable<Integer> talkIds) {
-		Integer sum = 0;
+		int sum = 0;
 		for (Integer talkId : talkIds) {
 			sum += firstNonNull(talksIds.get(talkId), 0);
 		}

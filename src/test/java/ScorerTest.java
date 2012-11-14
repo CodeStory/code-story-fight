@@ -1,15 +1,13 @@
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ScorerTest {
 	TalkIds talkIds = mock(TalkIds.class);
-	Scores scores = mock(Scores.class);
+	Votes scores = mock(Votes.class);
 
 	@Test
 	public void should_compute_score_for_keywords() {

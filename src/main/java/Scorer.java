@@ -2,9 +2,9 @@ import java.util.Set;
 
 public class Scorer {
 	private final TalkIds talkIds;
-	private final Scores scores;
+	private final Votes scores;
 
-	public Scorer(TalkIds talkIds, Scores scores) {
+	public Scorer(TalkIds talkIds, Votes scores) {
 		this.talkIds = talkIds;
 		this.scores = scores;
 	}

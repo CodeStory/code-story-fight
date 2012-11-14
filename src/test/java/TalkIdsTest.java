@@ -42,7 +42,7 @@ public class TalkIdsTest {
 	}
 
 	@Test
-	public void should_search_on_all_metata_data() throws IOException {
+	public void should_search_on_all_metadata() throws IOException {
 		TalkIds talkIds = new TalkIds(Resources.getResource("planning.json"));
 
 		Set<Integer> ids = talkIds.withKeyword("JavaFX");
