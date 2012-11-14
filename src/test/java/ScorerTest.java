@@ -14,7 +14,7 @@ public class ScorerTest {
 	@Test
 	public void should_compute_score_for_keywords() {
 		when(talkIds.withKeyword("angularJs")).thenReturn(ImmutableSet.of(1, 2));
-		when(scores.getScore(Arrays.asList(1, 2))).thenReturn(100);
+		when(scores.getScore(ImmutableSet.of(1, 2))).thenReturn(100);
 
 		Scorer scorer = new Scorer(talkIds, scores);
 
