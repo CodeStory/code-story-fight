@@ -1,10 +1,8 @@
 Browser = require('zombie')
 should = require('chai').should()
 
-home = 'http://127.0.0.1:8080'
-
-# Uncheck to debug
-#Browser.debug = true
+port = process.env.PORT || 8080
+home = "http://127.0.0.1:#{port}/"
 
 describe 'Server', ->
 	it 'should be live', (done) ->
@@ -30,7 +28,7 @@ describe 'Server', ->
 
 	it 'should display scores for java and scala', (done) ->
 		browser = new Browser
-		browser.visit "#{home}/fight/java/scala", ->
+		browser.visit "#{home}fight/java/scala", ->
 			browser.field('input[id="leftKeyword"]').value.should.equal "java"
 			browser.field('input[id="rightKeyword"]').value.should.equal "scala"
 			done()
