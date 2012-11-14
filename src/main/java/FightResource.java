@@ -32,7 +32,14 @@ public class FightResource {
 	@Path("style.less")
 	@Produces("text/css;charset=UTF-8")
 	public File style() {
-		return new File("style.less");
+		return new File("web/style.less");
+	}
+
+	@GET
+	@Path("images/bg.jpeg")
+	@Produces("text/css;charset=UTF-8")
+	public File background() {
+		return new File("web/bg.jpeg");
 	}
 
 	@GET
@@ -45,7 +52,7 @@ public class FightResource {
 			"leftScore", scorer.get(leftKeyword),
 			"rightScore", scorer.get(rightKeyword));
 
-		Mustache template = new DefaultMustacheFactory().compile("index.html");
+		Mustache template = new DefaultMustacheFactory().compile("web/index.html");
 		StringWriter html = new StringWriter();
 		template.execute(html, data);
 
