@@ -1,5 +1,6 @@
 import com.google.inject.AbstractModule;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import static com.google.inject.name.Names.named;
@@ -10,12 +11,16 @@ public class JerseyModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-
 		try {
 			bind(URL.class).annotatedWith(named("planningUrl")).toInstance(new URL(PLANNING_JSON));
+		} catch (MalformedURLException e) {
+			addError(e);
+		}
+
+		try {
 			bind(URL.class).annotatedWith(named("votesUrl")).toInstance(new URL(VOTES_JSON));
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Invalid urls");
+		} catch (MalformedURLException e) {
+			addError(e);
 		}
 	}
 }
