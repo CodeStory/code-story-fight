@@ -1,6 +1,6 @@
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
-import com.google.common.collect.Maps;
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -74,16 +74,16 @@ public class FightResource {
 	@Produces("text/html;charset=UTF-8")
 	public String fight(@PathParam("left") String leftKeyword, @PathParam("right") String rightKeyword) {
 		topFights.log(leftKeyword, rightKeyword);
-		Map<String, Object> templateData = Maps.newHashMap();
-		templateData.put("leftKeyword", leftKeyword);
-		templateData.put("rightKeyword", rightKeyword);
-		templateData.put("leftScore", scorer.get(leftKeyword));
-		templateData.put("rightScore", scorer.get(rightKeyword));
-
 		TopFight topFight = topFights.get();
 
-		templateData.put("topLeftKeyword", topFight.getLeft());
-		templateData.put("topRightKeyword", topFight.getRight());
+		Map<String, Object> templateData = ImmutableMap.<String, Object>builder()
+			.put("leftKeyword", leftKeyword)
+			.put("rightKeyword", rightKeyword)
+			.put("leftScore", scorer.get(leftKeyword))
+			.put("rightScore", scorer.get(rightKeyword))
+			.put("topLeftKeyword", topFight.getLeft())
+			.put("topRightKeyword", topFight.getRight())
+			.build();
 
 		Mustache indexTemplate = new DefaultMustacheFactory().compile("web/index.html");
 		return indexTemplate.execute(new StringWriter(), templateData).toString();
