@@ -1,7 +1,7 @@
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,13 +14,16 @@ import java.io.StringWriter;
 import java.net.URI;
 import java.util.Map;
 
+@Singleton
 @Path("/")
 public class FightResource {
 	final Scorer scorer;
+	final Mustache indexTemplate;
 
 	@Inject
 	public FightResource(Scorer scorer) {
 		this.scorer = scorer;
+		indexTemplate = new DefaultMustacheFactory().compile("web/index.html");
 	}
 
 	@GET
@@ -52,16 +55,8 @@ public class FightResource {
 	@Path("fight/{left}/{right}")
 	@Produces("text/html;charset=UTF-8")
 	public String fight(@PathParam("left") String leftKeyword, @PathParam("right") String rightKeyword) {
-		Map<String, Object> data = ImmutableMap.<String, Object>of(
-			"leftKeyword", leftKeyword,
-			"rightKeyword", rightKeyword,
-			"leftScore", scorer.get(leftKeyword),
-			"rightScore", scorer.get(rightKeyword));
+		Map<String, Object> data = scorer.get(leftKeyword, rightKeyword);
 
-		Mustache template = new DefaultMustacheFactory().compile("web/index.html");
-		StringWriter html = new StringWriter();
-		template.execute(html, data);
-
-		return html.toString();
+		return indexTemplate.execute(new StringWriter(), data).toString();
 	}
 }

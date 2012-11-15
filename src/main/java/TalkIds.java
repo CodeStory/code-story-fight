@@ -26,8 +26,13 @@ public class TalkIds {
 	}
 
 	@Inject
-	public TalkIds(@Named("planningUrl") URL url) throws IOException {
-		Days days = new Gson().fromJson(Resources.toString(url, Charsets.UTF_8), Days.class);
+	public TalkIds(@Named("planningUrl") URL url) {
+		Days days;
+		try {
+			days = new Gson().fromJson(Resources.toString(url, Charsets.UTF_8), Days.class);
+		} catch (IOException e) {
+			throw new IllegalStateException("Unable to read planning json", e);
+		}
 
 		keywordsByIds = Maps.newHashMap();
 		for (Day day : days.days) {

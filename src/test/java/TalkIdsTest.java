@@ -2,8 +2,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.io.Resources;
 import org.junit.Test;
 
-import java.io.IOException;
-
 import static java.util.Arrays.asList;
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -31,7 +29,7 @@ public class TalkIdsTest {
 	}
 
 	@Test
-	public void should_read_planning_as_json() throws IOException {
+	public void should_read_planning_as_json() {
 		TalkIds talkIds = new TalkIds(Resources.getResource("planning.json"));
 
 		int[] ids = talkIds.withKeyword("AngularJs");
@@ -40,7 +38,7 @@ public class TalkIdsTest {
 	}
 
 	@Test
-	public void should_search_on_all_metadata() throws IOException {
+	public void should_search_on_all_metadata() {
 		TalkIds talkIds = new TalkIds(Resources.getResource("planning.json"));
 
 		int[] ids = talkIds.withKeyword("JavaFX");
