@@ -66,8 +66,8 @@ body {
     }
 
     @scale: 2;
-    @star_width: 300px/@scale;
-    @star_height: 286px/@scale;
+    @star_width: 300px / @scale;
+    @star_height: 286px / @scale;
 
     #leftScore, #rightScore {
       display: block;
@@ -79,6 +79,13 @@ body {
       vertical-align: middle;
       color: black;
       padding-top: 5px;
+    }
+
+    #leftScore {
+      -webkit-animation: rotate_left 4s;
+    }
+    #rightScore {
+      -webkit-animation: rotate_right 4s;
     }
 
     #leftKeyword {
@@ -99,3 +106,16 @@ body {
   }
 }
 
+@-webkit-keyframes
+rotate_left {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes
+rotate_right {
+  to {
+    -webkit-transform: rotate(-360deg);
+  }
+}
