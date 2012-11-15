@@ -27,12 +27,14 @@ public class TopFights {
 	private File outputFile;
 
 	public TopFights() {
-		fightCount = create();
-		outputFile = new File("fightCount.bin");
-		loadFromDisk();
+		init(true);
 	}
 
-	/*package*/ TopFights(boolean readFile) {
+	/*package*/ TopFights(boolean doReadFile) {
+		init(doReadFile);
+	}
+
+	private void init(boolean readFile) {
 		fightCount = create();
 		outputFile = new File("fightCount.bin");
 		if (readFile) {
