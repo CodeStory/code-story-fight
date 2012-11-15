@@ -80,13 +80,7 @@ body {
       vertical-align: middle;
       color: black;
       padding-top: 5px;
-    }
-
-    #leftScore {
-      -webkit-animation: rotate_left 4s;
-    }
-    #rightScore {
-      -webkit-animation: rotate_right 4s;
+      -webkit-animation: scale 1s ease-out;
     }
 
     #leftKeyword {
@@ -108,15 +102,11 @@ body {
 }
 
 @-webkit-keyframes
-rotate_left {
-  to {
-    -webkit-transform: rotate(360deg);
+scale {
+  from {
+    -webkit-transform: scale(0.0);
   }
-}
-
-@-webkit-keyframes
-rotate_right {
   to {
-    -webkit-transform: rotate(-360deg);
+    -webkit-transform: scale(1.0);
   }
 }
