@@ -100,7 +100,16 @@ body {
       vertical-align: middle;
       color: black;
       padding-top: 5px;
-      -webkit-animation: scale 1s ease-out;
+    }
+
+    .winner {
+      -webkit-animation: scale-winner 1s ease-out;
+      -webkit-animation-fill-mode: forwards;
+    }
+
+    .looser {
+      -webkit-animation: scale-looser 1s ease-out;
+      -webkit-animation-fill-mode: forwards;
     }
 
     #leftKeyword {
@@ -127,7 +136,7 @@ footer {
 }
 
 @-webkit-keyframes
-scale {
+scale-winner {
   from {
     -webkit-transform: scale(0.0);
   }
@@ -136,4 +145,12 @@ scale {
   }
 }
 
-
+@-webkit-keyframes
+scale-looser {
+  from {
+    -webkit-transform: scale(0.0);
+  }
+  to {
+    -webkit-transform: scale(0.5);
+  }
+}

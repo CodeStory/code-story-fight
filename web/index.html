@@ -48,6 +48,26 @@
     return false;
   }
 
+  function updateStars() {
+    var leftScore = +'{{leftScore}}';
+    var rightScore = +'{{rightScore}}';
+
+    var leftClass;
+    var rightClass;
+    if (leftScore > rightScore) {
+      leftClass = 'winner';
+      rightClass = 'looser';
+    } else if (leftScore == rightScore) {
+      leftClass = 'winner';
+      rightClass = 'winner';
+    } else {
+      leftClass = 'looser';
+      rightClass = 'winner';
+    }
+
+    $('#leftScore').addClass(leftClass);
+    $('#rightScore').addClass(rightClass);
+  }
   $(document).ready(function () {
     $(document)
       .on('click', '#letsfight', launchFight)
@@ -65,6 +85,8 @@
         source:words
       });
     })
+
+    updateStars();
   });
 
   !function (d, s, id) {
