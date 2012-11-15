@@ -75,19 +75,11 @@ public class FightResource {
 	}
 
 	@GET
-	@Path("images/star.png")
+	@Path("images/{path : .*\\.png}")
 	@Produces("image/png")
-	public Response star() {
-		return staticResource("web/star.png");
+	public Response images(@PathParam("path") String path) {
+		return staticResource("web/" + path);
 	}
-
-	@GET
-	@Path("images/weCodeInPeace.png")
-	@Produces("image/png")
-	public Response weCodeInPeace() {
-		return staticResource("web/weCodeInPeace.png");
-	}
-
 
 	@GET
 	@Path("fight/{left}/{right}")
