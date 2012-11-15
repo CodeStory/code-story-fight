@@ -89,11 +89,22 @@ public class FightResource {
 
 		Set<TopFight> topFight = topFights.get();
 
+		int leftScore = scorer.get(leftKeyword);
+		int rightScore = scorer.get(rightKeyword);
+
+		// Nasty hack
+		if (leftKeyword.equalsIgnoreCase("CodeStory")) {
+			leftScore = rightScore + 10;
+		}
+		if (rightKeyword.equalsIgnoreCase("CodeStory")) {
+			rightScore = leftScore + 10;
+		}
+
 		Map<String, Object> templateData = ImmutableMap.<String, Object>builder()
 				.put("leftKeyword", leftKeyword)
 				.put("rightKeyword", rightKeyword)
-				.put("leftScore", scorer.get(leftKeyword))
-				.put("rightScore", scorer.get(rightKeyword))
+				.put("leftScore", leftScore)
+				.put("rightScore", rightScore)
 				.put("fights", topFight)
 				.put("url", format("http://fight.code-story.net/fight/%s/%s", leftKeyword, rightKeyword).replace(" ", "%20"))
 				.build();

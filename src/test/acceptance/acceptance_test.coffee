@@ -36,14 +36,9 @@ describe 'Server', ->
 			browser.query('#topFight li:nthchild(1) a').href.should.equal "#{home}/fight/AngularJS/JavaFX"
 			done()
 
-			# Need to find why queryAll() does return an empty array
-#	it 'should display 5 top fights in the home page', (done) ->
-#		browser = new Browser
-#		browser.visit "#{home}/JavaFx/Hibernate", ->
-#			browser.visit "#{home}/JavaFx/Spring", ->
-#				browser.visit "#{home}/JavaFx/GWT", ->
-#					browser.visit "#{home}/JavaFx/Scala", ->
-#						browser.visit "#{home}/JavaFx/FooBar", ->
-#							console.log browser.queryAll('#topFight li a')
-#							browser.queryAll('#topFight li a').length.should.equal 5
-#							done()
+	it 'should always loose against CodeStory', (done) ->
+		browser = new Browser
+		browser.visit "#{home}/fight/world/codestory", ->
+			browser.text('#leftScore').should.contain '152'
+			browser.text('#rightScore').should.contain '162'
+			done()
