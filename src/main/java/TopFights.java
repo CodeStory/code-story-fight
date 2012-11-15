@@ -70,6 +70,7 @@ public class TopFights {
 
 	public void log(String left, String right) {
 		fightCount.incrementAndGet(new TopFight(left, right));
+		saveOnDisk();
 	}
 
 	public synchronized void loadFromDisk() {
@@ -82,17 +83,20 @@ public class TopFights {
 			fightCount = create((Map<TopFight, Long>) ois.readObject());
 			ois.close();
 		} catch (ClassNotFoundException | IOException exception) {
-			exception.printStackTrace(System.out);
 			throw new RuntimeException(exception.getMessage());
 		}
 	}
 
-	public synchronized void saveOnDisk() throws IOException {
+	public synchronized void saveOnDisk() {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-		ObjectOutputStream oos = new ObjectOutputStream(byteArrayOutputStream);
-		oos.writeObject(copyOf(fightCount.asMap()));
-		oos.flush();
-		write(byteArrayOutputStream.toByteArray(), outputFile);
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(byteArrayOutputStream);
+			oos.writeObject(copyOf(fightCount.asMap()));
+			oos.flush();
+			write(byteArrayOutputStream.toByteArray(), outputFile);
+		} catch (IOException ioe) {
+			throw new RuntimeException(ioe.getMessage());
+		}
 	}
 
 }
