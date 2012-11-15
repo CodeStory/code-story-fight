@@ -1,37 +1,51 @@
 body {
-	background-image: url('images/bg.jpeg');
-	background-size:100%;
-	font-family: sans-serif;
-	color: white;
-	text-align: center;
+  background: url('images/bg.jpeg') top right;
+  font-family: sans-serif;
+  text-align: center;
+
+  a {
+    color: white;
+  }
+
+  h1 {
+    color: white;
+  }
+
+  #fight {
+    width: 779px;
+    height: 300px;
+    margin: 50px auto 0 auto;
+    font-size: 200%;
+
+    #leftKeyword, #rightKeyword, #letsfight {
+      font-size: 1em;
+      margin: 0;
+    }
+
+    #leftKeyword, #rightKeyword {
+      width: 331px;
+    }
+
+    #left {
+      float: left;
+    }
+
+    #letsfight {
+      float: left;
+    }
+
+    #right {
+      float: right;
+    }
+
+    #rightKeyword {
+      float: right;
+      text-align: right;
+    }
+
+    .twitter-share-button {
+      margin-top: 150px;
+    }
+  }
 }
-
-a {
-	color: white;
-}
-
-#fight {
-	width: 800px;
-	height: 300px;
-	display: block;
-	margin: 50px auto 0 auto;
-	font-size: 200%;
-
-	.keyword {
-		text-align: center;
-	}
-
-	#leftKeyword, #rightKeyword, #letsfight {
-		font-size: 1em;
-	}
-
-	#left, #vs, #right {
-		float: left;
-	}
-
-	#rightKeyword {
-		text-align:right;
-	}
-}
-
 

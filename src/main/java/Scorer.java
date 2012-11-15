@@ -1,19 +1,17 @@
 import com.google.inject.Inject;
 
-import java.util.Set;
-
 public class Scorer {
 	private final TalkIds talkIds;
-	private final Votes scores;
+	private final Votes votes;
 
 	@Inject
-	public Scorer(TalkIds talkIds, Votes scores) {
+	public Scorer(TalkIds talkIds, Votes votes) {
 		this.talkIds = talkIds;
-		this.scores = scores;
+		this.votes = votes;
 	}
 
 	public int get(String keyword) {
-		Set<Integer> ids = talkIds.withKeyword(keyword);
-		return scores.getScore(ids);
+		int[] ids = talkIds.withKeyword(keyword);
+		return votes.getScore(ids);
 	}
 }

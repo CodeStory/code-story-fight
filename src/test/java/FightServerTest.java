@@ -12,20 +12,18 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class FightServerTest {
 	@Rule
-	public ServiceRule<FightServer> server = ServiceRule.startWithRandomPort(
-		FightServer.class, new JerseyModuleForTest());
+	public ServiceRule<FightServer> server = ServiceRule.startWithRandomPort(FightServer.class, new AbstractModule() {
+		@Override
+		protected void configure() {
+			bind(URL.class).annotatedWith(named("planningUrl")).toInstance(Resources.getResource("planning.json"));
+			bind(URL.class).annotatedWith(named("votesUrl")).toInstance(Resources.getResource("starsPerTalk.json"));
+		}
+	});
 
 	@Test
 	public void should_test_home_page() throws Exception {
 		int resultCode = new Shell().execute("./etc/junit_run_mocha.sh ./src/test/acceptance/acceptance_test.coffee %d", server.getPort());
-		assertThat(resultCode).isZero();
-	}
 
-	static class JerseyModuleForTest extends AbstractModule {
-		@Override
-		protected void configure() {
-			bind(URL.class).annotatedWith(named("planningUrl")).toInstance(Resources.getResource("planning.json"));
-			bind(URL.class).annotatedWith(named("vote")).toInstance(Resources.getResource("starsPerTalk.json"));
-		}
+		assertThat(resultCode).isZero();
 	}
 }

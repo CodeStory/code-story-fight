@@ -1,4 +1,3 @@
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.google.gson.Gson;
@@ -17,22 +16,15 @@ public class Votes {
 	private final Map<Integer, Integer> talksIds;
 
 	@Inject
-	public Votes(@Named("vote") URL url) throws IOException {
+	public Votes(@Named("votesUrl") URL url) throws IOException {
 		Type typeToken = new TypeToken<Map<Integer, Integer>>() {
 		}.getType();
-		String talkIdsJson = Resources.toString(url, Charsets.UTF_8);
-		this.talksIds = new Gson().fromJson(talkIdsJson, typeToken);
-
+		this.talksIds = new Gson().fromJson(Resources.toString(url, Charsets.UTF_8), typeToken);
 	}
 
-	@VisibleForTesting
-	Votes(Map<Integer, Integer> talksIds) {
-		this.talksIds = talksIds;
-	}
-
-	public Integer getScore(Iterable<Integer> talkIds) {
+	public int getScore(int... talkIds) {
 		int sum = 0;
-		for (Integer talkId : talkIds) {
+		for (int talkId : talkIds) {
 			sum += firstNonNull(talksIds.get(talkId), 0);
 		}
 		return sum;
