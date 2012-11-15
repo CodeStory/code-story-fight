@@ -9,17 +9,16 @@
 <h1>Code-Story Fight for Devoxx</h1>
 
 <div id="fight">
-  <div id="left">
-    <input id="leftKeyword" type="text" value="{{leftKeyword}}" tabindex="1"/><br/>
-    <a id="leftScore" title="{{leftKeyword}} needs your vote !"
-       href="http://planning.code-story.net/planning.html?q={{leftKeyword}}" target="_blank">{{leftScore}}</a>
-  </div>
+  <input id="leftKeyword" type="text" value="{{leftKeyword}}" tabindex="1"/>
+  <a id="leftScore" title="{{leftKeyword}} needs your vote !"
+     href="http://planning.code-story.net/planning.html?q={{leftKeyword}}" target="_blank">{{leftScore}}</a>
+
   <button id="letsfight">Fight!</button>
-  <div id="right">
-    <input id="rightKeyword" type="text" value="{{rightKeyword}}" tabindex="2"/><br/>
-    <a id="rightScore" title="{{rightKeyword}} needs your vote !"
-       href="http://planning.code-story.net/planning.html?q={{rightKeyword}}" target="_blank">{{rightScore}}</a>
-  </div>
+
+  <input id="rightKeyword" type="text" value="{{rightKeyword}}" tabindex="2"/>
+  <a id="rightScore" title="{{rightKeyword}} needs your vote !"
+     href="http://planning.code-story.net/planning.html?q={{rightKeyword}}" target="_blank">{{rightScore}}</a>
+
   <a
     href="https://twitter.com/share?size=large&text=Hey! Look who's winning. {{leftKeyword}} or {{rightKeyword}}&url=http://fight.code-story.net/fight/{{leftKeyword}}/{{rightKeyword}}&hashtags=Devoxx,CodeStory"
     class="twitter-share-button" data-lang="en">Tweet</a>

@@ -12,38 +12,84 @@ body {
   }
 
   #fight {
+    position: relative;
     width: 779px;
     height: 300px;
     margin: 50px auto 0 auto;
     font-size: 200%;
 
-    #leftKeyword, #rightKeyword, #letsfight {
-      font-size: 1em;
-      margin: 0;
+    .left(){
+      position: absolute;
+      left: 0;
+    }
+    .right(){
+      position: absolute;
+      right: 0;
     }
 
     #leftKeyword, #rightKeyword {
-      width: 321px;
+      font-size: 1em;
+      margin: 0;
+      width: 301px;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    #leftKeyword {
+      .left;
+      top: 0;
+    }
+
+    #rightKeyword {
+      .right;
+      top: 0;
+    }
+
+    #letsfight {
+      .left;
+      font-size: 1em;
+      margin: 0;
+      top: 0;
+      left: 334px;
+    }
+
+    #leftScore {
+      .left;
+      top: 80px;
+      left: 80px;
+    }
+
+    #rightScore {
+      .right;
+      top: 80px;
+      right: 80px;
+    }
+
+    @scale: 2;
+    @star_width: 300px/@scale;
+    @star_height: 286px/@scale;
+
+    #leftScore, #rightScore {
+      display: block;
+      width: @star_width;
+      height: (@star_height)-5px;
+      background: url('images/star.png');
+      background-size: @star_width @star_height;
+      line-height: @star_height;
+      vertical-align: middle;
+      color: black;
+      padding-top: 5px;
     }
 
     #leftKeyword {
       margin-right: 10px;
     }
 
-    #left {
-      float: left;
-    }
-
     #letsfight {
-      float: left;
-    }
-
-    #right {
-      float: right;
+      padding: 10px;
     }
 
     #rightKeyword {
-      float: right;
       text-align: right;
     }
 

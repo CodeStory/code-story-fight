@@ -55,6 +55,13 @@ public class FightResource {
 	}
 
 	@GET
+	@Path("images/star.png")
+	@Produces("image/png")
+	public Response star() {
+		return staticResource("web/star.png");
+	}
+
+	@GET
 	@Path("fight/{left}/{right}")
 	@Produces("text/html;charset=UTF-8")
 	public String fight(@PathParam("left") String leftKeyword, @PathParam("right") String rightKeyword) {
