@@ -14,7 +14,7 @@ public class TopFightsTest {
 	@Test
 	public void should_increment_keyword_counters() throws Exception {
 		topFights.log("AngularJS", "Jabba The Hutt");
-		TopFight topFight = topFights.get().iterator().next();
+		TopFight topFight = topFights.first();
 
 		assertThat(topFight.getLeft()).isEqualTo("AngularJS");
 		assertThat(topFight.getRight()).isEqualTo("Jabba The Hutt");
@@ -29,7 +29,7 @@ public class TopFightsTest {
 		topFights.log("AngularJS", "Jabba The Hutt");// <-- we did that 3 times, right.
 		topFights.log("JavaFX", "Hibernate");
 
-		TopFight topFight = topFights.get().iterator().next();
+		TopFight topFight = topFights.first();
 
 		assertThat(topFight.getLeft()).isEqualTo("AngularJS");
 		assertThat(topFight.getRight()).isEqualTo("Jabba The Hutt");
@@ -42,7 +42,7 @@ public class TopFightsTest {
 
 		TopFights topFights2 = new TopFights();
 
-		TopFight topFight = topFights2.get().iterator().next();
+		TopFight topFight = topFights2.first();
 
 		assertThat(topFight.getLeft()).isEqualTo("Polka");
 		assertThat(topFight.getRight()).isEqualTo("Rock N Roll");

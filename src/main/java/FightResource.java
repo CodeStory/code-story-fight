@@ -15,8 +15,8 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static java.lang.String.format;
 
@@ -87,7 +87,7 @@ public class FightResource {
 	public String fight(@PathParam("left") String leftKeyword, @PathParam("right") String rightKeyword) throws UnsupportedEncodingException {
 		topFights.log(leftKeyword, rightKeyword);
 
-		Set<TopFight> topFight = topFights.get();
+		List<TopFight> topFight = topFights.get();
 
 		int leftScore = scorer.get(leftKeyword);
 		int rightScore = scorer.get(rightKeyword);

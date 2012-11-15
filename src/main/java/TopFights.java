@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -46,7 +47,11 @@ public class TopFights {
 		fightCount.clear();
 	}
 
-	public Set<TopFight> get() {
+	public TopFight first() {
+		return get().get(0);
+	}
+
+	public List<TopFight> get() {
 		Set<Map.Entry<TopFight, Long>> topFightEntries = fightCount.asMap().entrySet();
 		ArrayList<Map.Entry<TopFight, Long>> entries = Lists.newArrayList(topFightEntries);
 		Collections.sort(entries, new Comparator<Map.Entry<TopFight, Long>>() {
@@ -56,7 +61,7 @@ public class TopFights {
 			}
 		});
 
-		Set<TopFight> topFights = new LinkedHashSet();
+		List<TopFight> topFights = new ArrayList<>();
 
 		for (Map.Entry<TopFight, Long> topFightLongEntry : entries) {
 			topFights.add(topFightLongEntry.getKey());
