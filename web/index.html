@@ -42,6 +42,7 @@
   <a href="http://planning.code-story.net/" target="_blank">Vote for your favorite speaker,talks</a>
 </footer>
 
+<script src="http://konami-js.googlecode.com/svn/trunk/konami.js"></script>
 <script>
   function launchFight() {
     window.location = '/fight/' + $('#leftKeyword').val() + '/' + $('#rightKeyword').val();
@@ -74,7 +75,7 @@
       .on('click', 'input', function (event) {
         event.srcElement.select();
       })
-      .on('keypress', function (event) {
+      .on('keypress','input', function (event) {
         if (event.keyCode == 13) {
           launchFight();
         }
@@ -87,6 +88,9 @@
     })
 
     updateStars();
+	konami = new Konami();
+	konami.load("/images/weCodeInPeace.png");
+
   });
 
   !function (d, s, id) {

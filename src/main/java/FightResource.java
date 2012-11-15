@@ -82,6 +82,14 @@ public class FightResource {
 	}
 
 	@GET
+	@Path("images/weCodeInPeace.png")
+	@Produces("image/png")
+	public Response weCodeInPeace() {
+		return staticResource("web/weCodeInPeace.png");
+	}
+
+
+	@GET
 	@Path("fight/{left}/{right}")
 	@Produces("text/html;charset=UTF-8")
 	public String fight(@PathParam("left") String leftKeyword, @PathParam("right") String rightKeyword) throws UnsupportedEncodingException {
