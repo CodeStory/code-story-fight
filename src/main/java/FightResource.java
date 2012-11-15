@@ -13,9 +13,12 @@ import javax.ws.rs.core.Response;
 
 import java.io.File;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Date;
 import java.util.Map;
+
+import static java.lang.String.format;
 
 @Singleton
 @Path("/")
@@ -81,7 +84,7 @@ public class FightResource {
 	@GET
 	@Path("fight/{left}/{right}")
 	@Produces("text/html;charset=UTF-8")
-	public String fight(@PathParam("left") String leftKeyword, @PathParam("right") String rightKeyword) {
+	public String fight(@PathParam("left") String leftKeyword, @PathParam("right") String rightKeyword) throws UnsupportedEncodingException {
 		topFights.log(leftKeyword, rightKeyword);
 		TopFight topFight = topFights.get();
 
@@ -92,6 +95,7 @@ public class FightResource {
 			.put("rightScore", scorer.get(rightKeyword))
 			.put("topLeftKeyword", topFight.getLeft())
 			.put("topRightKeyword", topFight.getRight())
+			.put("url", format("http://fight.code-story.net/fight/%s/%s", leftKeyword, rightKeyword).replace(" ", "%20"))
 			.build();
 
 		Mustache indexTemplate = new DefaultMustacheFactory().compile("web/index.html");
