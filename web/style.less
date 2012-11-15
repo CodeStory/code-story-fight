@@ -103,13 +103,18 @@ body {
     }
 
     .winner {
-      -webkit-animation: scale-winner 1s ease-out;
-      -webkit-animation-fill-mode: forwards;
+      .scaleout(scale-winner);
     }
 
     .looser {
-      -webkit-animation: scale-looser 1s ease-out;
+      .scaleout(scale-looser);
+    }
+
+    .scaleout(@name) {
+      -webkit-animation: @name 1s ease-out;
+      animation: @name 1s ease-out;
       -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
     }
 
     #leftKeyword {
@@ -131,26 +136,22 @@ body {
 }
 
 footer {
-	margin-top:50px;
-	text-align: center;
+  margin-top:50px;
+  text-align: center;
 }
 
-@-webkit-keyframes
-scale-winner {
+.scaleoutFrames(@from, @to) {
   from {
-    -webkit-transform: scale(0.0);
+    -webkit-transform: scale(@from);
+    transform: scale(@from);
   }
   to {
-    -webkit-transform: scale(1.0);
+    -webkit-transform: scale(@to);
+    transform: scale(@to);
   }
 }
 
-@-webkit-keyframes
-scale-looser {
-  from {
-    -webkit-transform: scale(0.0);
-  }
-  to {
-    -webkit-transform: scale(0.5);
-  }
-}
+@-webkit-keyframes scale-winner { .scaleoutFrames(0.0, 1.0); }
+        @keyframes scale-winner { .scaleoutFrames(0.0, 1.0); }
+@-webkit-keyframes scale-looser { .scaleoutFrames(0.0, 0.5); }
+        @keyframes scale-looser { .scaleoutFrames(0.0, 0.5); }
