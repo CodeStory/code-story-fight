@@ -1,5 +1,6 @@
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -20,12 +21,14 @@ import java.util.Map;
 public class FightResource {
 	private static final long ONE_MONTH = 1000L * 3600 * 24 * 30;
 
-	final Scorer scorer;
-	final Mustache indexTemplate;
+	private final Scorer scorer;
+	private final TopFights topFights;
+	private final Mustache indexTemplate;
 
 	@Inject
-	public FightResource(Scorer scorer) {
+	public FightResource(Scorer scorer,TopFights topFights) {
 		this.scorer = scorer;
+		this.topFights = topFights;
 		indexTemplate = new DefaultMustacheFactory().compile("web/index.html");
 	}
 
@@ -65,9 +68,19 @@ public class FightResource {
 	@Path("fight/{left}/{right}")
 	@Produces("text/html;charset=UTF-8")
 	public String fight(@PathParam("left") String leftKeyword, @PathParam("right") String rightKeyword) {
-		Map<String, Object> data = scorer.get(leftKeyword, rightKeyword);
+		topFights.log(leftKeyword, rightKeyword);
+		Map<String, Object> templateData = Maps.newHashMap();
+		templateData.put("leftKeyword", leftKeyword);
+		templateData.put("rightKeyword", rightKeyword);
+		templateData.put("leftScore", scorer.get(leftKeyword));
+		templateData.put("rightScore", scorer.get(rightKeyword));
 
-		return indexTemplate.execute(new StringWriter(), data).toString();
+		TopFight topFight = topFights.get();
+
+		templateData.put("topLeftKeyword", topFight.getLeft());
+		templateData.put("topRightKeyword", topFight.getRight());
+
+		return indexTemplate.execute(new StringWriter(), templateData).toString();
 	}
 
 	private static Response staticResource(String path) {

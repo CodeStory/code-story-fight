@@ -18,11 +18,7 @@ public class ScorerTest {
 		when(votes.score(1, 2)).thenReturn(100);
 		when(votes.score(3, 4, 5)).thenReturn(66);
 
-		Map<String, Object> scores = scorer.get("angularJs", "java");
-
-		assertThat(scores.get("leftKeyword")).isEqualTo("angularJs");
-		assertThat(scores.get("rightKeyword")).isEqualTo("java");
-		assertThat(scores.get("leftScore")).isEqualTo(100);
-		assertThat(scores.get("rightScore")).isEqualTo(66);
+		assertThat(scorer.get("angularJs")).isEqualTo(100);
+		assertThat(scorer.get("java")).isEqualTo(66);
 	}
 }

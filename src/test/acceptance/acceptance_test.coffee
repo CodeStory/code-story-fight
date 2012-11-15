@@ -28,3 +28,10 @@ describe 'Server', ->
 			browser.text('#leftScore').should.contain '819'
 			browser.text('#rightScore').should.contain '207'
 			done()
+
+	it 'should display the top fight in the home page', (done) ->
+		browser = new Browser
+		browser.visit "#{home}/", ->
+			browser.text('#topFight li:nthchild(1)').should.equal 'AngularJS vs JavaFX'
+			browser.query('#topFight li:nthchild(1) a').href.should.equal "#{home}/fight/AngularJS/JavaFX"
+			done()
