@@ -23,13 +23,11 @@ public class FightResource {
 
 	private final Scorer scorer;
 	private final TopFights topFights;
-	private final Mustache indexTemplate;
 
 	@Inject
-	public FightResource(Scorer scorer,TopFights topFights) {
+	public FightResource(Scorer scorer, TopFights topFights) {
 		this.scorer = scorer;
 		this.topFights = topFights;
-		indexTemplate = new DefaultMustacheFactory().compile("web/index.html");
 	}
 
 	@GET
@@ -41,6 +39,13 @@ public class FightResource {
 	@Path("index.html")
 	public Response oldIndex() {
 		return index();
+	}
+
+	@GET
+	@Produces("application/javascript;charset=UTF-8")
+	@Path("words")
+	public File words() {
+		return new File("words.json");
 	}
 
 	@GET
@@ -80,6 +85,7 @@ public class FightResource {
 		templateData.put("topLeftKeyword", topFight.getLeft());
 		templateData.put("topRightKeyword", topFight.getRight());
 
+		Mustache indexTemplate = new DefaultMustacheFactory().compile("web/index.html");
 		return indexTemplate.execute(new StringWriter(), templateData).toString();
 	}
 

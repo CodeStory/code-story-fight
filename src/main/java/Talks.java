@@ -17,16 +17,17 @@ import java.util.Map;
 import java.util.Set;
 
 @Singleton
-public class TalkIds {
+public class Talks {
 	private final Map<Integer, List<String>> keywordsByIds;
+	private final Set<String> words = Sets.newTreeSet();
 
 	@VisibleForTesting
-	TalkIds(Map<Integer, List<String>> keywordsByIds) {
+	Talks(Map<Integer, List<String>> keywordsByIds) {
 		this.keywordsByIds = keywordsByIds;
 	}
 
 	@Inject
-	public TalkIds(@Named("planningUrl") URL url) {
+	public Talks(@Named("planningUrl") URL url) {
 		Days days;
 		try {
 			days = new Gson().fromJson(Resources.toString(url, Charsets.UTF_8), Days.class);
@@ -44,12 +45,23 @@ public class TalkIds {
 						.addAll(talk.tags)
 						.addAll(talk.speakers)
 						.build());
+
+					for (String tag : talk.tags) {
+						words.add(tag.toLowerCase());
+					}
+					for (String tag : talk.speakers) {
+						words.add(tag.toLowerCase());
+					}
 				}
 			}
 		}
 	}
 
-	public int[] withKeyword(String keyword) {
+	public Set<String> extractWords() {
+		return words;
+	}
+
+	public int[] ids(String keyword) {
 		Set<Integer> ids = Sets.newHashSet();
 
 		for (Map.Entry<Integer, List<String>> keywordsForId : keywordsByIds.entrySet()) {
