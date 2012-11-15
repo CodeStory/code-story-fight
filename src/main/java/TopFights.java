@@ -95,7 +95,7 @@ public class TopFights {
 			oos.flush();
 			write(byteArrayOutputStream.toByteArray(), outputFile);
 		} catch (IOException ioe) {
-			throw new RuntimeException(ioe.getMessage());
+			ioe.printStackTrace(System.err);
 		}
 	}
 
