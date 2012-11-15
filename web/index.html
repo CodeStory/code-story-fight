@@ -25,11 +25,9 @@
   <a
     href="https://twitter.com/share?size=large&text=Hey! Look who's winning. {{leftKeyword}} or {{rightKeyword}}&url=http://fight.code-story.net/fight/{{leftKeyword}}/{{rightKeyword}}&hashtags=Devoxx,CodeStory"
     class="twitter-share-button" data-lang="en">Tweet</a>
-
 </div>
 
 <div id="topFight">
-	<h2>Top Fights</h2>
 	<ul>
 		<li>
 			<a href="/fight/{{topLeftKeyword}}/{{topRightKeyword}}">{{topLeftKeyword}} vs {{topRightKeyword}}</a>
@@ -60,7 +58,7 @@
       });
 
     $.getJSON('/words', function (words) {
-      $("#leftKeyword").autocomplete({
+      $("#leftKeyword, #rightKeyword").autocomplete({
         source:words
       });
     })

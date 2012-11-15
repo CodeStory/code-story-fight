@@ -1,6 +1,7 @@
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -21,11 +22,13 @@ import java.util.Map;
 public class FightResource {
 	private static final long ONE_MONTH = 1000L * 3600 * 24 * 30;
 
+	private final Talks talks;
 	private final Scorer scorer;
 	private final TopFights topFights;
 
 	@Inject
-	public FightResource(Scorer scorer, TopFights topFights) {
+	public FightResource(Talks talks, Scorer scorer, TopFights topFights) {
+		this.talks = talks;
 		this.scorer = scorer;
 		this.topFights = topFights;
 	}
@@ -42,10 +45,16 @@ public class FightResource {
 	}
 
 	@GET
-	@Produces("application/javascript;charset=UTF-8")
+	@Path("fight")
+	public Response fight() {
+		return index();
+	}
+
+	@GET
 	@Path("words")
-	public File words() {
-		return new File("words.json");
+	@Produces("application/javascript;charset=UTF-8")
+	public String words() {
+		return new Gson().toJson(talks.extractWords());
 	}
 
 	@GET
