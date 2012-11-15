@@ -12,11 +12,14 @@ import javax.ws.rs.core.Response;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.URI;
+import java.util.Date;
 import java.util.Map;
 
 @Singleton
 @Path("/")
 public class FightResource {
+	private static final long ONE_MONTH = 1000L * 3600 * 24 * 30;
+
 	final Scorer scorer;
 	final Mustache indexTemplate;
 
@@ -46,9 +49,9 @@ public class FightResource {
 
 	@GET
 	@Path("images/bg.jpeg")
-	@Produces("text/css;charset=UTF-8")
-	public File background() {
-		return new File("web/bg.jpeg");
+	@Produces("image/jpeg")
+	public Response background() {
+		return staticResource("web/bg.jpeg");
 	}
 
 	@GET
@@ -58,5 +61,12 @@ public class FightResource {
 		Map<String, Object> data = scorer.get(leftKeyword, rightKeyword);
 
 		return indexTemplate.execute(new StringWriter(), data).toString();
+	}
+
+	private static Response staticResource(String path) {
+		File file = new File(path);
+		long modified = file.lastModified();
+
+		return Response.ok(file).lastModified(new Date(modified)).expires(new Date(modified + ONE_MONTH)).build();
 	}
 }
