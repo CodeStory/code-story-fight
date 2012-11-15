@@ -10,7 +10,7 @@ public class TopFightsTest {
 		TopFights topFights = new TopFights();
 
 		topFights.log("AngularJS", "Jabba The Hutt");
-		TopFight topFight = topFights.get();
+		TopFight topFight = topFights.get().iterator().next();
 
 		assertThat(topFight.getLeft()).isEqualTo("AngularJS");
 		assertThat(topFight.getRight()).isEqualTo("Jabba The Hutt");
@@ -26,7 +26,7 @@ public class TopFightsTest {
 		topFights.log("AngularJS", "Jabba The Hutt");// <-- we did that 3 times, right.
 		topFights.log("JavaFX", "Hibernate");
 
-		TopFight topFight = topFights.get();
+		TopFight topFight = topFights.get().iterator().next();
 
 		assertThat(topFight.getLeft()).isEqualTo("AngularJS");
 		assertThat(topFight.getRight()).isEqualTo("Jabba The Hutt");

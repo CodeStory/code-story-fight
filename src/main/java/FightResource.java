@@ -10,13 +10,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-
 import java.io.File;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
 import static java.lang.String.format;
 
@@ -86,17 +86,17 @@ public class FightResource {
 	@Produces("text/html;charset=UTF-8")
 	public String fight(@PathParam("left") String leftKeyword, @PathParam("right") String rightKeyword) throws UnsupportedEncodingException {
 		topFights.log(leftKeyword, rightKeyword);
-		TopFight topFight = topFights.get();
+
+		Set<TopFight> topFight = topFights.get();
 
 		Map<String, Object> templateData = ImmutableMap.<String, Object>builder()
-			.put("leftKeyword", leftKeyword)
-			.put("rightKeyword", rightKeyword)
-			.put("leftScore", scorer.get(leftKeyword))
-			.put("rightScore", scorer.get(rightKeyword))
-			.put("topLeftKeyword", topFight.getLeft())
-			.put("topRightKeyword", topFight.getRight())
-			.put("url", format("http://fight.code-story.net/fight/%s/%s", leftKeyword, rightKeyword).replace(" ", "%20"))
-			.build();
+				.put("leftKeyword", leftKeyword)
+				.put("rightKeyword", rightKeyword)
+				.put("leftScore", scorer.get(leftKeyword))
+				.put("rightScore", scorer.get(rightKeyword))
+				.put("fights", topFight)
+				.put("url", format("http://fight.code-story.net/fight/%s/%s", leftKeyword, rightKeyword).replace(" ", "%20"))
+				.build();
 
 		Mustache indexTemplate = new DefaultMustacheFactory().compile("web/index.html");
 		return indexTemplate.execute(new StringWriter(), templateData).toString();

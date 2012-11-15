@@ -6,8 +6,12 @@ import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
 
 @Singleton
 public class TopFights {
@@ -18,17 +22,26 @@ public class TopFights {
 		fightCount = AtomicLongMap.create();
 	}
 
-	public TopFight get() {
-		Set<Map.Entry<TopFight,Long>> topFights = fightCount.asMap().entrySet();
-		ArrayList<Map.Entry<TopFight,Long>> entries1 = Lists.newArrayList(topFights);
-		Collections.sort(entries1, new Comparator<Map.Entry<TopFight, Long>>() {
+	public Set<TopFight> get() {
+		Set<Map.Entry<TopFight,Long>> topFightEntries = fightCount.asMap().entrySet();
+		ArrayList<Map.Entry<TopFight,Long>> entries = Lists.newArrayList(topFightEntries);
+		Collections.sort(entries, new Comparator<Map.Entry<TopFight, Long>>() {
 			@Override
 			public int compare(Map.Entry<TopFight, Long> o1, Map.Entry<TopFight, Long> o2) {
 				return Long.compare(o2.getValue(), o1.getValue());
 			}
 		});
-		TopFight topFight1 = entries1.get(0).getKey();
-		return topFight1;
+
+		Set<TopFight> topFights = new LinkedHashSet();
+
+		for (Map.Entry<TopFight, Long> topFightLongEntry : entries) {
+			topFights.add(topFightLongEntry.getKey());
+			if (topFights.size() == 5) {
+				return topFights;
+			}
+		}
+
+		return topFights;
 	}
 
 	public void log(String left, String right) {

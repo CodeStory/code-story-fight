@@ -28,11 +28,14 @@
 </div>
 
 <div id="topFight">
-  <ul>
-    <li>
-      <a href="/fight/{{topLeftKeyword}}/{{topRightKeyword}}">{{topLeftKeyword}} vs {{topRightKeyword}}</a>
-    </li>
-  </ul>
+	<h2>Top Fights</h2>
+	<ul>
+		{{#fights}}
+		<li>
+			<a href="/fight/{{left}}/{{right}}">{{left}} vs {{right}}</a>
+		</li>
+		{{/fights}}
+	</ul>
 </div>
 
 <footer>
