@@ -43,10 +43,6 @@ public class TopFights {
 		}
 	}
 
-	public void empty() {
-		fightCount.clear();
-	}
-
 	public TopFight first() {
 		return get().get(0);
 	}
